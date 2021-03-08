@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link
+      rel="shortcut icon"
+      type="image/ico"
+      href="../../images/favicon.png"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous"
+    />
+    <title>Panier</title>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+        <a class="navbar-brand" href="index.html">Orinoco</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="nav">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Accueil</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="produit.html">Produit</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="panier.html">Panier</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="confirmation.html">Confirmation</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container">
+
+      <h1>Panier</h1>
+
+      <ul class="list-group">
+        <li class="list-group-item">Produit 1</li>
+        <li class="list-group-item">Produit 2</li>
+        <li class="list-group-item">Produit 3</li>
+      </ul>
+      <div class="list-group-item list-group-item-primary">Total</div>
+
+      <form>
+        <!--first name-->
+        <div class="form-group">
+          <label for="firstName">Prénom</label>
+          <input
+            type="text"
+            class="form-control"
+            id="firstName"
+            aria-describedby="firstNameHelp"
+            placeholder="Your first name"
+          />
+          <small id="firstNameHelp" class="form-text text-muted"
+            >Entrez votre prénom.</small
+          >
+        </div>
+
+        <!--last name-->
+        <div class="form-group">
+          <label for="lastName">Nom</label>
+          <input
+            type="text"
+            class="form-control"
+            id="lastName"
+            aria-describedby="lastNameHelp"
+            placeholder="Your last name"
+          />
+          <small id="lastNameHelp" class="form-text text-muted"
+            >Entrez votre nom.</small
+          >
+        </div>
+
+        <!--address-->
+        <div class="form-group">
+          <label for="address">Adresse</label>
+          <input
+            type="text"
+            class="form-control"
+            id="address"
+            aria-describedby="addressHelp"
+            placeholder="Your address"
+          />
+          <small id="addressHelp" class="form-text text-muted"
+            >Entrez votre adresse.</small
+          >
+        </div>
+
+        <!--city-->
+        <div class="form-group">
+          <label for="city">Ville</label>
+          <input
+            type="text"
+            class="form-control"
+            id="city"
+            aria-describedby="cityHelp"
+            placeholder="Your city"
+          />
+          <small id="cityHelp" class="form-text text-muted"
+            >Entrez votre ville.</small
+          >
+        </div>
+
+        <!--email-->
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            aria-describedby="emailHelp"
+            placeholder="Your email"
+          />
+          <small id="emailHelp" class="form-text text-muted"
+            >Entrez votre email.</small
+          >
+        </div>
+
+        <button type="submit" class="btn btn-primary">Commander</button>
+      </form>
+    </main>
+
+    <footer></footer>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+      integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
