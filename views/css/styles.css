@@ -1,0 +1,9 @@
+.card.m-2 > img {
+  object-fit: cover;
+  height: 219.56px;
+}
+
+.card-horizontal {
+  display: flex;
+  flex: 1 1 auto;
+}
