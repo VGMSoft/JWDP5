@@ -4,6 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "sass": "sass --watch ./views/css/styles.scss:./views/css/styles.css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

@@ -1,0 +1,57 @@
+//responsive
+$breakpoints: (
+  mobile: 321px,
+  tablet: 768px,
+  desktop: 1280px,
+  widescreen: 1440px,
+);
+
+//responsive
+@mixin mobile-only {
+  @media screen and (min-width: map-get($breakpoints, mobile)) and (orientation: landscape) {
+    @content;
+  }
+}
+
+@mixin tablet-only {
+  @media screen and (min-width: map-get($breakpoints, tablet)) and (orientation: landscape) {
+    @content;
+  }
+}
+
+@mixin desktop-only {
+  @media screen and (min-width: map-get($breakpoints, desktop)) {
+    @content;
+  }
+}
+
+@mixin widescreen-only {
+  @media screen and (min-width: map-get($breakpoints, widescreen)) {
+    @content;
+  }
+}
+
+//styles
+.card {
+  &--portrait {
+    img {
+      height: 219.56px;
+    }
+  }
+  &--landscape {
+    img {
+      object-fit: cover;
+    }
+  }
+}
+
+.logo {
+  &--icon {
+    width: 40px;
+    height: 40px;
+  }
+  &--invert {
+    width: 100px;
+    height: 50px;
+  }
+}
