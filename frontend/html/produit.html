@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <!--favincon-->
+    <link
+      rel="apple-touch-icon"
+      sizes="57x57"
+      href="../images/favicon/apple-icon-57x57.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="60x60"
+      href="../images/favicon/apple-icon-60x60.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="72x72"
+      href="../images/favicon/apple-icon-72x72.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="76x76"
+      href="../images/favicon/apple-icon-76x76.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="114x114"
+      href="../images/favicon/apple-icon-114x114.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="120x120"
+      href="../images/favicon/apple-icon-120x120.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="144x144"
+      href="../images/favicon/apple-icon-144x144.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="152x152"
+      href="../images/favicon/apple-icon-152x152.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="../images/favicon/apple-icon-180x180.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="../images/favicon/android-icon-192x192.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../images/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="96x96"
+      href="../images/favicon/favicon-96x96.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../images/favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="../images/favicon/manifest.json" />
+    <meta name="msapplication-TileColor" content="#ffffff" />
+    <meta
+      name="msapplication-TileImage"
+      content="../images/favicon/ms-icon-144x144.png"
+    />
+    <meta name="theme-color" content="#ffffff" />
+    <!--favincon end-->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+      integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <title>Produit</title>
+  </head>
+  <body>
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="staticBackdrop"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body" id="staticBackdropLabel">
+            Votre article a été ajouter au panier
+          </div>
+          <div class="modal-footer">
+            <a
+              class="btn btn-primary float-right"
+              href="../index.html"
+              role="button"
+              >Continuez vos achats</a
+            >
+
+            <a
+              class="btn btn-primary float-right"
+              href="./panier.html"
+              role="button"
+              >Aller au panier</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal end -->
+
+    <header>
+      <nav class="navbar navbar-dark bg-dark navbar-expand-lg shadow">
+        <a class="navbar-brand p-0" href="../index.html"
+          ><img
+            src="../images/logo/logo--icon.png"
+            alt="Orinoco"
+            class="logo--icon" /><img
+            src="../images/logo/logo--invert.png"
+            alt="Orinoco"
+            class="logo--invert"
+        /></a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="nav">
+            <li class="nav-item">
+              <a class="nav-link" href="../index.html">Accueil</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="./produit.html"
+                ><i class="bi bi-camera p-1"></i>Produit</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="./panier.html"
+                ><i class="bi bi-basket3 p-1"></i>Panier</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./confirmation.html"
+                ><i class="bi bi-check2 p-1"></i>Confirmation</a
+              >
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container">
+      <h1 class="p-3">Détails du produit</h1>
+
+      <div class="card card--landscape mb-3 shadow-sm">
+        <div class="d-flex flex-column flex-md-row">
+          <div class="p-0 border border-warning border-5">
+            <img
+              src="../../backend/images/vcam/vcam-sm/vcam_1-sm.png"
+              alt="vintage camera 1"
+              class="mw-100 h-100 border border-warning border-5"
+            />
+          </div>
+
+          <div class="card-body col-lg-6">
+            <h2 class="card-title p-2 text-warning">
+              camera vintage 1<span class="float-right text-warning">25€</span>
+            </h2>
+            <p class="card-text text-warning">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
+              vestibulum vehicula felis sit amet pharetra. Suspendisse potenti.
+              Nunc neque orci, ultrices et quam auctor, tincidunt consectetur
+              felis.
+            </p>
+
+            <div class="dropdown mb-5">
+              <button
+                class="btn btn-secondary dropdown-toggle"
+                type="button"
+                id="dropdownMenuButton"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <span class="text-warning">Lentilles</span>
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item text-warning" href="#">lense_1</a>
+                <a class="dropdown-item text-warning" href="#">lense_2</a>
+                <a class="dropdown-item text-warning" href="#">lense_3</a>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              class="btn btn-primary float-right m-3"
+              data-toggle="modal"
+              data-target="#staticBackdrop"
+            >
+              Ajouter au panier
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer></footer>
+
+    <!-- Javascript -->
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+      integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
+      crossorigin="anonymous"
+    ></script>
+    <script type="text/javascript" src="../js/panier.js"></script>
+  </body>
+</html>
