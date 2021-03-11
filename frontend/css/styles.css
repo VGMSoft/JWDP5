@@ -2,6 +2,7 @@
   height: 219.56px;
 }
 .card--landscape img {
+  max-height: 400px;
   object-fit: cover;
 }
 
