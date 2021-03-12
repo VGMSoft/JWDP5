@@ -1,23 +1,31 @@
 /*GET Request (imageUrl, name)*/
 
-const getData = () =>{
-var request = new XMLHttpRequest();
-request.onreadystatechange = function () {
-  if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-    var response = JSON.parse(this.responseText);
-   console.log(response);
-  }
-};
-request.open("GET", "http://localhost:3000/api/cameras");
-request.send();
-}
+/* API Fetch */
 
-getData();
+const img = document.getElementsByClassName('vcam2')
+
+fetch('https://oc-p5-api.herokuapp.com/api/cameras')
+  .then(res => {
+    if (res.ok) {
+      res.json().then(data => {
+        for (let i in data) {
+          console.log(data[i]);
+          img.src = data[i].imageUrl;
+        
+        }
+      })
+    }
+    else {
+      throw new Error("Erreur de coonexion à l'API")
+    }
+  })
+  .catch(function (err) {
+    return 0;
+  })
 
 
-const newElt = document.createElement("div");
-newElt.textContent ="";
-
-let elt = document.getElementById("vcam1");
-elt.appendChild(newElt);
-
+//notes
+/*
+img.setAttribute("src", img.src);
+.catch ()
+*/
