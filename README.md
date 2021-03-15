@@ -7,16 +7,33 @@
   </a>
 </p>
 
-> Construction d'un site de e-commerce
+**Construction d'un site de e-commerce**
+
+* Interagir avec un web service avec JavaScript
+* Créer un plan de test pour une application
+* Valider des données issues de sources externes
+* Gérer des événements JavaScript
+
 
 ### 🏠 [Homepage](https://github.com/VGMSoft/VirgileGuglielmi_5_04032021)
 
 ### ✨ [Demo](https://vgmsoft.github.io/VirgileGuglielmi_5_04032021/frontend/)
 
 ## Usage
-
+**Frontend**
+> Compilation du scss en css
 ```sh
-sass: "sass --watch ./views/css/styles.scss:./views/css/styles.css";
+sass: "sass --watch ./views/css/styles.scss:./views/css/styles.css"
+```
+**Backend**
+> Lancement du serveur de l'API
+Installation des dépendances
+```sh
+npm install
+```
+Lancement du serveur node.js
+```sh
+node server
 ```
 
 ## Author
