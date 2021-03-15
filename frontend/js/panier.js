@@ -1,5 +1,9 @@
 /*GET Request (_id, total)*/
 
+/*POST Request (imageUrl, name, description, lenses[])*/
+const myRequest = new Request("https://oc-p5-api.herokuapp.com/api/cameras");
+
+
 /*totalCalc*/
 
 /* verification formulaire*/
@@ -20,9 +24,21 @@ const ValidateEmail = (mail) => {
 
 /*POST Request (#firstName, #lastName, #address, #city, #email)*/
 
-const postForm = () => {
-  var request = new XMLHttpRequest();
-  request.open("POST", "https://oc-p5-api.herokuapp.com/api/cameras");
-  request.setRequestHeader("Content-Type", "application/json");
-  request.send(JSON.stringify(jsonBody));
-}
+fetch(myRequest, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({/* contactObject */ }, {/* productArray */ })
+})
+  .then(res => {
+    if (res.ok) {
+      console.log("SUCCES");
+      res.json().then(data => console.log(data));
+    }
+    else {
+      console.log("!SUCCES");
+      throw new Error("Erreur de conexion à l'API");
+    }
+  })
+  .catch(error => console.log("!SUCCES"));

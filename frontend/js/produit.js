@@ -26,21 +26,26 @@ fetch(myRequest)
         vcamPrice.textContent = (data.price / 100 + "€");
         vcamDescription.textContent = (data.description);
 
-        console.log(data.lenses);
+        /* Dropdown menu feeding */
+        for (let i in data.lenses) {
+          let newDropdownItem = document.createElement("a");
+          newDropdownItem.classList.add("dropdown-item");
+          newDropdownItem.textContent = (data.lenses[i])
+          vcamDropdown.appendChild(newDropdownItem);
+        }
 
 
-        //vcamDropdown.
         //vcamAdd.setAttribute("href", "./html/panier.html?id=" + data._id);
 
       });
     }
     else {
-      throw new Error("Erreur de conexion à l'API");
+      console.log('Mauvaise réponse du réseau');
     }
   })
-  .catch(err => {
-    return err;
+  .catch(function (error) {
+    console.log('Il y a eu un problème avec l\'opération fetch: ' + error.message);
   });
 
-
 /*formatPrice*/
+/*-----------------------------------------------------------*/
