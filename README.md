@@ -26,7 +26,6 @@
 sass: "sass --watch ./views/css/styles.scss:./views/css/styles.css"
 ```
 **Backend**
-> Lancement du serveur de l'API
 Installation des dépendances
 ```sh
 npm install
