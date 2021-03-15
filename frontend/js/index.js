@@ -34,7 +34,8 @@ for (let i = 1; i <= 5; i++) {
 fetch(myRequest)
   .then(res => {
     if (res.ok) {
-      res.json().then(data => {  
+      res.json().then(data => { 
+       
         vcam1Name.textContent = (data[0].name);
         vcam1Image.setAttribute("src", data[0].imageUrl);
         vcam1Image.setAttribute("alt", data[0].name);
