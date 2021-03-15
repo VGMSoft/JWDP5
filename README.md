@@ -26,11 +26,11 @@
 sass: "sass --watch ./views/css/styles.scss:./views/css/styles.css"
 ```
 **Backend**
-Installation des dépendances
+>Installation des dépendances
 ```sh
 npm install
 ```
-Lancement du serveur node.js
+>Lancement du serveur node.js
 ```sh
 node server
 ```
