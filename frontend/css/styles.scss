@@ -2,12 +2,14 @@
 .card {
   &--portrait {
     img {
-      height: 219.56px;
+      height: 220px;
     }
   }
   &--landscape {
     img {
       max-height: 400px;
+      min-height: 220px;
+      min-width: 450px;
       object-fit: cover;
     }
   }
@@ -24,10 +26,8 @@
   }
 }
 
-
-
-
-.price{
+.price {
   color: #212529;
   font-size: 2rem;
 }
+
