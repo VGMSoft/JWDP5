@@ -3,6 +3,9 @@ const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const id = urlParams.get("id");
 
+/* GET url id short */
+console.log(new URL(window.location.href).searchParams.get("id"));
+
 /* Vars */
 const myRequest = new Request(`${apiUrl}/api/cameras/` + id);
 let cart = [];
@@ -38,6 +41,7 @@ fetch(myRequest)
         vcamAdd.addEventListener('click', event => {
           let cart = [];
           cart.push(data._id);
+          localStorage.setItem("productId", cart);
           console.log(cart);
         })
         
