@@ -84,7 +84,7 @@
       content="./images/favicon/ms-icon-144x144.png"
     />
     <meta name="theme-color" content="#ffffff" />
-    <!--favincon end-->
+    <!--favincon END-->
 
     <!--styles-->
     <link
@@ -98,12 +98,7 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css"
     />
     <link rel="stylesheet" href="./css/styles.css" />
-    <!--styles end-->
-
-    <!--script-->
-    <script type="text/javascript" src="./js/config.js" defer></script>
-    <script type="text/javascript" src="./js/index.js" defer></script>
-    <!--script end-->
+    <!--styles END-->
 
     <title>Orinoco</title>
   </head>
@@ -145,76 +140,30 @@
     <main class="container">
       <h1 class="p-3">Nos produits</h1>
 
-      <div class="row">
-        <div class="col-12 col-md-6 col-lg-4">
-          <div class="card m-2 card--portrait shadow-sm vcam1">
-            <img class="card-img-top bg-secondary" />
-            <div class="card-body">
-              <h2 class="card-title">Produit</h2>
-              <a class="btn btn-primary float-right" role="button"
-                >Voir produit</a
-              >
-            </div>
-          </div>
-        </div>
-
-        <div class="col-12 col-md-6 col-lg-4">
-          <div class="card m-2 card--portrait shadow-sm vcam2">
-            <img class="card-img-top bg-secondary" />
-            <div class="card-body">
-              <h2 class="card-title">Produit</h2>
-              <a class="btn btn-primary float-right" role="button"
-                >Voir produit</a
-              >
-            </div>
-          </div>
-        </div>
-
-        <div class="col-12 col-md-6 col-lg-4">
-          <div class="card m-2 card--portrait shadow-sm vcam3">
-            <img class="card-img-top bg-secondary" />
-            <div class="card-body">
-              <h2 class="card-title">Produit</h2>
-              <a class="btn btn-primary float-right" role="button"
-                >Voir produit</a
-              >
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-12 col-md-6 col-lg-4">
-          <div class="card m-2 card--portrait shadow-sm vcam4">
-            <img class="card-img-top bg-secondary" />
-            <div class="card-body">
-              <h2 class="card-title">Produit</h2>
-              <a class="btn btn-primary float-right" role="button"
-                >Voir produit</a
-              >
-            </div>
-          </div>
-        </div>
-
-        <div class="col-12 col-md-6 col-lg-4">
-          <div class="card m-2 card--portrait shadow-sm vcam5">
-            <img class="card-img-top bg-secondary" />
-            <div class="card-body">
-              <h2 class="card-title">Produit</h2>
-              <a class="btn btn-primary float-right" role="button"
-                >Voir produit</a
-              >
-            </div>
-          </div>
-        </div>
-
-        <div class="col-4 col-sm-12"></div>
-      </div>
+      <section class="row templateContainer d-flex"></section>
     </main>
+
+    <!-- Template -->
+    <template id="template">
+      <div class="col-12 col-md-6 col-lg-4">
+        <figure class="card m-2 card--portrait shadow-sm vcam1">
+          <img class="card-img-top bg-secondary" />
+          <figcaption class="card-body">
+            <h2 class="card-title">Produit</h2>
+            <a class="btn btn-primary float-right" role="button"
+              >Voir produit</a
+            >
+          </figcaption>
+        </figure>
+      </div>
+    </template>
+    <!-- Template END -->
 
     <footer></footer>
 
     <!-- Javascript -->
+    <script type="text/javascript" src="./js/config.js" defer></script>
+    <script type="text/javascript" src="./js/index.js" defer></script>
     <script
       src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
       integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -230,5 +179,6 @@
       integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
       crossorigin="anonymous"
     ></script>
+    <!-- Javascript END -->
   </body>
 </html>
