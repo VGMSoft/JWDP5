@@ -19,12 +19,11 @@ async function getData() {
     });
 }
 
-
 function fillMarkup(products) {
-  products.forEach((product) => displayProduct(product));
+  products.forEach((product) => fillTemplate(product));
 }
 
-function displayProduct(product) {
+function fillTemplate(product) {
 
   /* get template */
   const template = document.querySelector("#template");
@@ -39,6 +38,6 @@ function displayProduct(product) {
   clone.querySelector(".card .card-body h2").textContent = product.name;
   clone.querySelector(".card .card-body a").href = (urlTemplate + product._id);
 
-  /* display template */
+  /* send filled template */
   document.querySelector(".templateContainer").appendChild(clone);
 }
