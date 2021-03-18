@@ -1,17 +1,24 @@
 (async () => {
   const products = await getData();
+  console.log("Request results :", products);
   fillMarkup(products);
 })();
 
 async function getData() {
   return fetch(`${apiUrl}/api/cameras`)
-    .then(res => res.json())
+    .then(res => {
+      console.log("HTTP Request Status :", res.status);
+      if (res.ok) {
+        return res.json();
+      }
+    })
     .then((products) => products)
     .catch(err => {
       console.log(err);
       alert("La connexion au serveur à échoué, veuillez réactualiser la page !");
     });
 }
+
 
 function fillMarkup(products) {
   products.forEach((product) => displayProduct(product));
@@ -21,8 +28,7 @@ function displayProduct(product) {
 
   /* get template */
   const template = document.querySelector("#template");
-  console.log(template.content)
-  
+
   /* clone template */
   const clone = document.importNode(template.content, true);
 
