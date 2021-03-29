@@ -1,16 +1,18 @@
-/* collect product id */
-const id = new URL(window.location.href).searchParams.get("id");
-
 (() => {
-    getProduct()
-        .then((product) => {
-            console.log("Request result :", product);
-            fillMarkup(product);
-        })
-    addToCart(id)
+    const id = getProductId()
+    getProduct(id)
+        .then((product) => fillMarkup(product))
+        .then()
 })();
+
+/* ------------------------------------------ Filling Markup ------------------------------------------ */
+/* collect product id */
+function getProductId() {
+    return new URL(window.location.href).searchParams.get("id")
+}
+
 /* collecting data from API */
-function getProduct() {
+function getProduct(id) {
     return fetch(`${apiUrl}/api/cameras/` + id)
         .then(res => {
             console.log("HTTP Request Status :", res.status);
@@ -37,14 +39,26 @@ function fillMarkup(product) {
         newDropdownItem.setAttribute("value", i)
         newDropdownItem.classList.add(".dropdown-item")
         newDropdownItem.textContent = (product.lenses[i])
-        document.querySelector(".lense-selector").appendChild(newDropdownItem)
+        newDropdownItem.value = (product.lenses[i])
+        document.querySelector(".lenseSelector").appendChild(newDropdownItem)
     }
 }
-/* Adding product to cart */
-function addToCart(id) {
+
+// revealing modal (BootstrapJS homemade patch)
+function revealModal() {
     document.querySelector(".addToCart").onclick = () => {
-        localStorage.setItem('newItem', id)
-        var newItem = localStorage.getItem('newItem');
-        console.log("Last added to cart:", id)
+        document.body.classList.add("modal-open")
+        document.querySelector(".modal").classList.add("show")
+        document.querySelector(".modal").style.display = "block"
+        document.querySelector(".modal").setAttribute("aria-modal", "true")
+        document.querySelector(".modal").setAttribute("role", "dialog")
+        document.querySelector(".modal").removeAttribute("aria-hidden")
+        const div = document.createElement("div");
+        div.classList.add("modal-backdrop")
+        div.classList.add("fade")
+        div.classList.add("show")
+        document.body.appendChild(div)
+        console.log(div)
     }
 }
+revealModal()

@@ -1,43 +1,78 @@
-let cart = [];
-
 (async() => {
-    appendToCart()
-        //const inputs = await getFormInputs();
-        //sendOrder(inputs);
-        //emptyCart()
+
+
 })();
 
 
+/*---------------------------------------- CART ----------------------------------------*/
+function productTotal(product) {
+    let productTotal = product.price * product.quantity
+}
 
-function appendToCart() {
-    cart.push(localStorage.getItem('newItem'))
-    localStorage.setItem('cart', cart)
-    console.log(cart)
+function totalCalc(productTotal) {
+    const totalPrice = ""
+}
+
+//show cart products
+function showCartProducts() {
+    /* get template */
+    const template = document.querySelector("#template")
+        /* clone template */
+    const clone = document.importNode(template.content, true);
+    /* send filled template */
+    document.querySelector(".templateContainer").appendChild(clone);
+}
+for (let i = 0; i < 3; i++) {
+    showCartProducts()
 }
 
 
+/*---------------------------------------- FORM ----------------------------------------*/
+function formValidate(input, condition) {
 
-
-
-
-
-
-
-
-
-
-function getFormInputs() {
-    document.querySelector(".order").onclick = (e) => {
-        e.preventDefault();
-        alert("Erreur 404");
-        const name = document.querySelector("#name");
-        const email = document.querySelector("#email");
-    };
 }
 
 
-/*
-function sendOrder(name, email) {
+//firstName
+const ValidateFirstName = (firstName) => {
+        if (/^([a-zA-Z ]+)$/) {
+            return (true)
+        }
+        alert("Veuillez entrer votre prénom")
+        return (false)
+    }
+    //lastName
+const ValidateLastName = (lastName) => {
+        if (/^([a-zA-Z ]+)$/) {
+            return (true)
+        }
+        alert("Veuillez entrer votre nom de famille")
+        return (false)
+    }
+    //address
+const ValidateAddress = (address) => {
+        if (/^([0-9]+\ )([a-zA-Z]+\ ?)([a-zA- Z] +\ )([a-zA-Z\ ]+)$/) {
+            return (true)
+        }
+        alert("Veuillez entrer votre nom de famille")
+        return (false)
+    }
+    //city
+/^([a-zA-Z]+)$/;
+//email
+const ValidateEmail = (mail) => {
+    if (/^$/.test(myForm.emailAddr.value)) {
+        return (true)
+    }
+    alert("You have entered an invalid email address!")
+    return (false)
+}
+
+
+/*---------------------------------------- ORDER ----------------------------------------*/
+/*orderData*/
+
+function sendOrder(firstName, lastName, address, city, email) {
     return fetch(`${apiUrl}/api/cameras/order`, {
             method: "POST",
             body: JSON.stringify({
@@ -56,9 +91,6 @@ function sendOrder(name, email) {
         .then((response) => response.json())
         .then((json) => console.log(json));
 }
-*/
-
-/*orderData*/
 let contact = {
     firstName: "",
     lastName: "",
@@ -73,53 +105,10 @@ let order = { contact, products };
 
 
 
-/*CART*/
-function quantityCalc() {}
 
-function totalCalc() {}
 
-/*FORM*/
-function formValidate() {
-    //firstName
-    const ValidateFirstName = (firstName) => {
-            if (/^([a-zA-Z ]+)$/) {
-                return (true)
-            }
-            alert("Veuillez entrer votre prénom")
-            return (false)
-        }
-        //lastName
-    const ValidateLastName = (lastName) => {
-            if (/^([a-zA-Z ]+)$/) {
-                return (true)
-            }
-            alert("Veuillez entrer votre nom de famille")
-            return (false)
-        }
-        //address
-    const ValidateAddress = (address) => {
-            if (/^([0-9]+\ )([a-zA-Z]+\ ?)([a-zA- Z] +\ )([a-zA-Z\ ]+)$/) {
-                return (true)
-            }
-            alert("Veuillez entrer votre nom de famille")
-            return (false)
-        }
-        //city
-    /^([a-zA-Z]+)$/;
-    //email
-    const ValidateEmail = (mail) => {
-        if (/^$/.test(myForm.emailAddr.value)) {
-            return (true)
-        }
-        alert("You have entered an invalid email address!")
-        return (false)
-    }
-}
-
-/*------------------------------------------------------------*/
+/*---------------------------------------- onclick called func ----------------------------------------*/
 function emptyCart() {
-    document.querySelector(".emptyCart").onclick = () => {
-        localStorage.clear()
-        console.warn("Cart cleaned")
-    }
+    localStorage.clear()
+    console.warn("Cart cleaned")
 }
