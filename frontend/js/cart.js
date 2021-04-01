@@ -1,24 +1,39 @@
-/* ------------------------------------------ Adding to Cart ------------------------------------------*/
-(() => {
-    //Adding product to cart 
-    getProductData()
-        .then((productData) => buildCart(productData))
-})();
+/* ------------------------------------------ Adding to Cart ------------------------------------------
+(async() => {
+    const option = await getLenseOption()
+    createProductObject(product, option)
+})()*/
 
-
-
-function getProductData() {
-    //get productId
-    const id = getProductId()
-    console.log(id)
-        //get lense option
+/* ------------------------------------------- Building Cart -------------------------------------------- 
+function getLenseOption() {
     const lenseSelector = document.querySelector(".lenseSelector")
-    const lenseOption = lenseSelector.options[lenseSelector.selectedIndex].value
-    console.log(lenseOption)
-        //get price 
-    const product = getProduct(id)
-    console.log(product)
+    lenseSelector.onchange = () => {
+        console.log(lenseSelector.value)
+        return lenseSelector.value
+    }
 }
+
+function createProductObject(product, option) {
+    //gathering data
+    const id = (product._id)
+    const name = (product.name)
+    const price = (product.price / 100 + "€")
+    const lenseSelector = document.querySelector(".lenseSelector")
+        //Create cart
+    let cartContent = {}
+        //Create cartObject
+    const productObject = {}
+        //Adding attribute to cartObject
+    productObject.name = name
+    productObject.price = price
+    productObject.option = option
+    productObject.quantity = 1
+        //Append to localStorage
+    console.log(productObject)
+    localStorage.setItem('cartContent', JSON.stringify(productObject))
+}
+*/
+
 
 function buildCart() {
 
@@ -38,22 +53,12 @@ function buildCart() {
     newCart[id].price = product.price
     newCart[id].option = product.option
     newCart[id].quantity = 1
-        //Append to localStorage
-    console.log(newCart)
-    localStorage.setItem('cartContent', JSON.stringify(newCart))
 
-    /* ------------ exemple ---------------*/
 
-    const id = "5be9c4471c9d440000a730e8"
-        //let newCart = {}
 
-    newCart[id] = {}
-    newCart[id].name = "ZoomH6"
-    newCart[id].price = "350"
-    newCart[id].option = "lense1"
-    newCart[id].quantity = 1
-        //newCart[id].quantity++
-    console.log(newCart)
-
-    /* ------------------------------------*/
 }
+/*------------------------------------------------------------------------------------------------*/
+
+class CartObject {}
+
+const cart = new CartObject()

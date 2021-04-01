@@ -93,7 +93,8 @@
             <input
               type="number"
               name="quantity"
-              class="form-control form-control-md w-25 rounded-0"
+              class="form-control w-25 rounded-0"
+              placeholder="1"
             />
             <button
               type="button"
@@ -108,21 +109,18 @@
       </template>
         <!--cartProductTemplate END-->
 
-        <!--Panier END-->
-
         <!--Form-->
         <div class="row">
             <div class="col-12 p-3">
                 <h2>Vos coordonées</h2>
-                <form>
+                <form action="" method="post" class="form">
                     <!--first name-->
                     <div class="form-group">
                         <label for="firstName">Prénom</label>
-                        <input type="text" class="form-control" id="firstName" aria-describedby="firstNameHelp" placeholder="Your first name" required />
+                        <input type="text" class="form-control" id="firstName" aria-describedby="firstNameHelp" placeholder="Your first name" name="firstName" pattern="^([a-zA-Z ]+)$" required />
                         <small id="firstNameHelp" class="form-text text-muted">Entrez votre prénom.</small
               >
             </div>
-
             <!--last name-->
             <div class="form-group">
               <label for="lastName">Nom</label>
@@ -132,13 +130,14 @@
                 id="lastName"
                 aria-describedby="lastNameHelp"
                 placeholder="Your last name"
+                name="lastName"
+                pattern="^([a-zA-Z ]+)$"
                 required
               />
               <small id="lastNameHelp" class="form-text text-muted"
                 >Entrez votre nom.</small
               >
             </div>
-
             <!--address-->
             <div class="form-group">
               <label for="address">Adresse</label>
@@ -148,13 +147,14 @@
                 id="address"
                 aria-describedby="addressHelp"
                 placeholder="Your address"
+                name="address"
+                pattern="^[1-9]+\s[a-zA-Z0-9\s]+$"
                 required
               />
               <small id="addressHelp" class="form-text text-muted"
                 >Entrez votre adresse.</small
               >
             </div>
-
             <!--city-->
             <div class="form-group">
               <label for="city">Ville</label>
@@ -164,13 +164,14 @@
                 id="city"
                 aria-describedby="cityHelp"
                 placeholder="Your city"
+                name="city"
+                pattern="^([a-zA-Z ]+)$"
                 required
               />
               <small id="cityHelp" class="form-text text-muted"
                 >Entrez votre ville.</small
               >
             </div>
-
             <!--email-->
             <div class="form-group">
               <label for="email">Email</label>
@@ -180,23 +181,28 @@
                 id="email"
                 aria-describedby="emailHelp"
                 placeholder="Your email"
+                name="email"
+                pattern="^(\w\.?)+@[\w\.-]+\.\w{2,4}$"
                 required
               />
               <small id="emailHelp" class="form-text text-muted"
                 >Entrez votre email.</small
               >
             </div>
-
+            <!--submit-->
+            <button class="btn btn-primary order" type="submit">
+              Commander
+            </button>
+            <!--redirect-->
             <a
               class="btn btn-primary order"
               href="./confirmation.html"
               role="button"
-              >Commander</a
+              >Confirmation</a
             >
           </form>
         </div>
       </div>
-
       <!--Form END-->
     </main>
 

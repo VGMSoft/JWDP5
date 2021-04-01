@@ -1,10 +1,6 @@
 /*GET Request (order_id, total)*/
 (() => {
-    getOrderData()
-        .then((product) => {
-            console.log("Request result :", product);
-            fillMarkup(product);
-        })
+    //getOrderData()
 })();
 
 async function getOrderData() {

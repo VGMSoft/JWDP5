@@ -1,16 +1,16 @@
-(async() => {
-
-
+(() => {
+    for (let i = 0; i < 5; i++) {
+        showCartProducts()
+    }
+    getFormData()
+        //formValidate()
+        //buildContactObject()
 })();
 
 
 /*---------------------------------------- CART ----------------------------------------*/
-function productTotal(product) {
-    let productTotal = product.price * product.quantity
-}
-
-function totalCalc(productTotal) {
-    const totalPrice = ""
+function getCartProducts() {
+    console.log(JSON.parse(localStorage.getItem('cartContent')))
 }
 
 //show cart products
@@ -22,16 +22,47 @@ function showCartProducts() {
     /* send filled template */
     document.querySelector(".templateContainer").appendChild(clone);
 }
-for (let i = 0; i < 3; i++) {
-    showCartProducts()
+
+
+function productTotal(product) {
+    let productTotal = product.price * product.quantity
 }
 
+function totalCalc(productTotal) {
+    const totalPrice = ""
+}
 
 /*---------------------------------------- FORM ----------------------------------------*/
-function formValidate(input, condition) {
 
+
+
+function getFormData() {
+    const form = document.querySelector(".form")
+    form.onsubmit = (e) => {
+        e.preventDefault()
+            //getting field value
+        const firstName = e.target.firstName.value
+        const lastName = e.target.lastName.value
+        const address = e.target.address.value
+        const city = e.target.city.value
+        const email = e.target.email.value
+            //Creating contactObject
+        let contactObject = { firstName: firstName, lastName: lastName, address: address, city: city, email: email }
+        console.log(contactObject)
+    }
 }
 
+function formValidate(input, condition) {
+    const lastName = document.querySelector('input[name=""]')
+    lastName.onchange = () => {
+        lastName.addEventListener('invalid', (e) => {
+            lastName.style.border = "solid red 1px"
+
+        });
+    }
+}
+
+function buildContactObject() {}
 
 //firstName
 const ValidateFirstName = (firstName) => {
@@ -68,6 +99,11 @@ const ValidateEmail = (mail) => {
     return (false)
 }
 
+// Empty Cart
+function emptyCart() {
+    localStorage.clear()
+    console.warn("Cart cleaned")
+}
 
 /*---------------------------------------- ORDER ----------------------------------------*/
 /*orderData*/
@@ -101,14 +137,3 @@ let contact = {
 let products = [];
 
 let order = { contact, products };
-
-
-
-
-
-
-/*---------------------------------------- onclick called func ----------------------------------------*/
-function emptyCart() {
-    localStorage.clear()
-    console.warn("Cart cleaned")
-}
