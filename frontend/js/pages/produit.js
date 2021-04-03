@@ -1,16 +1,11 @@
-(async() => {
+(async () => {
     const id = getProductId()
-    const option = await getLenseOption()
     getProduct(id)
         .then((product) => {
-            fillMarkup(product)
-            createProductObject(product, option)
+            displayProduct(product)
+            revealModalOnClick(product)
         })
 
-
-
-
-    revealModal()
 })()
 
 /* ------------------------------------------ Filling Markup ------------------------------------------ */
@@ -35,13 +30,13 @@ function getProduct(id) {
         });
 };
 //Presenting data in markup
-function fillMarkup(product) {
+function displayProduct(product) {
     document.querySelector(".card-title").textContent = product.name
     document.querySelector(".card img").src = product.imageUrl
     document.querySelector(".card-title").alt = product.name
     document.querySelector(".price").textContent = (product.price / 100 + "€")
     document.querySelector(".card-text").textContent = (product.description)
-        /* Dropdown menu feeding */
+    /* Dropdown menu feeding */
     for (let i in product.lenses) {
         let newDropdownItem = document.createElement("option")
         newDropdownItem.setAttribute("value", i)
@@ -50,10 +45,11 @@ function fillMarkup(product) {
         newDropdownItem.value = (product.lenses[i])
         document.querySelector(".lenseSelector").appendChild(newDropdownItem)
     }
+    cart.getOption((response) => console.log(response))
 }
 
 /* ---------------------------- revealing modal (BootstrapJS homemade patch) ---------------------------- */
-function revealModal() {
+function revealModalOnClick(product) {
     const modal = document.querySelector(".modal")
     document.querySelector(".addToCart").onclick = () => {
         document.body.classList.add("modal-open")
@@ -67,36 +63,6 @@ function revealModal() {
         div.classList.add("fade")
         div.classList.add("show")
         document.body.appendChild(div)
+        cart.addItem(product)
     }
-}
-
-
-
-/* ------------------------------------------- Building Cart -------------------------------------------- */
-function getLenseOption() {
-    const lenseSelector = document.querySelector(".lenseSelector")
-    lenseSelector.onchange = () => {
-        console.log(lenseSelector.value)
-        return lenseSelector.value
-    }
-}
-
-function createProductObject(product, option) {
-    //gathering data
-    const id = (product._id)
-    const name = (product.name)
-    const price = (product.price / 100 + "€")
-    const lenseSelector = document.querySelector(".lenseSelector")
-        //Create cart
-    let cartContent = {}
-        //Create cartObject
-    const productObject = {}
-        //Adding attribute to cartObject
-    productObject.name = name
-    productObject.price = price
-    productObject.option = option
-    productObject.quantity = 1
-        //Append to localStorage
-    console.log(productObject)
-    localStorage.setItem('cartContent', JSON.stringify(productObject))
 }

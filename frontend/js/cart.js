@@ -1,64 +1,47 @@
-/* ------------------------------------------ Adding to Cart ------------------------------------------
-(async() => {
-    const option = await getLenseOption()
-    createProductObject(product, option)
-})()*/
+class Cart {
 
-/* ------------------------------------------- Building Cart -------------------------------------------- 
-function getLenseOption() {
-    const lenseSelector = document.querySelector(".lenseSelector")
-    lenseSelector.onchange = () => {
-        console.log(lenseSelector.value)
-        return lenseSelector.value
+
+    // localStorage.setItem('cart', JSON.stringify(products))
+
+
+    getOption(onOptionSelected) {
+        const lenseSelector = document.querySelector(".lenseSelector")
+        lenseSelector.onchange = () => {
+            onOptionSelected(lenseSelector.value)
+            return lenseSelector.value
+        }
     }
-}
 
-function createProductObject(product, option) {
-    //gathering data
-    const id = (product._id)
-    const name = (product.name)
-    const price = (product.price / 100 + "€")
-    const lenseSelector = document.querySelector(".lenseSelector")
+    createProductObject(product){
+        //new Product Object
+        let productObject = {}
+        //Adding attribute to cartObject
+        productObject.name = product.name
+        productObject.price = (product.price / 100 + "€")
+        productObject.option = "option"
+        productObject.quantity = 1
+        cart[id] = productObject
+    }
+
+
+
+    addItem(product) {
         //Create cart
-    let cartContent = {}
-        //Create cartObject
-    const productObject = {}
-        //Adding attribute to cartObject
-    productObject.name = name
-    productObject.price = price
-    productObject.option = option
-    productObject.quantity = 1
+        const cart = JSON.parse(localStorage.getItem('cart')) || {}
+        const id = (product._id)
+        //test if product exist in cart
+        if (cart[id] == null) {
+            createProductObject(product)
+        } else {
+            //increasing quantity
+            cart[id].quantity++
+        }
         //Append to localStorage
-    console.log(productObject)
-    localStorage.setItem('cartContent', JSON.stringify(productObject))
-}
-*/
-
-
-function buildCart() {
-
-    if (typeof newCart[id] == "undefined") {
-
-    } else if (typeof newCart[id] != "undefined") {
-        newCart[id].quantity++
+        localStorage.setItem('cart', JSON.stringify(cart))
     }
-
-    /* ------------------------------------*/
-    //Create cart
-    let newCart
-        //Create cartObject
-    newCart[id] = {}
-        //Adding attribute to cartObject
-    newCart[id].name = product.name
-    newCart[id].price = product.price
-    newCart[id].option = product.option
-    newCart[id].quantity = 1
-
-
-
+    /*  removeItem(id) {
+        localStorage.removeItem(id);
+    }*/
 }
-/*------------------------------------------------------------------------------------------------*/
 
-class CartObject {}
-
-const cart = new CartObject()
+const cart = new Cart()
