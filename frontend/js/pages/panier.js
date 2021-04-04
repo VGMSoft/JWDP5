@@ -1,45 +1,64 @@
 (() => {
-  for (let i = 0; i < 5; i++) {
-    showCartProducts()
-  }
-  getFormData()
+
+  const itemsInCart = cart.getCartItems()
+  console.log(itemsInCart)
+  displayCartProduct(itemsInCart)
+
+  
+  
+  //getFormData()
+  //modifyQuantity()
   //formValidate()
   //buildContactObject()
 })();
 
 
 /*---------------------------------------- CART ----------------------------------------*/
-function getCartProducts() {
-  console.log(JSON.parse(localStorage.getItem('cartContent')))
-}
 
-//show cart products
-function showCartProducts() {
-  /* get template */
-  const template = document.querySelector("#template")
-  /* clone template */
-  const clone = document.importNode(template.content, true);
-  /* send filled template */
-  document.querySelector(".templateContainer").appendChild(clone);
+function cartObjectToProductArray(){
+  return Object.values(cart.getCartItems())
 }
 
 
-function productTotal(product) {
-  let productTotal = product.price * product.quantity
+//Display Cart Content
+function displayCartProduct() {
+  //Append Cart product Id in Product Array
+  let productArray = cartObjectToProductArray()
+  //Tableau de produits
+  console.log("Tableau de produits :", productArray)
+  for (let i in productArray) {
+    // get template
+    const template = document.querySelector("#template");
+    // clone template
+    const clone = document.importNode(template.content, true)
+    //fill template
+    clone.querySelector(".productName").innerHTML = productArray[i].name
+    clone.querySelector(".quantity").value = productArray[i].quantity
+    clone.querySelector(".unityPrice").innerHTML = productArray[i].price
+    clone.querySelector(".totalPrice").innerHTML = productArray[i].price
+    document.querySelector(".templateContainer").appendChild(clone);
+  }
 }
 
-function totalCalc(productTotal) {
-  const totalPrice = ""
+
+function modifyQuantity() {
+  const minus = window.document.querySelector(".buttonMinus")
+  const plus = window.document.querySelector(".buttonPlus")
+  const quantity = window.document.querySelector(".quantity")
+  quantity.value = 1
+  minus.onclick = () => {
+    quantity.value--
+  }
+  plus.onclick = () => {
+    quantity.value++
+  }
 }
 
 /*---------------------------------------- FORM ----------------------------------------*/
-
-
-
 function getFormData() {
   const form = document.querySelector(".form")
-  form.onsubmit = (e) => {
-    e.preventDefault()
+  form.onsubmit = (event) => {
+    event.preventDefault()
     //getting field value
     const firstName = e.target.firstName.value
     const lastName = e.target.lastName.value
@@ -48,7 +67,8 @@ function getFormData() {
     const email = e.target.email.value
     //Creating contactObject
     let contactObject = { firstName: firstName, lastName: lastName, address: address, city: city, email: email }
-    console.log(contactObject)
+    //Objet de contact
+    console.log("Objet de Contact :", contactObject)
   }
 }
 

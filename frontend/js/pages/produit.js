@@ -1,8 +1,9 @@
-(async () => {
+(() => {
   const id = getProductId()
   getProduct(id)
     .then((product) => {
       displayProduct(product)
+      console.log("HTTP Request Results :", product)
       revealModalOnClick(product)
     })
 
@@ -18,7 +19,7 @@ function getProductId() {
 function getProduct(id) {
   return fetch(`${apiUrl}/api/cameras/` + id)
     .then(res => {
-      console.log("HTTP Request Status :", res.status);
+      console.log("HTTP Request Status :", res.status)
       if (res.ok) {
         return res.json();
       }
@@ -45,7 +46,6 @@ function displayProduct(product) {
     newDropdownItem.value = (product.lenses[i])
     document.querySelector(".lenseSelector").appendChild(newDropdownItem)
   }
-  cart.getOption((response) => console.log(response))
 }
 
 /* ---------------------------- revealing modal (BootstrapJS homemade patch) ---------------------------- */
@@ -63,6 +63,7 @@ function revealModalOnClick(product) {
     div.classList.add("fade")
     div.classList.add("show")
     document.body.appendChild(div)
+
     cart.addItem(product)
   }
 }
