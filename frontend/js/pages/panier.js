@@ -4,8 +4,8 @@
   console.log(itemsInCart)
   displayCartProduct(itemsInCart)
 
-  
-  
+
+
   //getFormData()
   //modifyQuantity()
   //formValidate()
@@ -15,10 +15,9 @@
 
 /*---------------------------------------- CART ----------------------------------------*/
 
-function cartObjectToProductArray(){
+function cartObjectToProductArray() {
   return Object.values(cart.getCartItems())
 }
-
 
 //Display Cart Content
 function displayCartProduct() {
@@ -40,7 +39,6 @@ function displayCartProduct() {
   }
 }
 
-
 function modifyQuantity() {
   const minus = window.document.querySelector(".buttonMinus")
   const plus = window.document.querySelector(".buttonPlus")
@@ -55,7 +53,7 @@ function modifyQuantity() {
 }
 
 /*---------------------------------------- FORM ----------------------------------------*/
-function getFormData() {
+/* function getFormData() {
   const form = document.querySelector(".form")
   form.onsubmit = (event) => {
     event.preventDefault()
