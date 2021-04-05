@@ -65,6 +65,7 @@ function getFormData() {
     let contactObject = { firstName: firstName, lastName: lastName, address: address, city: city, email: email }
     //Objet de contact
     console.log("Objet de Contact :", contactObject)
+    window.location.href = `./confirmation.html`
   }
 }
 
@@ -127,5 +128,4 @@ const ValidateEmail = (mail) => {
     .then((json) => console.log(json));
     let order = { contactObject: {}, productArray: [] }
 } */
-
 
