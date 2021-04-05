@@ -1,16 +1,12 @@
 (() => {
-
   const itemsInCart = cart.getCartItems()
-  console.log(itemsInCart)
   displayCartProduct(itemsInCart)
-  //getFormData()
+  cart.calcGlobalTotal()
   //formValidate()
-  buildContactObject()
+  getFormData()
 })();
 
-
 /*---------------------------------------- CART ----------------------------------------*/
-
 function cartObjectToProductArray() {
   return Object.values(cart.getCartItems())
 }
@@ -53,31 +49,18 @@ function modifyQuantity() {
   }
 }
 
-
-function getGlobalTotal() {
-  let globalTotal = 0;
-  const totalProductPrice = document.querySelectorAll(".totalPrice");
-  const globalTotalDisplay = document.querySelector(".globalTotal");
-  Array.from(totalProductPrice).forEach((product) => {
-    globalTotal += parseInt(product.getAttribute("value"))
-  })
-  globalTotalDisplay.innerHTML = globalTotal + "€"
-}
-
-getGlobalTotal()
-
-
 /*---------------------------------------- FORM ----------------------------------------*/
-/* function getFormData() {
+function getFormData() {
   const form = document.querySelector(".form")
+  //if(formValidated){}
   form.onsubmit = (event) => {
     event.preventDefault()
     //getting field value
-    const firstName = e.target.firstName.value
-    const lastName = e.target.lastName.value
-    const address = e.target.address.value
-    const city = e.target.city.value
-    const email = e.target.email.value
+    const firstName = event.target.firstName.value
+    const lastName = event.target.lastName.value
+    const address = event.target.address.value
+    const city = event.target.city.value
+    const email = event.target.email.value
     //Creating contactObject
     let contactObject = { firstName: firstName, lastName: lastName, address: address, city: city, email: email }
     //Objet de contact
@@ -93,11 +76,8 @@ function formValidate(input, condition) {
 
     });
   }
-} */
-
-function buildContactObject() { }
-
-/* //firstName
+}
+//firstName
 const ValidateFirstName = (firstName) => {
   if (/^([a-zA-Z ]+)$/) {
     return (true)
@@ -132,41 +112,20 @@ const ValidateEmail = (mail) => {
   return (false)
 }
 
-// Empty Cart
-function emptyCart() {
-  localStorage.clear()
-  console.warn("Cart cleaned")
-} */
+
 
 /*---------------------------------------- ORDER ----------------------------------------*/
-/*orderData*/
-
-function sendOrder(firstName, lastName, address, city, email) {
+/* function sendOrder(contactObject, productArray) {
   return fetch(`${apiUrl}/api/cameras/order`, {
     method: "POST",
-    body: JSON.stringify({
-      firstName: "",
-      lastName: "",
-      address: "",
-      city: "",
-      email: ""
-    }, {
-
-    }),
+    body: JSON.stringify(contactObject),
     headers: {
       "Content-type": "application/json; charset=UTF-8",
     },
   })
     .then((response) => response.json())
     .then((json) => console.log(json));
-}
-let contact = {
-  firstName: "",
-  lastName: "",
-  address: "",
-  city: "",
-  email: ""
-};
-let products = [];
+    let order = { contactObject: {}, productArray: [] }
+} */
 
-let order = { contact, products };
+

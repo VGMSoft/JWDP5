@@ -48,12 +48,20 @@ class Cart {
   }
 
   //Cart Math
-  productTotal() { }
+  calcGlobalTotal() {
+    let globalTotal = 0;
+    const totalProductPrice = document.querySelectorAll(".totalPrice");
+    const globalTotalDisplay = document.querySelector(".globalTotal");
+    Array.from(totalProductPrice).forEach((product) => {
+      globalTotal += parseInt(product.getAttribute("value"))
+    })
+    globalTotalDisplay.innerHTML = globalTotal + "€"
+  }
 
-
-
-  totalCalc(productTotal) {
-    const totalPrice = ""
+  // Empty Cart
+  emptyCart() {
+    localStorage.clear()
+    console.warn("Cart cleaned")
   }
 
 }
