@@ -3,13 +3,9 @@
   const itemsInCart = cart.getCartItems()
   console.log(itemsInCart)
   displayCartProduct(itemsInCart)
-
-
-
   //getFormData()
-  //modifyQuantity()
   //formValidate()
-  //buildContactObject()
+  buildContactObject()
 })();
 
 
@@ -18,7 +14,6 @@
 function cartObjectToProductArray() {
   return Object.values(cart.getCartItems())
 }
-
 //Display Cart Content
 function displayCartProduct() {
   //Append Cart product Id in Product Array
@@ -31,10 +26,14 @@ function displayCartProduct() {
     // clone template
     const clone = document.importNode(template.content, true)
     //fill template
+
+    totalProductPrice = parseInt(productArray[i].price) * parseInt(productArray[i].quantity)
     clone.querySelector(".productName").innerHTML = productArray[i].name
     clone.querySelector(".quantity").value = productArray[i].quantity
     clone.querySelector(".unityPrice").innerHTML = productArray[i].price
-    clone.querySelector(".totalPrice").innerHTML = productArray[i].price
+    clone.querySelector(".totalPrice").innerHTML = totalProductPrice + "€"
+    clone.querySelector(".totalPrice").setAttribute("value", totalProductPrice)
+
     document.querySelector(".templateContainer").appendChild(clone);
   }
 }
@@ -46,11 +45,27 @@ function modifyQuantity() {
   quantity.value = 1
   minus.onclick = () => {
     quantity.value--
+    cart.setCartItem()
   }
   plus.onclick = () => {
     quantity.value++
+    cart.setCartItem()
   }
 }
+
+
+function getGlobalTotal() {
+  let globalTotal = 0;
+  const totalProductPrice = document.querySelectorAll(".totalPrice");
+  const globalTotalDisplay = document.querySelector(".globalTotal");
+  Array.from(totalProductPrice).forEach((product) => {
+    globalTotal += parseInt(product.getAttribute("value"))
+  })
+  globalTotalDisplay.innerHTML = globalTotal + "€"
+}
+
+getGlobalTotal()
+
 
 /*---------------------------------------- FORM ----------------------------------------*/
 /* function getFormData() {
@@ -78,11 +93,11 @@ function formValidate(input, condition) {
 
     });
   }
-}
+} */
 
 function buildContactObject() { }
 
-//firstName
+/* //firstName
 const ValidateFirstName = (firstName) => {
   if (/^([a-zA-Z ]+)$/) {
     return (true)
@@ -121,7 +136,7 @@ const ValidateEmail = (mail) => {
 function emptyCart() {
   localStorage.clear()
   console.warn("Cart cleaned")
-}
+} */
 
 /*---------------------------------------- ORDER ----------------------------------------*/
 /*orderData*/
