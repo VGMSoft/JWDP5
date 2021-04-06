@@ -7,6 +7,8 @@
   </a>
 </p>
 
+## 🎯 [Objectif]
+
 **Construction d'un site de e-commerce**
 
 * Interagir avec un web service avec JavaScript
