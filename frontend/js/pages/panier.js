@@ -31,11 +31,11 @@ function displayCartProduct() {
     document.querySelector(".templateContainer").appendChild(clone);
   }
 }
-
+//?
 function modifyQuantity() {
+  const quantity = window.document.querySelector(".quantity")
   const minus = window.document.querySelector(".buttonMinus")
   const plus = window.document.querySelector(".buttonPlus")
-  const quantity = window.document.querySelector(".quantity")
   quantity.value = 1
   minus.onclick = () => {
     quantity.value--
@@ -52,17 +52,20 @@ function checkInput(input, condition) {
   // user feedback
   input.onchange = (event) => {
     if (condition(event)) {
-      //input.classList.add("border")
+      input.classList.remove("is-invalid")
       input.classList.add("is-valid")
-      //input.classList.add("border-success")
       getFormData()
     } else {
-      //input.classList.add("border")
+      input.classList.remove("is-valid")
       input.classList.add("is-invalid")
-      //input.classList.add("border-danger")
     }
   }
+  input.onblur = () => {
+    input.classList.remove("is-valid")
+  }
 }
+
+
 
 //? add looper or eventListener
 //check inputs validity

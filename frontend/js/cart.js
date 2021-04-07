@@ -4,6 +4,8 @@ class Cart {
 
   setCartItem = (cart) => localStorage.setItem('cart', JSON.stringify(cart))
 
+
+  /*------------------------------------  ------------------------------------*/
   //Create Cart Promise
   /* getOption(onOptionSelected) {
     const lenseSelector = document.querySelector(".lenseSelector")
@@ -46,16 +48,30 @@ class Cart {
     this.setCartItem(cart)
   }
 
-  //Cart Math
+  /*------------------------------------ Cart Math ------------------------------------*/
   calcGlobalTotal() {
     let globalTotal = 0;
     const totalProductPrice = document.querySelectorAll(".totalPrice");
     const globalTotalDisplay = document.querySelector(".globalTotal");
-    //? .map
     Array.from(totalProductPrice).forEach((product) => {
       globalTotal += parseInt(product.getAttribute("value"))
     })
     globalTotalDisplay.innerHTML = `${globalTotal}€`
+  }
+
+  /*-------------------------------- Cart Controls ----------------------------------*/
+
+  //? stopPropagation()
+  //reduce quantity
+  reduceQuantity(productId) {
+    let cart = getCartItem()
+    return cart[productId].quantity--
+  }
+
+  //increase quantity
+  increaseQuantity(productId) {
+    let cart = getCartItem()
+    return cart[productId].quantity++
   }
 
   // Empty Cart
@@ -67,3 +83,35 @@ class Cart {
 }
 
 const cart = new Cart()
+
+
+/*-------------------------------- Events Listener ----------------------------------*/
+//Lense Option Change Catcher
+document.querySelector(".lenseSelector").onchange = (event) => {
+  cart.getOption()
+}
+
+//Add Product To Cart
+document.querySelector(".addToCart").onclick = (event) => {
+  cart.addItem(product)
+}
+
+//Reveal Modal
+document.querySelector(".revealModal").onclick = (event) => {
+  revealModalOnClick(product)
+}
+
+//Empty Cart
+document.querySelector(".emptyCart").onclick = (event) => {
+  cart.emptyCart()
+}
+
+//Submit Form & Order
+document.querySelector(".order").onclick = (event) => {
+  sendOrder()
+}
+
+//Submit Form & Order
+document.querySelector(".form").onclick = (event) => {
+  sendOrder()
+}
