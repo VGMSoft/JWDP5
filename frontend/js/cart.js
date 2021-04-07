@@ -4,7 +4,7 @@ class Cart {
 
   setCartItem = (cart) => localStorage.setItem('cart', JSON.stringify(cart))
 
-  //Create Cart
+  //Create Cart Promise
   /* getOption(onOptionSelected) {
     const lenseSelector = document.querySelector(".lenseSelector")
     lenseSelector.onchange = () => {
@@ -12,11 +12,10 @@ class Cart {
       return lenseSelector.value
     }
   } */
-
   getOption() {
     const lenseSelector = document.querySelector(".lenseSelector")
     if (lenseSelector.value !== "Lenses") {
-      console.log("Lense Option :", lenseSelector.value)
+      console.log(`Lense Option : ${lenseSelector.value}`)
       return lenseSelector.value
     }
   }
@@ -30,7 +29,7 @@ class Cart {
       let productObject = {}
       //Adding attribute to cartObject
       productObject.name = product.name
-      productObject.price = (product.price / 100 + "€")
+      productObject.price = `${product.price / 100}€`
       productObject.option = this.getOption()
       productObject.quantity = 1
       cart[product._id] = productObject
@@ -41,8 +40,8 @@ class Cart {
       //productObject.option.push(this.getOption())
     }
     //display results on console
-    console.log("New Product :", cart[product._id])
-    console.log("Cart Content :", cart)
+    console.log('New Product : ', cart[product._id])
+    console.log('Cart Content : ', cart)
     //Append to localStorage
     this.setCartItem(cart)
   }
@@ -52,10 +51,11 @@ class Cart {
     let globalTotal = 0;
     const totalProductPrice = document.querySelectorAll(".totalPrice");
     const globalTotalDisplay = document.querySelector(".globalTotal");
+    //? .map
     Array.from(totalProductPrice).forEach((product) => {
       globalTotal += parseInt(product.getAttribute("value"))
     })
-    globalTotalDisplay.innerHTML = globalTotal + "€"
+    globalTotalDisplay.innerHTML = `${globalTotal}€`
   }
 
   // Empty Cart

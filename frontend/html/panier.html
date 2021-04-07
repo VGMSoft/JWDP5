@@ -71,18 +71,30 @@
           <div
             class="list-group-item list-group-item-primary d-flex justify-content-between rounded-top px-0"
           >
-            <span class="w-25 d-flex justify-content-center font-weight-bold">Produit</span>
-            <span class="w-25 d-flex justify-content-center font-weight-bold">Quantité</span>
-            <span class="w-25 d-flex justify-content-center font-weight-bold">Prix</span>
-            <span class="w-25 d-flex justify-content-center font-weight-bold">Total</span>
+            <span class="w-25 d-flex justify-content-center font-weight-bold"
+              >Produit</span
+            >
+            <span class="w-25 d-flex justify-content-center font-weight-bold"
+              >Quantité</span
+            >
+            <span class="w-25 d-flex justify-content-center font-weight-bold"
+              >Prix</span
+            >
+            <span class="w-25 d-flex justify-content-center font-weight-bold"
+              >Total</span
+            >
           </div>
 
           <ul class="list-group rounded-0 templateContainer"></ul>
 
           <div
-            class="list-group-item list-group-item-secondary d-flex justify-content-between rounded-bottom  px-0"
+            class="list-group-item list-group-item-secondary d-flex justify-content-between rounded-bottom px-0"
           >
-            <span class="w-25 d-flex justify-content-center font-weight-bold">Total</span><span class="w-25 d-flex justify-content-center globalTotal">0€</span>
+            <span class="w-25 d-flex justify-content-center font-weight-bold"
+              >Total</span
+            ><span class="w-25 d-flex justify-content-center globalTotal"
+              >0€</span
+            >
           </div>
         </div>
       </div>
@@ -91,7 +103,10 @@
       <template id="template">
         <li class="list-group-item d-flex justify-content-between px-0">
           <!--productName-->
-          <span class="w-25 d-inline-block text-center text-nowrap text-truncate align-middle my-auto mx-1 productName">productName</span>
+          <span
+            class="w-25 d-inline-block text-center text-nowrap text-truncate align-middle my-auto mx-1 productName"
+            >productName</span
+          >
           <!--Quantity-->
           <span class="w-25 d-flex justify-content-center">
             <button
@@ -114,9 +129,15 @@
             </button>
           </span>
           <!--unityPrice-->
-          <span class="w-25 d-flex justify-content-center align-items-center unityPrice">unityPrice</span>
+          <span
+            class="w-25 d-flex justify-content-center align-items-center unityPrice"
+            >unityPrice</span
+          >
           <!--totalPrice-->
-          <span class="w-25 d-flex justify-content-center align-items-center totalPrice">totalPrice</span>
+          <span
+            class="w-25 d-flex justify-content-center align-items-center totalPrice"
+            >totalPrice</span
+          >
         </li>
       </template>
       <!--cartProductTemplate END-->
@@ -136,7 +157,7 @@
                 aria-describedby="firstNameHelp"
                 placeholder="Your first name"
                 name="firstName"
-                pattern="^([a-zA-Z ]+)$"
+                pattern="[a-zA-Z-,\s]+"
                 required
               />
               <small id="firstNameHelp" class="form-text text-muted"
@@ -153,7 +174,7 @@
                 aria-describedby="lastNameHelp"
                 placeholder="Your last name"
                 name="lastName"
-                pattern="^([a-zA-Z ]+)$"
+                pattern="[a-zA-Z-,\s]+"
                 required
               />
               <small id="lastNameHelp" class="form-text text-muted"
@@ -162,15 +183,15 @@
             </div>
             <!--address-->
             <div class="form-group">
-              <label for="address">Adresse</label>
+              <label for="adress">Adresse</label>
               <input
                 type="text"
                 class="form-control"
-                id="address"
+                id="adress"
                 aria-describedby="addressHelp"
                 placeholder="Your address"
                 name="address"
-                pattern="^[1-9]+\s[a-zA-Z0-9\s]+$"
+                pattern="([a-zA-Z0-9-\s]+){1,8}"
                 required
               />
               <small id="addressHelp" class="form-text text-muted"
@@ -187,7 +208,7 @@
                 aria-describedby="cityHelp"
                 placeholder="Your city"
                 name="city"
-                pattern="^([a-zA-Z ]+)$"
+                pattern="[a-zA-Z-,\s]+"
                 required
               />
               <small id="cityHelp" class="form-text text-muted"
@@ -197,16 +218,21 @@
             <!--email-->
             <div class="form-group">
               <label for="email">Email</label>
-              <input
-                type="email"
-                class="form-control"
-                id="email"
-                aria-describedby="emailHelp"
-                placeholder="Your email"
-                name="email"
-                pattern="^(\w\.?)+@[\w\.-]+\.\w{2,4}$"
-                required
-              />
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">@</div>
+                </div>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  aria-describedby="emailHelp"
+                  placeholder="Your email"
+                  name="email"
+                  pattern="(\w\.?)+@[\w\.-]+\.\w{2,4}"
+                  required
+                />
+              </div>
               <small id="emailHelp" class="form-text text-muted"
                 >Entrez votre email.</small
               >

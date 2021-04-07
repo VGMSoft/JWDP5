@@ -2,9 +2,7 @@
   const itemsInCart = cart.getCartItems()
   displayCartProduct(itemsInCart)
   cart.calcGlobalTotal()
-  //formValidate()
-  getFormData()
-})();
+})()
 
 /*---------------------------------------- CART ----------------------------------------*/
 function cartObjectToProductArray() {
@@ -15,7 +13,7 @@ function displayCartProduct() {
   //Append Cart product Id in Product Array
   let productArray = cartObjectToProductArray()
   //Tableau de produits
-  console.log("Tableau de produits :", productArray)
+  console.log('Tableau de produits : ', productArray)
   for (let i in productArray) {
     // get template
     const template = document.querySelector("#template");
@@ -27,7 +25,7 @@ function displayCartProduct() {
     clone.querySelector(".productName").innerHTML = productArray[i].name
     clone.querySelector(".quantity").value = productArray[i].quantity
     clone.querySelector(".unityPrice").innerHTML = productArray[i].price
-    clone.querySelector(".totalPrice").innerHTML = totalProductPrice + "€"
+    clone.querySelector(".totalPrice").innerHTML = `${totalProductPrice}€`
     clone.querySelector(".totalPrice").setAttribute("value", totalProductPrice)
 
     document.querySelector(".templateContainer").appendChild(clone);
@@ -50,70 +48,65 @@ function modifyQuantity() {
 }
 
 /*---------------------------------------- FORM ----------------------------------------*/
+function checkInput(input, condition) {
+  // user feedback
+  input.onchange = (event) => {
+    if (condition(event)) {
+      //input.classList.add("border")
+      input.classList.add("is-valid")
+      //input.classList.add("border-success")
+      getFormData()
+    } else {
+      //input.classList.add("border")
+      input.classList.add("is-invalid")
+      //input.classList.add("border-danger")
+    }
+  }
+}
+
+//? add looper or eventListener
+//check inputs validity
+checkInput(document.querySelector("#firstName"), (event) => {
+  const textRegex = /^[a-zA-Z-,\s]+$/
+  return textRegex.test(event.target.value.trim())
+})
+checkInput(document.querySelector("#lastName"), (event) => {
+  const textRegex = /^[a-zA-Z-,\s]+$/
+  return textRegex.test(event.target.value.trim())
+})
+checkInput(document.querySelector("#adress"), (event) => {
+  const adressRegex = /^([a-zA-Z0-9-\s]+){1,8}$/
+  return adressRegex.test(event.target.value.trim())
+})
+checkInput(document.querySelector("#city"), (event) => {
+  const textRegex = /^[a-zA-Z-,\s]+$/
+  return textRegex.test(event.target.value.trim())
+})
+checkInput(document.querySelector("#email"), (event) => {
+  //source: https://emailregex.com/
+  const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  return emailRegex.test(event.target.value.trim())
+})
+
 function getFormData() {
   const form = document.querySelector(".form")
   //if(formValidated){}
   form.onsubmit = (event) => {
     event.preventDefault()
     //getting field value
-    const firstName = event.target.firstName.value
-    const lastName = event.target.lastName.value
-    const address = event.target.address.value
-    const city = event.target.city.value
-    const email = event.target.email.value
+    const firstName = event.target.firstName.value.trim()
+    const lastName = event.target.lastName.value.trim()
+    const address = event.target.address.value.trim()
+    const city = event.target.city.value.trim()
+    const email = event.target.email.value.trim()
     //Creating contactObject
     let contactObject = { firstName: firstName, lastName: lastName, address: address, city: city, email: email }
     //Objet de contact
-    console.log("Objet de Contact :", contactObject)
-    window.location.href = `./confirmation.html`
+    console.log('Objet de Contact : ', contactObject)
+    //redirect to confirmation
+    setTimeout(() => window.location.href = `./confirmation.html`, 2500)
   }
 }
-
-function formValidate(input, condition) {
-  const lastName = document.querySelector('input[name=""]')
-  lastName.onchange = () => {
-    lastName.addEventListener('invalid', (e) => {
-      lastName.style.border = "solid red 1px"
-
-    });
-  }
-}
-//firstName
-const ValidateFirstName = (firstName) => {
-  if (/^([a-zA-Z ]+)$/) {
-    return (true)
-  }
-  alert("Veuillez entrer votre prénom")
-  return (false)
-}
-//lastName
-const ValidateLastName = (lastName) => {
-  if (/^([a-zA-Z ]+)$/) {
-    return (true)
-  }
-  alert("Veuillez entrer votre nom de famille")
-  return (false)
-}
-//address
-const ValidateAddress = (address) => {
-  if (/^([0-9]+\ )([a-zA-Z]+\ ?)([a-zA- Z] +\ )([a-zA-Z\ ]+)$/) {
-    return (true)
-  }
-  alert("Veuillez entrer votre nom de famille")
-  return (false)
-}
-//city
-/^([a-zA-Z]+)$/;
-//email
-const ValidateEmail = (mail) => {
-  if (/^$/.test(myForm.emailAddr.value)) {
-    return (true)
-  }
-  alert("You have entered an invalid email address!")
-  return (false)
-}
-
-
 
 /*---------------------------------------- ORDER ----------------------------------------*/
 /* function sendOrder(contactObject, productArray) {

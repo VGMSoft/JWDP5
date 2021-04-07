@@ -4,9 +4,9 @@
 })();
 
 async function getOrderData() {
-  return fetch(``)
+  return fetch(`${apiUrl}/api/cameras`)
     .then(res => {
-      console.log("HTTP Request Status :", res.status);
+      console.log(`HTTP Request Status : ${res.status}`);
       if (res.ok) {
         return res.json();
       }

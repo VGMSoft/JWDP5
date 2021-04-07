@@ -1,9 +1,9 @@
 (() => {
   const id = getProductId()
   getProduct(id)
-    .then((product) => {
+    .then(product => {
       displayProduct(product)
-      console.log("HTTP Request Results :", product)
+      console.log('HTTP Request Result : ', product)
       revealModalOnClick(product)
     })
 
@@ -19,12 +19,12 @@ function getProductId() {
 function getProduct(id) {
   return fetch(`${apiUrl}/api/cameras/` + id)
     .then(res => {
-      console.log("HTTP Request Status :", res.status)
+      console.log(`HTTP Request Status : ${res.status}`)
       if (res.ok) {
         return res.json();
       }
     })
-    .then((product) => product)
+    .then(product => product)
     .catch(err => {
       console.log(err)
       alert("La connexion au serveur à échoué, veuillez réactualiser la page !")
@@ -35,7 +35,7 @@ function displayProduct(product) {
   document.querySelector(".card-title").textContent = product.name
   document.querySelector(".card img").src = product.imageUrl
   document.querySelector(".card-title").alt = product.name
-  document.querySelector(".price").textContent = (product.price / 100 + "€")
+  document.querySelector(".price").textContent = `${product.price / 100}€`
   document.querySelector(".card-text").textContent = (product.description)
   /* Dropdown menu feeding */
   for (let i in product.lenses) {

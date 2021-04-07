@@ -1,20 +1,21 @@
 (() => {
-  getProducts().then((products) => {
+  getProducts().then(products => {
     displayProducts(products)
-    console.log("HTTP Request Results :", products)})
+    console.log('HTTP Request Results : ', products)
+  })
 })();
 // Collect Data from API
 function getProducts() {
   return fetch(`${apiUrl}/api/cameras`)
-    .then((res) => {
+    .then(res => {
+      console.log(`HTTP Request Status : ${res.status}`)
       if (res.ok) {
-        console.log("HTTP Request Status :", res.status)
         return res.json()
       } else {
-        return null
+        return null  
       }
     })
-    .catch((err) => {
+    .catch(err => {
       console.log(err)
       alert(
         "La connexion au serveur semble être plus longue que d'habitude, veuillez réactualiser la page !"
@@ -39,5 +40,5 @@ function fillTemplate(product) {
 }
 // Display Data
 function displayProducts(products) {
-  products.forEach((product) => fillTemplate(product))
+  products.forEach(product => fillTemplate(product))
 }
