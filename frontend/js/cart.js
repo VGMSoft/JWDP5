@@ -1,11 +1,16 @@
 class Cart {
   //
-  getCartItems = () => JSON.parse(localStorage.getItem('cart')) || {}
+  getCartItems() {
+    return JSON.parse(localStorage.getItem('cart')) || {}
+  }
 
-  setCartItem = (cart) => localStorage.setItem('cart', JSON.stringify(cart))
+  setCartItem(cart) {
+    localStorage.setItem('cart', JSON.stringify(cart))
+  }
 
 
-  /*------------------------------------  ------------------------------------*/
+  /*------------------------------------ build
+ ------------------------------------*/
   //Create Cart Promise
   /* getOption(onOptionSelected) {
     const lenseSelector = document.querySelector(".lenseSelector")
@@ -27,19 +32,19 @@ class Cart {
     const cart = this.getCartItems()
     //test if product exist in cart
     if (cart[product._id] == null) {
-      //new Product Object
-      let productObject = {}
-      //Adding attribute to cartObject
-      productObject.name = product.name
-      productObject.price = `${product.price / 100}€`
-      productObject.option = this.getOption()
-      productObject.quantity = 1
-      cart[product._id] = productObject
+      //setting new Product Object
+      cart[product._id] = {}
+      cart[product._id].option = []
+      //Adding attribute to Product Object
+      cart[product._id].name = product.name
+      cart[product._id].price = `${product.price / 100}€`
+      cart[product._id].option.push(`${this.getOption()}`)
+      cart[product._id].quantity = 1
     } else {
       //increasing quantity
       cart[product._id].quantity++
       //add option
-      //productObject.option.push(this.getOption())
+      cart[product._id].option.push(`${this.getOption()}`)
     }
     //display results on console
     console.log('New Product : ', cart[product._id])
@@ -49,15 +54,19 @@ class Cart {
   }
 
   /*------------------------------------ Cart Math ------------------------------------*/
+
+  /* 
   calcGlobalTotal() {
     let globalTotal = 0;
-    const totalProductPrice = document.querySelectorAll(".totalPrice");
+
+    // TODO a
+    const totalProductPrice = Object.values(this.getCartItems())
     const globalTotalDisplay = document.querySelector(".globalTotal");
     Array.from(totalProductPrice).forEach((product) => {
       globalTotal += parseInt(product.getAttribute("value"))
     })
     globalTotalDisplay.innerHTML = `${globalTotal}€`
-  }
+  } */
 
   /*-------------------------------- Cart Controls ----------------------------------*/
 
@@ -83,35 +92,3 @@ class Cart {
 }
 
 const cart = new Cart()
-
-
-/*-------------------------------- Events Listener ----------------------------------*/
-//Lense Option Change Catcher
-document.querySelector(".lenseSelector").onchange = (event) => {
-  cart.getOption()
-}
-
-//Add Product To Cart
-document.querySelector(".addToCart").onclick = (event) => {
-  cart.addItem(product)
-}
-
-//Reveal Modal
-document.querySelector(".revealModal").onclick = (event) => {
-  revealModalOnClick(product)
-}
-
-//Empty Cart
-document.querySelector(".emptyCart").onclick = (event) => {
-  cart.emptyCart()
-}
-
-//Submit Form & Order
-document.querySelector(".order").onclick = (event) => {
-  sendOrder(contactObject, productArray)
-}
-
-//Submit Form & Order
-document.querySelector(".form").onclick = (event) => {
-  checkInput(input, condition)
-}
