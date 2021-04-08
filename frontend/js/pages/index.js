@@ -6,14 +6,14 @@
 })();
 // Collect Data from API
 function getProducts() {
-  return fetch(`${apiUrl}/api/teddies`)
+  return fetch(`${apiUrl}/api/cameras`)
     .then(res => {
       console.log(`HTTP Request Status : ${res.status}`)
       if (res.ok) {
         return res.json()
       } else {
         const loadingContainer = document.createElement("div")
-        loadingContainer.innerHTML = '<p class=" display-2 text-secondary">Loading ...</p>'
+        loadingContainer.innerHTML = '<p class=" display-2 text-secondary">Server offline</p>'
         const templateContainer = document.querySelector(".templateContainer")
         templateContainer.classList.add("justify-content-center")
         templateContainer.appendChild(loadingContainer)
@@ -21,6 +21,11 @@ function getProducts() {
     })
     .catch(err => {
       console.error(err)
+      const loadingContainer = document.createElement("div")
+      loadingContainer.innerHTML = '<p class=" display-2 text-secondary">Loading ...</p>'
+      const templateContainer = document.querySelector(".templateContainer")
+      templateContainer.classList.add("justify-content-center")
+      templateContainer.appendChild(loadingContainer)
       alert(
         "La connexion au serveur semble être plus longue que d'habitude, veuillez réactualiser la page !"
       );
