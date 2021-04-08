@@ -9,26 +9,16 @@ class Cart {
   }
 
 
-  /*------------------------------------ build
- ------------------------------------*/
-  //Create Cart Promise
-  /* getOption(onOptionSelected) {
-    const lenseSelector = document.querySelector(".lenseSelector")
-    lenseSelector.onchange = () => {
-      onOptionSelected(lenseSelector.value)
-      return lenseSelector.value
-    }
-  } */
+  /*------------------------------------ build------------------------------------*/
   getOption() {
     const lenseSelector = document.querySelector(".lenseSelector")
     if (lenseSelector.value !== "Lenses") {
-      console.log(`Lense Option : ${lenseSelector.value}`)
       return lenseSelector.value
     }
   }
 
   addItem(product) {
-    //Get cart
+    //Get cart content
     const cart = this.getCartItems()
     //test if product exist in cart
     if (cart[product._id] == null) {
@@ -87,6 +77,7 @@ class Cart {
   emptyCart() {
     localStorage.clear()
     console.warn("Cart cleaned")
+    location.reload()
   }
 
 }

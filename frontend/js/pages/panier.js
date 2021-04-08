@@ -60,18 +60,14 @@ function checkInput(input, condition) {
     }
   }
 }
-
 //check inputs validity
 checkInput(document.querySelector("#firstName"), /^[a-zA-Z-,\s]+$/)
-
 checkInput(document.querySelector("#lastName"), /^[a-zA-Z-,\s]+$/)
-
 checkInput(document.querySelector("#adress"), /^([a-zA-Z0-9-\s]+){1,8}$/)
-
 checkInput(document.querySelector("#city"), /^[a-zA-Z-,\s]+$/)
-
 //source: https://emailregex.com/
 checkInput(document.querySelector("#email"), /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
+/*--------------------------------------------------------------------------------------*/
 
 function getFormData() {
   const form = document.querySelector(".form")

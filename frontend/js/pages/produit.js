@@ -14,8 +14,7 @@
 function getProductId() {
   return new URL(window.location.href).searchParams.get("id")
 }
-
-//collecting data from API
+//fetching data from API
 function getProduct(id) {
   return fetch(`${apiUrl}/api/cameras/` + id)
     .then(res => {
@@ -24,12 +23,12 @@ function getProduct(id) {
         return res.json();
       }
     })
-    .then(product => product)
     .catch(err => {
       console.log(err)
       alert("La connexion au serveur à échoué, veuillez réactualiser la page !")
-    });
-};
+    })
+}
+
 //Presenting data in markup
 function displayProduct(product) {
   document.querySelector(".card-title").textContent = product.name
@@ -66,4 +65,13 @@ function revealModalOnClick(product) {
 
     cart.addItem(product)
   }
+}
+
+
+
+
+
+function redirectProductToCart(product) {
+  addItem(product)
+  revealModalOnClick(product)
 }

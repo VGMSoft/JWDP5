@@ -110,7 +110,7 @@
                 onchange="cart.getOption()"
                 required
               >
-                <option>Lenses</option>
+                <option value="void">Lenses</option>
               </select>
             </div>
 
@@ -119,6 +119,7 @@
               class="btn btn-primary float-right m-3 addToCart revealModal"
               data-toggle="modal"
               data-target="#staticBackdrop"
+              onclick="redirectProductToCart()"
             >
               Ajouter au panier
             </button>
