@@ -108,10 +108,10 @@ document.querySelector(".emptyCart").onclick = (event) => {
 
 //Submit Form & Order
 document.querySelector(".order").onclick = (event) => {
-  sendOrder()
+  sendOrder(contactObject, productArray)
 }
 
 //Submit Form & Order
 document.querySelector(".form").onclick = (event) => {
-  sendOrder()
+  checkInput(input, condition)
 }

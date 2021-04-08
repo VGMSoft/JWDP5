@@ -6,17 +6,21 @@
 })();
 // Collect Data from API
 function getProducts() {
-  return fetch(`${apiUrl}/api/cameras`)
+  return fetch(`${apiUrl}/api/teddies`)
     .then(res => {
       console.log(`HTTP Request Status : ${res.status}`)
       if (res.ok) {
         return res.json()
       } else {
-        return null  
+        const loadingContainer = document.createElement("div")
+        loadingContainer.innerHTML = '<p class=" display-2 text-secondary">Loading ...</p>'
+        const templateContainer = document.querySelector(".templateContainer")
+        templateContainer.classList.add("justify-content-center")
+        templateContainer.appendChild(loadingContainer)
       }
     })
     .catch(err => {
-      console.log(err)
+      console.error(err)
       alert(
         "La connexion au serveur semble être plus longue que d'habitude, veuillez réactualiser la page !"
       );
@@ -42,3 +46,4 @@ function fillTemplate(product) {
 function displayProducts(products) {
   products.forEach(product => fillTemplate(product))
 }
+//-------------------------------------------------------------------------//
