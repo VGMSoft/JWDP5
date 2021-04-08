@@ -1,7 +1,7 @@
 (() => {
   const itemsInCart = cart.getCartItems()
   displayCartProduct(itemsInCart)
-  cart.calcGlobalTotal()
+  //cart.calcGlobalTotal()
 })()
 
 /*---------------------------------------- CART ----------------------------------------*/
@@ -51,45 +51,27 @@ function modifyQuantity() {
 function checkInput(input, condition) {
   // user feedback
   input.onchange = (event) => {
-    if (condition(event)) {
-      input.classList.remove("is-invalid")
+    input.classList.remove("is-invalid")
+    input.classList.remove("is-valid")
+    if (condition.test(event.target.value.trim())) {
       input.classList.add("is-valid")
-      getFormData()
     } else {
-      input.classList.remove("is-valid")
       input.classList.add("is-invalid")
     }
   }
-  input.onblur = () => {
-    input.classList.remove("is-valid")
-  }
 }
 
-
-
-//? add looper or eventListener
 //check inputs validity
-checkInput(document.querySelector("#firstName"), (event) => {
-  const textRegex = /^[a-zA-Z-,\s]+$/
-  return textRegex.test(event.target.value.trim())
-})
-checkInput(document.querySelector("#lastName"), (event) => {
-  const textRegex = /^[a-zA-Z-,\s]+$/
-  return textRegex.test(event.target.value.trim())
-})
-checkInput(document.querySelector("#adress"), (event) => {
-  const adressRegex = /^([a-zA-Z0-9-\s]+){1,8}$/
-  return adressRegex.test(event.target.value.trim())
-})
-checkInput(document.querySelector("#city"), (event) => {
-  const textRegex = /^[a-zA-Z-,\s]+$/
-  return textRegex.test(event.target.value.trim())
-})
-checkInput(document.querySelector("#email"), (event) => {
-  //source: https://emailregex.com/
-  const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-  return emailRegex.test(event.target.value.trim())
-})
+checkInput(document.querySelector("#firstName"), /^[a-zA-Z-,\s]+$/)
+
+checkInput(document.querySelector("#lastName"), /^[a-zA-Z-,\s]+$/)
+
+checkInput(document.querySelector("#adress"), /^([a-zA-Z0-9-\s]+){1,8}$/)
+
+checkInput(document.querySelector("#city"), /^[a-zA-Z-,\s]+$/)
+
+//source: https://emailregex.com/
+checkInput(document.querySelector("#email"), /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
 
 function getFormData() {
   const form = document.querySelector(".form")
@@ -108,11 +90,13 @@ function getFormData() {
     console.log('Objet de Contact : ', contactObject)
     //redirect to confirmation
     setTimeout(() => window.location.href = `./confirmation.html`, 2500)
+
+
   }
 }
 
 /*---------------------------------------- ORDER ----------------------------------------*/
-/* function sendOrder(contactObject, productArray) {
+function sendOrder(contactObject, productArray) {
   return fetch(`${apiUrl}/api/cameras/order`, {
     method: "POST",
     body: JSON.stringify(contactObject),
@@ -122,6 +106,6 @@ function getFormData() {
   })
     .then((response) => response.json())
     .then((json) => console.log(json));
-    let order = { contactObject: {}, productArray: [] }
-} */
+  let order = { contactObject: {}, productArray: [] }
+}
 
