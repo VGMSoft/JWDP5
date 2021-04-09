@@ -10,7 +10,7 @@
 function displayCartProduct() {
   //Append Cart product Id in Product Array
   let productArray = cart.cartToArray()
-  console.log('Tableau de produits : ',cart.cartToArray())
+  console.log('Tableau de produits : ', cart.cartToArray())
   //Tableau de produits
   for (let i in productArray) {
     // get template
@@ -30,20 +30,9 @@ function displayCartProduct() {
 //global total
 document.querySelector(".globalTotal").innerHTML = `${cart.calcGlobalTotal()}€`
 
-//?
-function modifyQuantity() {
-  const quantity = window.document.querySelector(".quantity")
-  const minus = window.document.querySelector(".buttonMinus")
-  const plus = window.document.querySelector(".buttonPlus")
-  quantity.value = 1
-  minus.onclick = () => {
-    quantity.value--
-    cart.setCartItem()
-  }
-  plus.onclick = () => {
-    quantity.value++
-    cart.setCartItem()
-  }
+//if cart is Empty
+if (cart.calcGlobalTotal() != 0) {
+  document.querySelector(".cartIsEmpty").classList.replace("d-flex", "d-none")
 }
 
 /*---------------------------------------- FORM ----------------------------------------*/
