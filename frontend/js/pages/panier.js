@@ -10,16 +10,15 @@
 function displayCartProduct() {
   //Append Cart product Id in Product Array
   let productArray = cart.cartToArray()
-  console.log(cart.cartToArray())
+  console.log('Tableau de produits : ',cart.cartToArray())
   //Tableau de produits
-  console.log('Tableau de produits : ', productArray)
   for (let i in productArray) {
     // get template
     const template = document.querySelector("#template");
     // clone template
     const clone = document.importNode(template.content, true)
     //fill template
-    totalProductPrice = cart.calcTotalProductPrice( i)
+    totalProductPrice = cart.calcTotalProductPrice(i)
     clone.querySelector(".productName").innerHTML = productArray[i].name
     clone.querySelector(".quantity").value = productArray[i].quantity
     clone.querySelector(".unityPrice").innerHTML = productArray[i].price
@@ -86,7 +85,7 @@ function getFormData() {
     console.log('Objet de Contact : ', contactObject)
     return contactObject
     //redirect to confirmation
-    setTimeout(() => window.location.href = `./confirmation.html`, 2500)
+    //window.location.href = `./confirmation.html`, 2500)
 
 
   }

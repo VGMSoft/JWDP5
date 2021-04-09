@@ -55,7 +55,7 @@ class Cart {
 
   //total price for product 
   calcGlobalTotal() {
-    let totalArray = []
+    let totalArray = [0]
     for (let i in this.cartToArray()) {
       totalArray.push(parseInt(this.cartToArray()[i].price) * parseInt(this.cartToArray()[i].quantity))
     }
