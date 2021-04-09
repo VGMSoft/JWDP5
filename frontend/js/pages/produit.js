@@ -67,11 +67,7 @@ function revealModalOnClick(product) {
   }
 }
 
-
-
-
-
-function redirectProductToCart(product) {
+/* function redirectProductToCart(product) {
   addItem(product)
   revealModalOnClick(product)
-}
+} */

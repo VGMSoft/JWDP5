@@ -5,13 +5,12 @@
 })()
 
 /*---------------------------------------- CART ----------------------------------------*/
-function cartObjectToProductArray() {
-  return Object.values(cart.getCartItems())
-}
+
 //Display Cart Content
 function displayCartProduct() {
   //Append Cart product Id in Product Array
-  let productArray = cartObjectToProductArray()
+  let productArray = cart.cartToArray()
+  console.log(cart.cartToArray())
   //Tableau de produits
   console.log('Tableau de produits : ', productArray)
   for (let i in productArray) {
@@ -20,17 +19,18 @@ function displayCartProduct() {
     // clone template
     const clone = document.importNode(template.content, true)
     //fill template
-
-    totalProductPrice = parseInt(productArray[i].price) * parseInt(productArray[i].quantity)
+    totalProductPrice = cart.calcTotalProductPrice( i)
     clone.querySelector(".productName").innerHTML = productArray[i].name
     clone.querySelector(".quantity").value = productArray[i].quantity
     clone.querySelector(".unityPrice").innerHTML = productArray[i].price
     clone.querySelector(".totalPrice").innerHTML = `${totalProductPrice}€`
     clone.querySelector(".totalPrice").setAttribute("value", totalProductPrice)
-
     document.querySelector(".templateContainer").appendChild(clone);
   }
 }
+//global total
+document.querySelector(".globalTotal").innerHTML = `${cart.calcGlobalTotal()}€`
+
 //?
 function modifyQuantity() {
   const quantity = window.document.querySelector(".quantity")
@@ -84,6 +84,7 @@ function getFormData() {
     let contactObject = { firstName: firstName, lastName: lastName, address: address, city: city, email: email }
     //Objet de contact
     console.log('Objet de Contact : ', contactObject)
+    return contactObject
     //redirect to confirmation
     setTimeout(() => window.location.href = `./confirmation.html`, 2500)
 
@@ -92,7 +93,12 @@ function getFormData() {
 }
 
 /*---------------------------------------- ORDER ----------------------------------------*/
-function sendOrder(contactObject, productArray) {
+
+function sendOrder() {
+  const productArray = cart.cartToArray()
+  const contactObject = getFormData()
+  let order = { contactObject, productArray }
+
   return fetch(`${apiUrl}/api/cameras/order`, {
     method: "POST",
     body: JSON.stringify(contactObject),
@@ -102,6 +108,6 @@ function sendOrder(contactObject, productArray) {
   })
     .then((response) => response.json())
     .then((json) => console.log(json));
-  let order = { contactObject: {}, productArray: [] }
+
 }
 

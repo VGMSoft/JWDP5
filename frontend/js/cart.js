@@ -8,6 +8,10 @@ class Cart {
     localStorage.setItem('cart', JSON.stringify(cart))
   }
 
+  cartToArray() {
+    return Object.values(this.getCartItems())
+  }
+
 
   /*------------------------------------ build------------------------------------*/
   getOption() {
@@ -44,23 +48,22 @@ class Cart {
   }
 
   /*------------------------------------ Cart Math ------------------------------------*/
+  //total price for product 
+  calcTotalProductPrice(i) {
+    return parseInt(this.cartToArray()[i].price) * parseInt(this.cartToArray()[i].quantity)
+  }
 
-  /* 
+  //total price for product 
   calcGlobalTotal() {
-    let globalTotal = 0;
-
-    // TODO a
-    const totalProductPrice = Object.values(this.getCartItems())
-    const globalTotalDisplay = document.querySelector(".globalTotal");
-    Array.from(totalProductPrice).forEach((product) => {
-      globalTotal += parseInt(product.getAttribute("value"))
-    })
-    globalTotalDisplay.innerHTML = `${globalTotal}€`
-  } */
-
+    let totalArray = []
+    for (let i in this.cartToArray()) {
+      totalArray.push(parseInt(this.cartToArray()[i].price) * parseInt(this.cartToArray()[i].quantity))
+    }
+    return totalArray.reduce((accu, value) => accu + value)
+  }
   /*-------------------------------- Cart Controls ----------------------------------*/
 
-  //? stopPropagation()
+
   //reduce quantity
   reduceQuantity(productId) {
     let cart = getCartItem()
