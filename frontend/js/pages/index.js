@@ -22,7 +22,7 @@ function getProducts() {
     .catch(err => {
       console.error(err)
       const loadingContainer = document.createElement("div")
-      loadingContainer.innerHTML = '<p class=" display-2 text-secondary">Loading ...</p>'
+      loadingContainer.innerHTML = '<div class="spinner-border text-secondary loadingSpinner" role="status"><span class="sr-only">Loading...</span></div>'
       const templateContainer = document.querySelector(".templateContainer")
       templateContainer.classList.add("justify-content-center")
       templateContainer.appendChild(loadingContainer)
