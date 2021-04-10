@@ -22,13 +22,13 @@ function displayCartProduct() {
     clone.querySelector(".productName").innerHTML = productArray[i].name
     clone.querySelector(".quantity").value = productArray[i].quantity
     clone.querySelector(".unityPrice").innerHTML = productArray[i].price
-    clone.querySelector(".totalPrice").innerHTML = `${totalProductPrice}€`
+    clone.querySelector(".totalPrice").innerHTML = `${totalProductPrice}&#128;`
     clone.querySelector(".totalPrice").setAttribute("value", totalProductPrice)
     document.querySelector(".templateContainer").appendChild(clone);
   }
 }
 //global total
-document.querySelector(".globalTotal").innerHTML = `${cart.calcGlobalTotal()}€`
+document.querySelector(".globalTotal").innerHTML = `${cart.calcGlobalTotal()}&#128;`
 
 //if cart is Empty
 if (cart.calcGlobalTotal() != 0) {
@@ -58,44 +58,61 @@ checkInput(document.querySelector("#email"), /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()
 /*--------------------------------------------------------------------------------------*/
 
 function getFormData() {
-  const form = document.querySelector(".form")
-  //if(formValidated){}
-  form.onsubmit = (event) => {
-    event.preventDefault()
-    //getting field value
-    const firstName = event.target.firstName.value.trim()
-    const lastName = event.target.lastName.value.trim()
-    const address = event.target.address.value.trim()
-    const city = event.target.city.value.trim()
-    const email = event.target.email.value.trim()
-    //Creating contactObject
-    let contactObject = { firstName: firstName, lastName: lastName, address: address, city: city, email: email }
-    //Objet de contact
-    console.log('Objet de Contact : ', contactObject)
-    return contactObject
-    //redirect to confirmation
-    //window.location.href = `./confirmation.html`, 2500)
-
-
-  }
+  //getting field value
+  const firstName = document.querySelector("#firstName").value.trim()
+  const lastName = document.querySelector("#lastName").value.trim()
+  const address = document.querySelector("#adress").value.trim()
+  const city = document.querySelector("#city").value.trim()
+  const email = document.querySelector("#email").value.trim()
+  //Creating contactObject
+  let contactObject = { firstName: firstName, lastName: lastName, address: address, city: city, email: email }
+  //Objet de contact
+  console.log('Objet de Contact : ', contactObject)
+  return contactObject
 }
 
+
 /*---------------------------------------- ORDER ----------------------------------------*/
-
+/**
+ *
+ * Expects request to contain:
+ * contact: {
+ *   firstName: string,
+ *   lastName: string,
+ *   address: string,
+ *   city: string,
+ *   email: string
+ * }
+ * products: [string] <-- array of product _id
+ *
+ */
 function sendOrder() {
-  const productArray = cart.cartToArray()
-  const contactObject = getFormData()
-  let order = { contactObject, productArray }
 
-  return fetch(`${apiUrl}/api/cameras/order`, {
-    method: "POST",
-    body: JSON.stringify(contactObject),
-    headers: {
-      "Content-type": "application/json; charset=UTF-8",
-    },
-  })
+  const order = {
+    contact: getFormData(),
+    products: Object.keys(cart.getCartItems())
+  }
+  console.log('Request body: ', order)
+  //Post Request
+  const fetchOptions = {
+    method: 'POST',
+    body: JSON.stringify(order),
+    headers: { 'Content-Type': 'application/json; charset=utf-8' },
+  }
+
+  fetch(`${apiUrl}/api/cameras/order`, fetchOptions)
     .then((response) => response.json())
-    .then((json) => console.log(json));
+    .then((json) => {
+      console.log('Request result: ', json)
+      //redirect to confirmation
+      window.location.href = `./confirmation.html?orderId=${json.orderId}&total=${cart.calcGlobalTotal()}`
+    })
 
+  
+}
+
+document.querySelector(".form").onsubmit = (event) => {
+  event.preventDefault()
+  sendOrder()
 }
 

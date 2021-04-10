@@ -1,19 +1,5 @@
-/*GET Request (order_id, total)*/
-(() => {
-  //getOrderData()
-})();
-
-async function getOrderData() {
-  return fetch(`${apiUrl}/api/cameras`)
-    .then(res => {
-      console.log(`HTTP Request Status : ${res.status}`);
-      if (res.ok) {
-        return res.json();
-      }
-    })
-    .then((orderData) => orderData)
-    .catch(err => {
-      console.log(err);
-      alert("La connexion au serveur à échoué, veuillez réactualiser la page !");
-    });
-};
+function getParam(param) {
+  return new URL(window.location.href).searchParams.get(param)
+}
+document.querySelector(".orderId").innerHTML = getParam("orderId")
+document.querySelector(".total").innerHTML = `${getParam("total")}&#128;`
