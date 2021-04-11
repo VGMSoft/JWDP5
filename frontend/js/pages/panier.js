@@ -5,7 +5,6 @@
 })()
 
 /*---------------------------------------- CART ----------------------------------------*/
-
 //Display Cart Content
 function displayCartProduct() {
   //Append Cart product Id in Product Array
@@ -29,13 +28,13 @@ function displayCartProduct() {
 }
 //global total
 document.querySelector(".globalTotal").innerHTML = `${cart.calcGlobalTotal()}&#128;`
-
 //if cart is Empty
 if (cart.calcGlobalTotal() != 0) {
   document.querySelector(".cartIsEmpty").classList.replace("d-flex", "d-none")
 }
 
 /*---------------------------------------- FORM ----------------------------------------*/
+//check inputs validity
 function checkInput(input, condition) {
   // user feedback
   input.onchange = (event) => {
@@ -48,14 +47,12 @@ function checkInput(input, condition) {
     }
   }
 }
-//check inputs validity
 checkInput(document.querySelector("#firstName"), /^[a-zA-Z-,\s]+$/)
 checkInput(document.querySelector("#lastName"), /^[a-zA-Z-,\s]+$/)
 checkInput(document.querySelector("#adress"), /^([a-zA-Z0-9-\s]+){1,8}$/)
 checkInput(document.querySelector("#city"), /^[a-zA-Z-,\s]+$/)
 //source: https://emailregex.com/
 checkInput(document.querySelector("#email"), /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
-/*--------------------------------------------------------------------------------------*/
 
 function getFormData() {
   //getting field value
@@ -71,23 +68,8 @@ function getFormData() {
   return contactObject
 }
 
-
 /*---------------------------------------- ORDER ----------------------------------------*/
-/**
- *
- * Expects request to contain:
- * contact: {
- *   firstName: string,
- *   lastName: string,
- *   address: string,
- *   city: string,
- *   email: string
- * }
- * products: [string] <-- array of product _id
- *
- */
 function sendOrder() {
-
   const order = {
     contact: getFormData(),
     products: Object.keys(cart.getCartItems())
@@ -99,20 +81,17 @@ function sendOrder() {
     body: JSON.stringify(order),
     headers: { 'Content-Type': 'application/json; charset=utf-8' },
   }
-
   fetch(`${apiUrl}/api/cameras/order`, fetchOptions)
     .then((response) => response.json())
     .then((json) => {
       console.log('Request result: ', json)
       //redirect to confirmation
+
       window.location.href = `./confirmation.html?orderId=${json.orderId}&total=${cart.calcGlobalTotal()}`
     })
-
-  
 }
-
+//form event listener
 document.querySelector(".form").onsubmit = (event) => {
   event.preventDefault()
   sendOrder()
 }
-

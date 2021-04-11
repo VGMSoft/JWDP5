@@ -1,5 +1,4 @@
 class Cart {
-  //
   getCartItems() {
     return JSON.parse(localStorage.getItem('cart')) || {}
   }
@@ -84,5 +83,5 @@ class Cart {
   }
 
 }
-
+// Instanciation de la classe Cart
 const cart = new Cart()

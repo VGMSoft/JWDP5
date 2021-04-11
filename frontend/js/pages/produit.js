@@ -6,7 +6,6 @@
       console.log('HTTP Request Result : ', product)
       revealModalOnClick(product)
     })
-
 })()
 
 /* ------------------------------------------ Filling Markup ------------------------------------------ */
@@ -62,12 +61,7 @@ function revealModalOnClick(product) {
     div.classList.add("fade")
     div.classList.add("show")
     document.body.appendChild(div)
-
+    //adding item to cart
     cart.addItem(product)
   }
 }
-
-/* function redirectProductToCart(product) {
-  addItem(product)
-  revealModalOnClick(product)
-} */
