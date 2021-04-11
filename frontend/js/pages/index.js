@@ -1,25 +1,26 @@
 (() => {
-  getProducts().then(products => {
-    displayProducts(products)
-    console.log('HTTP Request Results : ', products)
-  })
+  getProducts()
+    .then(products => {
+      displayProducts(products)
+      console.log('HTTP Request Results : ', products)
+    })
 })();
 // Collect Data from API
 function getProducts() {
-  loadingSpinnerOn()
   return fetch(`${apiUrl}/api/cameras`)
     .then(res => {
+      loadingSpinnerOn()
       console.log(`HTTP Request Status : ${res.status}`)
       if (res.ok) {
         loadingSpinnerOff()
         return res.json()
       } else {
-        serverOffline()       
+        loadingSpinnerOff()
+        serverOffline()
       }
     })
     .catch(err => {
       console.error(err)
-      
       alert(
         "La connexion au serveur semble être plus longue que d'habitude, veuillez réactualiser la page !"
       );
@@ -46,21 +47,21 @@ function displayProducts(products) {
   products.forEach(product => fillTemplate(product))
 }
 
-/*------------------------------- API states ------------------------------------------*/
+/*----------------------------------- API states ------------------------------------------*/
 function serverOffline() {
   const loadingContainer = document.createElement("div")
-  loadingContainer.innerHTML = '<p class=" display-2 text-secondary">Server offline</p>'
+  loadingContainer.innerHTML = '<p class=" display-2 text-secondary  mt-5 pt-5">Server offline</p>'
   const templateContainer = document.querySelector(".templateContainer")
   templateContainer.classList.add("justify-content-center")
   templateContainer.appendChild(loadingContainer)
 }
 
 function loadingSpinnerOn() {
-const loadingContainer = document.createElement("div")
-loadingContainer.innerHTML = '<div class="spinner-border text-secondary loadingSpinner" role="status"><span class="sr-only">Loading...</span></div>'
-const templateContainer = document.querySelector(".templateContainer")
-templateContainer.classList.add("justify-content-center")
-templateContainer.appendChild(loadingContainer)
+  const loadingContainer = document.createElement("div")
+  loadingContainer.innerHTML = '<div class="spinner-border text-secondary loadingSpinner mt-5 pt-5" role="status"><span class="sr-only">Loading...</span></div>'
+  const templateContainer = document.querySelector(".templateContainer")
+  templateContainer.classList.add("justify-content-center")
+  templateContainer.appendChild(loadingContainer)
 }
 
 function loadingSpinnerOff() {
