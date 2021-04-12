@@ -4,7 +4,7 @@
     .then(product => {
       displayProduct(product)
       console.log('HTTP Request Result : ', product)
-      revealModalOnClick(product)
+      document.querySelector('.addToCart').onclick = () => redirectProductToCart(product)
     })
 })()
 
@@ -46,22 +46,24 @@ function displayProduct(product) {
   }
 }
 
-/* ---------------------------- revealing modal (BootstrapJS homemade patch) ---------------------------- */
-function revealModalOnClick(product) {
+//Modal reveal
+function revealModalOnClick() {
   const modal = document.querySelector(".modal")
-  document.querySelector(".addToCart").onclick = () => {
-    document.body.classList.add("modal-open")
-    modal.classList.add("show")
-    modal.style.display = "block"
-    modal.setAttribute("aria-modal", "true")
-    modal.setAttribute("role", "dialog")
-    modal.removeAttribute("aria-hidden")
-    const div = document.createElement("div");
-    div.classList.add("modal-backdrop")
-    div.classList.add("fade")
-    div.classList.add("show")
-    document.body.appendChild(div)
-    //adding item to cart
-    cart.addItem(product)
-  }
+  document.body.classList.add("modal-open")
+  modal.classList.add("show")
+  modal.style.display = "block"
+  modal.setAttribute("aria-modal", "true")
+  modal.setAttribute("role", "dialog")
+  modal.removeAttribute("aria-hidden")
+  const div = document.createElement("div");
+  div.classList.add("modal-backdrop")
+  div.classList.add("fade")
+  div.classList.add("show")
+  document.body.appendChild(div)
+}
+
+function redirectProductToCart(product) {
+  //adding item to cart
+  cart.addItem(product)
+  revealModalOnClick()
 }
