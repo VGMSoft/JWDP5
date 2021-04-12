@@ -5,6 +5,8 @@
       console.log('HTTP Request Results : ', products)
     })
 })();
+
+
 // Collect Data from API
 function getProducts() {
   loadingSpinnerOn()
@@ -47,7 +49,7 @@ function displayProducts(products) {
   products.forEach(product => fillTemplate(product))
 }
 
-/*----------------------------------- API states feedback for user -----------------+--------------------*/
+/*----------------------------------- API states user feedback -------------------------------------*/
 function serverOffline() {
   const loadingContainer = document.createElement("div")
   loadingContainer.innerHTML = '<p class=" display-2 text-secondary  mt-5 pt-5">Server offline</p>'

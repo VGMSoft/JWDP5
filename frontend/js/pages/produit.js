@@ -46,7 +46,8 @@ function displayProduct(product) {
   }
 }
 
-//Modal reveal
+/*----------------------------------- redirect product to cart -------------------------------------*/
+//redirection modal
 function revealModalOnClick() {
   const modal = document.querySelector(".modal")
   document.body.classList.add("modal-open")
