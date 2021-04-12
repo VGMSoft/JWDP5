@@ -7,9 +7,9 @@
 })();
 // Collect Data from API
 function getProducts() {
+  loadingSpinnerOn()
   return fetch(`${apiUrl}/api/cameras`)
     .then(res => {
-      loadingSpinnerOn()
       console.log(`HTTP Request Status : ${res.status}`)
       if (res.ok) {
         loadingSpinnerOff()
@@ -47,7 +47,7 @@ function displayProducts(products) {
   products.forEach(product => fillTemplate(product))
 }
 
-/*----------------------------------- API states ------------------------------------------*/
+/*----------------------------------- API states feedback for user -----------------+--------------------*/
 function serverOffline() {
   const loadingContainer = document.createElement("div")
   loadingContainer.innerHTML = '<p class=" display-2 text-secondary  mt-5 pt-5">Server offline</p>'
