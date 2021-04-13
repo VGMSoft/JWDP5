@@ -113,7 +113,8 @@ function sendOrder() {
 //form event listener
 document.querySelector(".form").onsubmit = (event) => {
   event.preventDefault()
-  if (Object.keys(cart.getCartItems).length != 0) {
+  //At least 1 product in cart
+  if (Object.keys(cart.getCartItems()).length != 0) {
     sendOrder()
   } else {
     alert("Votre panier est vide, ajouter un article pour passer commande")
