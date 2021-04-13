@@ -65,6 +65,8 @@ function checkInput(input, condition) {
     }
   }
 }
+
+//Browse & verify input values
 checkInput(document.querySelector("#firstName"), /^[a-zA-Z-,\s]+$/)
 checkInput(document.querySelector("#lastName"), /^[a-zA-Z-,\s]+$/)
 checkInput(document.querySelector("#adress"), /^([a-zA-Z0-9-\s]+){1,8}$/)
@@ -104,11 +106,10 @@ function sendOrder() {
     .then((json) => {
       console.log('Request result: ', json)
       //redirect to confirmation
-
       window.location.href = `./confirmation.html?orderId=${json.orderId}&total=${cart.GlobalTotal()}`
     })
 }
-//form event listener
+//prevent empty cart
 document.querySelector(".form").onsubmit = (event) => {
   event.preventDefault()
   //At least 1 product in cart
