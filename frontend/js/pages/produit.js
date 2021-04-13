@@ -34,7 +34,7 @@ function displayProduct(product) {
   document.querySelector(".card-title").textContent = product.name
   document.querySelector(".card img").src = product.imageUrl
   document.querySelector(".card-title").alt = product.name
-  document.querySelector(".price").textContent = `${product.price / 100}€`
+  document.querySelector(".price").innerHTML = `${product.price / 100}&#128;`
   document.querySelector(".card-text").textContent = (product.description)
   /* Dropdown menu feeding */
   for (let i in product.lenses) {
