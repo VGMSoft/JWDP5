@@ -44,7 +44,6 @@
             class="logo--invert"
           />
         </a>
-        
       </nav>
     </header>
 
@@ -80,8 +79,12 @@
           </div>
 
           <ul class="list-group rounded-0 templateContainer">
-            <li class="list-group-item d-flex justify-content-center px-0 cartIsEmpty">
-              <span class="text-secondary text-center">Le panier est vide ...</span>
+            <li
+              class="list-group-item d-flex justify-content-center px-0 cartIsEmpty"
+            >
+              <span class="text-secondary text-center"
+                >Le panier est vide ...</span
+              >
             </li>
           </ul>
 
@@ -107,26 +110,12 @@
           >
           <!--Quantity-->
           <span class="w-25 d-flex justify-content-center">
-            <button
-              type="button"
-              class="bg-primary text-light border-0 rounded-left buttonMinus"
-              onclick="reduceQuantity()"
-            >
-              -
-            </button>
             <input
               type="number"
               name="quantity"
               class="quantity form-control rounded-0"
               min="0"
             />
-            <button
-              type="button"
-              class="bg-primary text-light border-0 rounded-right buttonPlus"
-              onclick="increaseQuantity()"
-            >
-              +
-            </button>
           </span>
           <!--unityPrice-->
           <span
@@ -146,7 +135,7 @@
       <div class="row">
         <div class="col-12 p-3">
           <h2>Vos coordonées</h2>
-          <form class="form" >
+          <form class="form">
             <!--first name-->
             <div class="form-group">
               <label for="firstName">Prénom</label>

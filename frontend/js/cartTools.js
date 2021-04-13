@@ -29,6 +29,7 @@ class Cart {
       cart[product._id] = {}
       cart[product._id].option = []
       //Adding attribute to Product Object
+      cart[product._id]._id = product._id
       cart[product._id].name = product.name
       cart[product._id].price = `${product.price / 100}€`
       cart[product._id].option.push(`${this.getOption()}`)
@@ -47,32 +48,26 @@ class Cart {
   }
 
   /*------------------------------------ Cart Math ------------------------------------*/
-  //total price for product 
-  calcTotalProductPrice(i) {
-    return parseInt(this.cartToArray()[i].price) * parseInt(this.cartToArray()[i].quantity)
+//Quantity
+  getQuantity(id) {
+    const product = this.getCartItems()
+    return product[id].quantity
+  }
+  updateQuantity(id, quantity) {
+    const cart = this.getCartItems()
+    cart[id].quantity = quantity
+    this.setCartItem(cart)
   }
 
-  //total price for product 
-  calcGlobalTotal() {
-    let totalArray = [0]
-    for (let i in this.cartToArray()) {
-      totalArray.push(parseInt(this.cartToArray()[i].price) * parseInt(this.cartToArray()[i].quantity))
-    }
-    return totalArray.reduce((accu, value) => accu + value)
+  //total  
+  TotalProductPrice(product) {
+    return parseInt(product.price) * parseInt(product.quantity)
   }
-  /*-------------------------------- Cart Controls ----------------------------------*/
-
-
-  //reduce quantity
-  reduceQuantity(productId) {
-    let cart = getCartItem()
-    return cart[productId].quantity--
-  }
-
-  //increase quantity
-  increaseQuantity(productId) {
-    let cart = getCartItem()
-    return cart[productId].quantity++
+  GlobalTotal() {
+    const globalTotal = this.cartToArray().reduce((acu, product) => {
+      return acu + (parseInt(product.price) * parseInt(product.quantity))
+    }, 0)
+    return globalTotal
   }
 
   // Empty Cart
@@ -81,7 +76,6 @@ class Cart {
     console.warn("Cart cleaned")
     location.reload()
   }
-
 }
 // Instanciation de la classe Cart
 const cart = new Cart()

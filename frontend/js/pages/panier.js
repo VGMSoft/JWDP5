@@ -1,35 +1,54 @@
 (() => {
   const itemsInCart = cart.getCartItems()
-  displayCartProduct(itemsInCart)
-  //cart.calcGlobalTotal()
+  fillMarkup(itemsInCart)
 })()
 
 /*---------------------------------------- CART ----------------------------------------*/
-//Display Cart Content
-function displayCartProduct() {
-  //Append Cart product Id in Product Array
-  let productArray = cart.cartToArray()
-  console.log('Tableau de produits : ', cart.cartToArray())
+
+function fillMarkup(itemsInCart) {
   //Tableau de produits
-  for (let i in productArray) {
-    // get template
-    const template = document.querySelector("#template");
-    // clone template
-    const clone = document.importNode(template.content, true)
-    //fill template
-    totalProductPrice = cart.calcTotalProductPrice(i)
-    clone.querySelector(".productName").innerHTML = productArray[i].name
-    clone.querySelector(".quantity").value = productArray[i].quantity
-    clone.querySelector(".unityPrice").innerHTML = productArray[i].price
-    clone.querySelector(".totalPrice").innerHTML = `${totalProductPrice}&#128;`
-    clone.querySelector(".totalPrice").setAttribute("value", totalProductPrice)
-    document.querySelector(".templateContainer").appendChild(clone);
-  }
+  let productArray = cart.cartToArray()
+  console.log('Tableau de produits : ', productArray)
+  productArray.forEach((product) => {
+    displayProduct(product)
+  })
 }
-//global total
-document.querySelector(".globalTotal").innerHTML = `${cart.calcGlobalTotal()}&#128;`
+
+//Display Cart Content
+function displayProduct(product) {
+  // get template
+  const template = document.querySelector("#template");
+  // clone template
+  const clone = document.importNode(template.content, true)
+  //fill template
+  totalProductPrice = cart.TotalProductPrice(product)
+  clone.querySelector(".productName").innerHTML = product.name
+  clone.querySelector(".quantity").value = product.quantity
+  clone.querySelector(".unityPrice").innerHTML = product.price
+  clone.querySelector(".totalPrice").innerHTML = `${cart.TotalProductPrice(product)}&#128;`
+  document.querySelector(".globalTotal").innerHTML = `${cart.GlobalTotal()}&#128;`
+
+
+  // Quantity listener & total calculation
+  let quantity = clone.querySelector(".quantity")
+  quantity.onchange = (e) => {
+    e.preventDefault()
+
+    // Update quantity
+    cart.updateQuantity(product._id, quantity.value)
+
+    // Update total product price
+    let totalPrice = e.target.parentElement.parentElement.lastElementChild
+    let updatedTotal = (product.price.slice(0, -1) * cart.getQuantity(product._id))
+    totalPrice.innerHTML = `${updatedTotal}&#128;`
+
+    // Update global total
+    document.querySelector(".globalTotal").innerHTML = `${cart.GlobalTotal()}&#128;`
+  }
+  document.querySelector(".templateContainer").appendChild(clone);
+}
 //if cart is Empty
-if (cart.calcGlobalTotal() != 0) {
+if (cart.GlobalTotal() != 0) {
   document.querySelector(".cartIsEmpty").classList.replace("d-flex", "d-none")
 }
 
@@ -87,7 +106,7 @@ function sendOrder() {
       console.log('Request result: ', json)
       //redirect to confirmation
 
-      window.location.href = `./confirmation.html?orderId=${json.orderId}&total=${cart.calcGlobalTotal()}`
+      window.location.href = `./confirmation.html?orderId=${json.orderId}&total=${cart.GlobalTotal()}`
     })
 }
 //form event listener
