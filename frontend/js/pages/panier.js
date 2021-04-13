@@ -7,12 +7,10 @@
 /*---------------------------------------- CART ----------------------------------------*/
 
 function fillMarkup(itemsInCart) {
-  //Tableau de produits
+  //insert each product of product arrays
   let productArray = cart.cartToArray()
   console.log('Tableau de produits : ', productArray)
-  productArray.forEach((product) => {
-    displayProduct(product)
-  })
+  productArray.forEach((product) => displayProduct(product))
 }
 
 //Display Cart Content
@@ -29,29 +27,29 @@ function displayProduct(product) {
   clone.querySelector(".totalPrice").innerHTML = `${cart.TotalProductPrice(product)}&#128;`
   document.querySelector(".globalTotal").innerHTML = `${cart.GlobalTotal()}&#128;`
 
+  userListener(clone,product)
 
-  // Quantity listener & total calculation
-  let quantity = clone.querySelector(".quantity")
-  quantity.onchange = (e) => {
-    e.preventDefault()
-
-    // Update quantity
-    cart.updateQuantity(product._id, quantity.value)
-
-    // Update total product price
-    let totalPrice = e.target.parentElement.parentElement.lastElementChild
-    let updatedTotal = (product.price.slice(0, -1) * cart.getQuantity(product._id))
-    totalPrice.innerHTML = `${updatedTotal}&#128;`
-
-    // Update global total
-    document.querySelector(".globalTotal").innerHTML = `${cart.GlobalTotal()}&#128;`
-
-    // Update product amount
-    cart.updateAmount()
-  }
+  //append clone element to markup
   document.querySelector(".templateContainer").appendChild(clone);
 }
 
+// Quantity listener & total calculation ON USER CHANGE
+function userListener(clone, product) {
+  let quantity = clone.querySelector(".quantity")
+  quantity.onchange = (event) => {
+    event.preventDefault()
+    // Update quantity
+    cart.updateQuantity(product._id, quantity.value)
+    // Update total product price
+    let totalPrice = event.target.parentElement.parentElement.lastElementChild
+    let updatedTotal = (product.price.slice(0, -1) * cart.getQuantity(product._id))
+    totalPrice.innerHTML = `${updatedTotal}&#128;`
+    // Update global total
+    document.querySelector(".globalTotal").innerHTML = `${cart.GlobalTotal()}&#128;`
+    // Update product amount
+    cart.updateAmount()
+  }
+}
 
 /*---------------------------------------- FORM ----------------------------------------*/
 //check inputs validity
