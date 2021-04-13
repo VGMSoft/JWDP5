@@ -1,18 +1,22 @@
 class Cart {
+
+  //get localStorage content for 'cart' key
   getCartItems() {
     return JSON.parse(localStorage.getItem('cart')) || {}
   }
 
+  //send products object to localStorage under 'cart' key
   setCartItem(cart) {
     localStorage.setItem('cart', JSON.stringify(cart))
   }
 
+  //transform products object in products array
   cartToArray() {
     return Object.values(this.getCartItems())
   }
 
-
-  /*------------------------------------ build------------------------------------*/
+  /*------------------------------- build cart -----------------------------*/
+  //get lense option on change
   getOption() {
     const lenseSelector = document.querySelector(".lenseSelector")
     if (lenseSelector.value !== "Lenses") {
@@ -20,6 +24,7 @@ class Cart {
     }
   }
 
+  //building cart object
   addItem(product) {
     //Get cart content
     const cart = this.getCartItems()
@@ -48,7 +53,7 @@ class Cart {
   }
 
   /*------------------------------------ Cart Math ------------------------------------*/
-//Quantity
+  //User update quantity
   getQuantity(id) {
     const product = this.getCartItems()
     return product[id].quantity
@@ -59,13 +64,20 @@ class Cart {
     this.setCartItem(cart)
   }
 
-  //Amount of products in cart
+  //showing mount of products in cart
   getAmount() {
-    document.querySelector(".cartContent").innerHTML = localStorage.getItem('amount')
-    console.log(document.querySelector(".cartContent"))
-    console.log(localStorage.getItem('amount'))
+    let cartContent = document.querySelector(".cartContent")
+    console.log(cartContent)
+    if (localStorage.getItem('amount') == 0) {
+      cartContent.classList.add("d-none")
+      cartContent.classList.remove("d-inline-block")
+    } else {
+      cartContent.innerHTML = localStorage.getItem('amount')
+      cartContent.classList.remove("d-none")
+    }
   }
-  updateAmount(){
+
+  updateAmount() {
     const amountOfProduct = this.cartToArray().reduce((acu, product) => {
       return acu + (parseInt(product.quantity))
     }, 0)
