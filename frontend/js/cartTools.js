@@ -58,6 +58,12 @@ class Cart {
     cart[id].quantity = quantity
     this.setCartItem(cart)
   }
+  AmountOfProducts(){
+    const amountOfProduct = this.cartToArray().reduce((acu, product) => {
+      return acu + (parseInt(product.quantity))
+    }, 0)
+    console.log(amountOfProduct)
+  }
 
   //total  
   TotalProductPrice(product) {
@@ -67,6 +73,9 @@ class Cart {
     const globalTotal = this.cartToArray().reduce((acu, product) => {
       return acu + (parseInt(product.price) * parseInt(product.quantity))
     }, 0)
+    if (globalTotal != 0) {
+      document.querySelector(".cartIsEmpty").classList.replace("d-flex", "d-none")
+    }
     return globalTotal
   }
 

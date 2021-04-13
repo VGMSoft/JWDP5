@@ -48,9 +48,7 @@ function displayProduct(product) {
   document.querySelector(".templateContainer").appendChild(clone);
 }
 //if cart is Empty
-if (cart.GlobalTotal() != 0) {
-  document.querySelector(".cartIsEmpty").classList.replace("d-flex", "d-none")
-}
+
 
 /*---------------------------------------- FORM ----------------------------------------*/
 //check inputs validity
@@ -112,5 +110,9 @@ function sendOrder() {
 //form event listener
 document.querySelector(".form").onsubmit = (event) => {
   event.preventDefault()
-  sendOrder()
+  if (Object.keys(cart.getCartItems).length != 0) {
+    sendOrder()
+  } else {
+    alert("Votre panier est vide, ajouter un article pour passer commande")
+  } 
 }
