@@ -58,11 +58,18 @@ class Cart {
     cart[id].quantity = quantity
     this.setCartItem(cart)
   }
-  AmountOfProducts(){
+
+  //Amount of products in cart
+  getAmount() {
+    document.querySelector(".cartContent").innerHTML = localStorage.getItem('amount')
+    console.log(document.querySelector(".cartContent"))
+    console.log(localStorage.getItem('amount'))
+  }
+  updateAmount(){
     const amountOfProduct = this.cartToArray().reduce((acu, product) => {
       return acu + (parseInt(product.quantity))
     }, 0)
-    console.log(amountOfProduct)
+    localStorage.setItem('amount', amountOfProduct)
   }
 
   //total  

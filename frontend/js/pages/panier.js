@@ -1,4 +1,5 @@
 (() => {
+  cart.updateAmount()
   const itemsInCart = cart.getCartItems()
   fillMarkup(itemsInCart)
 })()
@@ -44,10 +45,12 @@ function displayProduct(product) {
 
     // Update global total
     document.querySelector(".globalTotal").innerHTML = `${cart.GlobalTotal()}&#128;`
+
+    // Update product amount
+    cart.updateAmount()
   }
   document.querySelector(".templateContainer").appendChild(clone);
 }
-//if cart is Empty
 
 
 /*---------------------------------------- FORM ----------------------------------------*/
@@ -114,5 +117,5 @@ document.querySelector(".form").onsubmit = (event) => {
     sendOrder()
   } else {
     alert("Votre panier est vide, ajouter un article pour passer commande")
-  } 
+  }
 }

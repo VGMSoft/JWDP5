@@ -1,4 +1,5 @@
 (() => {
+  cart.getAmount()
   const id = getProductId()
   getProduct(id)
     .then(product => {

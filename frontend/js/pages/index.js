@@ -1,4 +1,5 @@
 (() => {
+  cart.getAmount()
   getProducts()
     .then(products => {
       displayProducts(products)
