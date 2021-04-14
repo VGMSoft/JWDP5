@@ -1,20 +1,20 @@
 (() => {
   cart.updateAmount()
   const itemsInCart = cart.getCartItems()
-  fillMarkup(itemsInCart)
+  displayProduct(itemsInCart)
 })()
 
 /*---------------------------------------- CART ----------------------------------------*/
-
-function fillMarkup(itemsInCart) {
+//Display Cart Content
+function displayProduct() {
   //insert each product of product arrays
   let productArray = cart.cartToArray()
   console.log('Tableau de produits : ', productArray)
-  productArray.forEach((product) => displayProduct(product))
+  productArray.forEach((product) => fillTemplate(product))
 }
 
-//Display Cart Content
-function displayProduct(product) {
+// Insert Data in Markup
+function fillTemplate(product) {
   // get template
   const template = document.querySelector("#template");
   // clone template
@@ -26,15 +26,14 @@ function displayProduct(product) {
   clone.querySelector(".unityPrice").innerHTML = product.price
   clone.querySelector(".totalPrice").innerHTML = `${cart.TotalProductPrice(product)}&#128;`
   document.querySelector(".globalTotal").innerHTML = `${cart.GlobalTotal()}&#128;`
-
-  userListener(clone,product)
-
+  //Listen to user changes
+  userChangeListener(clone, product)
   //append clone element to markup
   document.querySelector(".templateContainer").appendChild(clone);
 }
 
 // Quantity listener & total calculation ON USER CHANGE
-function userListener(clone, product) {
+function userChangeListener(clone, product) {
   let quantity = clone.querySelector(".quantity")
   quantity.onchange = (event) => {
     event.preventDefault()
@@ -48,6 +47,10 @@ function userListener(clone, product) {
     document.querySelector(".globalTotal").innerHTML = `${cart.GlobalTotal()}&#128;`
     // Update product amount
     cart.updateAmount()
+    //deleting product if quantity = 0
+    if (event.target.value == 0) {
+      cart.removeItem(product)
+    }
   }
 }
 
@@ -74,16 +77,18 @@ checkInput(document.querySelector("#city"), /^[a-zA-Z-,\s]+$/)
 //source: https://emailregex.com/
 checkInput(document.querySelector("#email"), /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
 
-function getFormData() {
+
+//Create contatct object
+function buildContactObject() {
   //getting field value
   const firstName = document.querySelector("#firstName").value.trim()
   const lastName = document.querySelector("#lastName").value.trim()
-  const address = document.querySelector("#adress").value.trim()
+  const adress = document.querySelector("#adress").value.trim()
   const city = document.querySelector("#city").value.trim()
   const email = document.querySelector("#email").value.trim()
   //Creating contactObject
-  let contactObject = { firstName: firstName, lastName: lastName, address: address, city: city, email: email }
-  //Objet de contact
+  let contactObject = { firstName: firstName, lastName: lastName, adress: adress, city: city, email: email }
+  localStorage.setItem(`${firstName} ${lastName}`, JSON.stringify(contactObject))
   console.log('Objet de Contact : ', contactObject)
   return contactObject
 }
@@ -91,7 +96,7 @@ function getFormData() {
 /*---------------------------------------- ORDER ----------------------------------------*/
 function sendOrder() {
   const order = {
-    contact: getFormData(),
+    contact: buildContactObject(),
     products: Object.keys(cart.getCartItems())
   }
   console.log('Request body: ', order)
@@ -109,7 +114,7 @@ function sendOrder() {
       window.location.href = `./confirmation.html?orderId=${json.orderId}&total=${cart.GlobalTotal()}`
     })
 }
-//prevent empty cart
+//prevent empty cart order
 document.querySelector(".form").onsubmit = (event) => {
   event.preventDefault()
   //At least 1 product in cart
