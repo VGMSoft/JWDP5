@@ -110,13 +110,27 @@
           >
           <!--Quantity-->
           <span class="w-25 d-flex justify-content-center">
-            <input
-              type="number"
-              name="quantity"
-              class="quantity form-control rounded-0"
-              min="0"
-              max="25"
-            />
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <button class="btn btn-outline-secondary input-group-text">
+                  -
+                </button>
+              </div>
+              <input
+                type="number"
+                name="quantity"
+                class="quantity form-control rounded-0"
+                min="0"
+                max="25"
+                pattern="[1-9]+"
+                required
+              />
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary input-group-text">
+                  +
+                </button>
+              </div>
+            </div>
           </span>
           <!--unityPrice-->
           <span

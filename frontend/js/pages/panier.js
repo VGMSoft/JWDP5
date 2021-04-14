@@ -47,8 +47,8 @@ function userChangeListener(clone, product) {
     document.querySelector(".globalTotal").innerHTML = `${cart.GlobalTotal()}&#128;`
     // Update product amount
     cart.updateAmount()
-    //deleting product if quantity = 0
-    if (event.target.value == 0) {
+    //deleting product if quantity less than 0
+    if (event.target.value < 1) {
       cart.removeItem(product)
     }
   }
