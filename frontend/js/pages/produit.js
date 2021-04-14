@@ -1,11 +1,10 @@
 (() => {
-  cart.getAmount()
+  cart.showAmount()
   const id = getProductId()
   getProduct(id)
     .then(product => {
       displayProduct(product)
       console.log('HTTP Request Result : ', product)
-      document.querySelector('.addToCart').onclick = () => redirectProductToCart(product)
     })
 })()
 
@@ -21,6 +20,8 @@ function getProduct(id) {
       console.log(`HTTP Request Status : ${res.status}`)
       if (res.ok) {
         return res.json();
+      }else{
+        return null
       }
     })
     .catch(err => {
@@ -45,6 +46,7 @@ function displayProduct(product) {
     newDropdownItem.value = (product.lenses[i])
     document.querySelector(".lenseSelector").appendChild(newDropdownItem)
   }
+  document.querySelector('.addToCart').onclick = () => redirectProductToCart(product)
 }
 
 /*----------------------------------- redirect product to cart -------------------------------------*/
@@ -67,5 +69,6 @@ function revealModalOnClick() {
 function redirectProductToCart(product) {
   //adding item to cart
   cart.addItem(product)
+  cart.showAmount()
   revealModalOnClick()
 }

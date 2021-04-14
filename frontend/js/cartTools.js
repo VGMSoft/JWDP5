@@ -1,13 +1,27 @@
 class Cart {
-
   //get localStorage content for 'cart' key
   getCartItems() {
     return JSON.parse(localStorage.getItem('cart')) || {}
   }
+  cart = this.getCartItems()
 
   //send products object to localStorage under 'cart' key
   setCartItem(cart) {
     localStorage.setItem('cart', JSON.stringify(cart))
+  }
+
+  emptyCart() {
+    localStorage.clear()
+    console.warn("Cart cleaned")
+    location.reload()
+  }
+
+  removeItem(product) {
+    //delete product
+    delete this.cart[product._id]
+    //Append to localStorage
+    this.setCartItem(this.cart)
+    location.reload()
   }
 
   //transform products object in products array
@@ -64,15 +78,15 @@ class Cart {
     this.setCartItem(cart)
   }
 
-  //showing mount of products in cart
+  // Showing amount of products in cart
   getAmount() {
     let cartContent = document.querySelector(".cartContent")
-    console.log(cartContent)
     if (localStorage.getItem('amount') == 0) {
       cartContent.classList.add("d-none")
       cartContent.classList.remove("d-inline-block")
     } else {
       cartContent.innerHTML = localStorage.getItem('amount')
+      cartContent.classList.add("d-inline-block")
       cartContent.classList.remove("d-none")
     }
   }
@@ -84,26 +98,24 @@ class Cart {
     localStorage.setItem('amount', amountOfProduct)
   }
 
-  //total  
+  showAmount(){
+    this.updateAmount()
+    this.getAmount()
+  }
+
+  // Total calculations
   TotalProductPrice(product) {
     return parseInt(product.price) * parseInt(product.quantity)
   }
   GlobalTotal() {
     const globalTotal = this.cartToArray().reduce((acu, product) => {
-      return acu + (parseInt(product.price) * parseInt(product.quantity))
+      return acu + this.TotalProductPrice(product)
     }, 0)
     if (globalTotal != 0) {
       document.querySelector(".cartIsEmpty").classList.replace("d-flex", "d-none")
     }
     return globalTotal
   }
-
-  // Empty Cart
-  emptyCart() {
-    localStorage.clear()
-    console.warn("Cart cleaned")
-    location.reload()
-  }
 }
-// Instanciation de la classe Cart
+//  de la  Cart class Instanciation
 const cart = new Cart()

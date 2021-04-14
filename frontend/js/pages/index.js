@@ -1,5 +1,5 @@
 (() => {
-  cart.getAmount()
+  cart.showAmount()
   getProducts()
     .then(products => {
       displayProducts(products)
@@ -20,6 +20,7 @@ function getProducts() {
       } else {
         loadingSpinnerOff()
         serverOffline()
+        return null
       }
     })
     .catch(err => {
@@ -29,6 +30,12 @@ function getProducts() {
       );
     });
 }
+
+// Display Data
+function displayProducts(products) {
+  products.forEach(product => fillTemplate(product))
+}
+
 // Insert Data in Markup
 function fillTemplate(product) {
   // get template
@@ -45,15 +52,12 @@ function fillTemplate(product) {
   // send filled template
   document.querySelector(".templateContainer").appendChild(clone)
 }
-// Display Data
-function displayProducts(products) {
-  products.forEach(product => fillTemplate(product))
-}
+
 
 /*----------------------------------- API states user feedback -------------------------------------*/
 function serverOffline() {
   const loadingContainer = document.createElement("div")
-  loadingContainer.innerHTML = '<p class=" display-2 text-secondary  mt-5 pt-5">Server offline</p>'
+  loadingContainer.innerHTML = '<p class="display-5 text-secondary text-center mt-5 pt-5">Server offline ...<br/>Please reload page<br/>or retry later!</p>'
   const templateContainer = document.querySelector(".templateContainer")
   templateContainer.classList.add("justify-content-center")
   templateContainer.appendChild(loadingContainer)
@@ -68,6 +72,6 @@ function loadingSpinnerOn() {
 }
 
 function loadingSpinnerOff() {
-  let elem = document.querySelector('.loadingSpinner');
-  elem.parentNode.removeChild(elem);
+  let spinner = document.querySelector('.loadingSpinner');
+  spinner.parentNode.removeChild(spinner);
 }
