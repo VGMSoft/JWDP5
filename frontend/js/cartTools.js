@@ -3,8 +3,7 @@ class Cart {
   getCartItems() {
     return JSON.parse(localStorage.getItem('cart')) || {}
   }
-  cart = this.getCartItems()
-
+  
   //send products object to localStorage under 'cart' key
   setCartItem(cart) {
     localStorage.setItem('cart', JSON.stringify(cart))
@@ -17,10 +16,11 @@ class Cart {
   }
 
   removeItem(product) {
+    let cart = this.getCartItems()
     //delete product
-    delete this.cart[product._id]
+    delete cart[product._id]
     //Append to localStorage
-    this.setCartItem(this.cart)
+    this.setCartItem(cart)
     location.reload()
   }
 
