@@ -69,13 +69,12 @@ function checkInput(input, condition) {
 }
 
 //Browse & verify input values
-checkInput(document.querySelector("#firstName"), /^[a-zA-Z-,\s]+$/)
-checkInput(document.querySelector("#lastName"), /^[a-zA-Z-,\s]+$/)
-checkInput(document.querySelector("#address"), /^([a-zA-Z0-9-\s]+){1,8}$/)
-checkInput(document.querySelector("#city"), /^[a-zA-Z-,\s]+$/)
+checkInput(document.querySelector("#firstName"), /^[a-zA-Z-,\séè]+$/)
+checkInput(document.querySelector("#lastName"), /^[a-zA-Z-,\séè]+$/)
+checkInput(document.querySelector("#address"), /^([a-zA-Z0-9-\séè]+){1,8}$/)
+checkInput(document.querySelector("#city"), /^[a-zA-Z-,\séè]+$/)
 //source: https://emailregex.com/
 checkInput(document.querySelector("#email"), /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
-
 
 //Create contatct object
 function buildContactObject() {
