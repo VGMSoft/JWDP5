@@ -1,12 +1,11 @@
 (() => {
   cart.updateAmount()
-  const itemsInCart = cart.getCartItems()
-  displayProduct(itemsInCart)
+  displayProduct()
 })()
 
 /*---------------------------------------- CART ----------------------------------------*/
 //Display Cart Content
-function displayProduct(itemsInCart) {
+function displayProduct() {
   //insert each product of product arrays
   let productArray = cart.cartToArray()
   productArray.forEach((product) => fillTemplate(product))
@@ -19,7 +18,6 @@ function fillTemplate(product) {
   // clone template
   const clone = document.importNode(template.content, true)
   //fill template
-  totalProductPrice = cart.totalProductPrice(product)
   clone.querySelector(".productName").innerHTML = product.name
   clone.querySelector(".quantity").value = product.quantity
   clone.querySelector(".unityPrice").innerHTML = product.price
@@ -34,10 +32,6 @@ function fillTemplate(product) {
 
 // Quantity listener & total calculation ON USER CHANGE
 function userChangeListener(clone, product) {
-  let quantity = clone.querySelector(".quantity")
-
-// Recuperating product
-
   //reduce quantity onclick on reduce button
   clone.querySelector(".reduceQuantity").onclick = (event) => {
     let quantityInput = event.target.parentElement.parentElement.querySelector(".quantity")
@@ -114,7 +108,7 @@ function sendOrder() {
 document.querySelector(".form").onsubmit = (event) => {
   event.preventDefault()
   //At least 1 product in cart
-  if (Object.keys(cart.getCartItems()).length != 0) {
+  if (Object.keys(cart.getCartItems()).length !== 0) {
     sendOrder()
   } else {
     alert("Votre panier est vide, ajouter un article pour passer commande")

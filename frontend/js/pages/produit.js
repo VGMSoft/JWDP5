@@ -8,21 +8,24 @@
 })()
 
 /* ------------------------------------------ Filling Markup ------------------------------------------ */
+
 //collect product id
 function getProductId() {
   return new URL(window.location.href).searchParams.get("id")
 }
+
 //fetching data from API
 function getProduct(id) {
   return fetch(`${apiUrl}/api/cameras/` + id)
     .then(res => {
       if (res.ok) {
         return res.json();
-      }else{
+      } else {
         return null
       }
     })
     .catch(err => {
+      console.error(err)
       alert("La connexion au serveur à échoué, veuillez réactualiser la page !")
     })
 }
@@ -37,11 +40,13 @@ function displayProduct(product) {
   /* Dropdown menu feeding */
   for (let i in product.lenses) {
     let newDropdownItem = document.createElement("option")
-    newDropdownItem.setAttribute("value", i)
-    newDropdownItem.classList.add(".dropdown-item")
-    newDropdownItem.textContent = (product.lenses[i])
-    newDropdownItem.value = (product.lenses[i])
-    document.querySelector(".lenseSelector").appendChild(newDropdownItem)
+    if (product.lenses.hasOwnProperty(i)) {
+      newDropdownItem.setAttribute("value", i)
+      newDropdownItem.classList.add(".dropdown-item")
+      newDropdownItem.textContent = (product.lenses[i])
+      newDropdownItem.value = (product.lenses[i])
+      document.querySelector(".lenseSelector").appendChild(newDropdownItem)
+    }
   }
   document.querySelector('.addToCart').onclick = () => redirectProductToCart(product)
 }
@@ -53,7 +58,9 @@ function getOption() {
     return lenseSelector.value
   }
 }
+
 /*----------------------------------- redirect product to cart -------------------------------------*/
+
 //redirection modal
 function revealModalOnClick() {
   const modal = document.querySelector(".modal")
@@ -73,7 +80,7 @@ function revealModalOnClick() {
 async function redirectProductToCart(product) {
   const option = await getOption()
   //adding item to cart
-  cart.addItem(product,option)
+  cart.addItem(product, option)
   cart.showAmount()
   revealModalOnClick()
 }

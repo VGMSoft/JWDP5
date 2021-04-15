@@ -21,6 +21,7 @@ function getProducts() {
       }
     })
     .catch(err => {
+      console.error(err)
       alert(
         "La connexion au serveur semble être plus longue que d'habitude, veuillez réactualiser la page !"
       );

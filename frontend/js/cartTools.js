@@ -88,7 +88,7 @@ class Cart {
   // Showing amount of products in cart
   getAmount() {
     let cartContent = document.querySelector(".cartContent")
-    if (localStorage.getItem('amount') == 0) {
+    if (JSON.parse(localStorage.getItem('amount')) === 0) {
       cartContent.classList.add("d-none")
       cartContent.classList.remove("d-inline-block")
     } else {
@@ -118,7 +118,7 @@ class Cart {
     const globalTotal = this.cartToArray().reduce((acu, product) => {
       return acu + this.totalProductPrice(product)
     }, 0)
-    if (globalTotal != 0) {
+    if (globalTotal !== 0) {
       document.querySelector(".cartIsEmpty").classList.replace("d-flex", "d-none")
     }
     return globalTotal
