@@ -4,7 +4,6 @@
   getProduct(id)
     .then(product => {
       displayProduct(product)
-      console.log('HTTP Request Result : ', product)
     })
 })()
 
@@ -17,7 +16,6 @@ function getProductId() {
 function getProduct(id) {
   return fetch(`${apiUrl}/api/cameras/` + id)
     .then(res => {
-      console.log(`HTTP Request Status : ${res.status}`)
       if (res.ok) {
         return res.json();
       }else{
@@ -25,7 +23,6 @@ function getProduct(id) {
       }
     })
     .catch(err => {
-      console.log(err)
       alert("La connexion au serveur à échoué, veuillez réactualiser la page !")
     })
 }

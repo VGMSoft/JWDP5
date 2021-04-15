@@ -11,7 +11,6 @@ class Cart {
 
   emptyCart() {
     localStorage.clear()
-    console.warn("Cart cleaned")
     location.reload()
   }
 
@@ -59,21 +58,18 @@ class Cart {
       //add option
       cart[product._id].option.push(`${this.getOption()}`)
     }
-    //display results on console
-    console.log('New Product : ', cart[product._id])
-    console.log('Cart Content : ', cart)
     //Append to localStorage
     this.setCartItem(cart)
   }
 
   /*------------------------------------ Cart Math ------------------------------------*/
 
-  modifyQuantity(productMod, quantityInput) {
+  modifyQuantity(product, quantityInput) {
     // Update quantity
-    this.updateQuantity(productMod._id, quantityInput.value)
+    this.updateQuantity(product._id, quantityInput.value)
     // Update total product price
     let totalPrice = event.target.parentElement.parentElement.parentElement.parentElement.querySelector(".totalPrice")
-    let updatedTotal = (productMod.price.slice(0, -1) * this.getQuantity(productMod._id))
+    let updatedTotal = (product.price.slice(0, -1) * this.getQuantity(product._id))
     totalPrice.innerHTML = `${updatedTotal}&#128;`
     // Update global total
     document.querySelector(".globalTotal").innerHTML = `${this.GlobalTotal()}&#128;`
@@ -81,7 +77,7 @@ class Cart {
     this.updateAmount()
     //deleting product if quantity less than 0
     if (event.target.parentElement.parentElement.querySelector(".quantity").value < 1) {
-      this.removeItem(productMod)
+      this.removeItem(product)
       alert("Votre produit a été supprimé du panier.")
     }
   }

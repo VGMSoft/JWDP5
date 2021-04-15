@@ -6,10 +6,9 @@
 
 /*---------------------------------------- CART ----------------------------------------*/
 //Display Cart Content
-function displayProduct() {
+function displayProduct(itemsInCart) {
   //insert each product of product arrays
   let productArray = cart.cartToArray()
-  console.log('Tableau de produits : ', productArray)
   productArray.forEach((product) => fillTemplate(product))
 }
 
@@ -38,18 +37,18 @@ function userChangeListener(clone, product) {
   let quantity = clone.querySelector(".quantity")
 
 // Recuperating product
-let productMod = product
+
   //reduce quantity onclick on reduce button
-  clone.querySelector(".reduceQuantity").onclick = (event, product) => {
+  clone.querySelector(".reduceQuantity").onclick = (event) => {
     let quantityInput = event.target.parentElement.parentElement.querySelector(".quantity")
     quantityInput.value--
-    cart.modifyQuantity(productMod, quantityInput)
+    cart.modifyQuantity(product, quantityInput)
   }
 //increase quantity onclick on increase button
-  clone.querySelector(".increaseQuantity").onclick = (event, product) => {
+  clone.querySelector(".increaseQuantity").onclick = (event) => {
     let quantityInput = event.target.parentElement.parentElement.querySelector(".quantity")
     quantityInput.value++
-    cart.modifyQuantity(productMod, quantityInput)
+    cart.modifyQuantity(product, quantityInput)
   }
 }
 
@@ -87,7 +86,6 @@ function buildContactObject() {
   //Creating contactObject
   let contactObject = { firstName: firstName, lastName: lastName, address: address, city: city, email: email }
   localStorage.setItem(`${firstName} ${lastName}`, JSON.stringify(contactObject))
-  console.log('Objet de Contact : ', contactObject)
   return contactObject
 }
 
@@ -97,7 +95,6 @@ function sendOrder() {
     contact: buildContactObject(),
     products: Object.keys(cart.getCartItems())
   }
-  console.log('Request body: ', order)
   //Post Request
   const fetchOptions = {
     method: 'POST',
@@ -107,7 +104,6 @@ function sendOrder() {
   fetch(`${apiUrl}/api/cameras/order`, fetchOptions)
     .then((response) => response.json())
     .then((json) => {
-      console.log('Request result: ', json)
       //redirect to confirmation
       sessionStorage.setItem(json.orderId, JSON.stringify(order.contact))
       window.location.href = `./confirmation.html?orderId=${json.orderId}&total=${cart.GlobalTotal()}`

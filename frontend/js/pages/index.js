@@ -3,17 +3,14 @@
   getProducts()
     .then(products => {
       displayProducts(products)
-      console.log('HTTP Request Results : ', products)
     })
 })();
-
 
 // Collect Data from API
 function getProducts() {
   loadingSpinnerOn()
   return fetch(`${apiUrl}/api/cameras`)
     .then(res => {
-      console.log(`HTTP Request Status : ${res.status}`)
       if (res.ok) {
         loadingSpinnerOff()
         return res.json()
@@ -24,7 +21,6 @@ function getProducts() {
       }
     })
     .catch(err => {
-      console.error(err)
       alert(
         "La connexion au serveur semble être plus longue que d'habitude, veuillez réactualiser la page !"
       );
@@ -52,7 +48,6 @@ function fillTemplate(product) {
   // send filled template
   document.querySelector(".templateContainer").appendChild(clone)
 }
-
 
 /*----------------------------------- API states user feedback -------------------------------------*/
 function serverOffline() {
