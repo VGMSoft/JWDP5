@@ -1,4 +1,24 @@
 //styles
+
+//all pages
+.logo {
+  &--icon {
+    width: 40px;
+    height: 40px;
+  }
+  &--invert {
+    width: 100px;
+    height: 50px;
+  }
+}
+
+//index.html
+.loadingSpinner {
+  width: 6rem;
+  height: 6rem;
+}
+
+//index.html && produit.js
 .card {
   &--portrait {
     img {
@@ -14,23 +34,33 @@
   }
 }
 
-.logo {
-  &--icon {
-    width: 40px;
-    height: 40px;
-  }
-  &--invert {
-    width: 100px;
-    height: 50px;
-  }
-}
-
+//produit.js
 .price {
   color: #212529;
   font-size: 2rem;
 }
 
-.loadingSpinner {
-  width: 6rem;
-  height: 6rem;
+//panier.js
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Portrait */
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+  .reduceQuantity,
+  .increaseQuantity {
+   padding-left: 0.375em;
+   padding-right: 0.375em
+  }
+  .quantity {
+    padding: 0.3em;
+  }
 }
