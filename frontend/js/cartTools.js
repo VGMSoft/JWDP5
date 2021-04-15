@@ -72,7 +72,7 @@ class Cart {
     let updatedTotal = (product.price.slice(0, -1) * this.getQuantity(product._id))
     totalPrice.innerHTML = `${updatedTotal}&#128;`
     // Update global total
-    document.querySelector(".globalTotal").innerHTML = `${this.GlobalTotal()}&#128;`
+    document.querySelector(".globalTotal").innerHTML = `${this.globalTotal()}&#128;`
     // Update product amount
     this.updateAmount()
     //deleting product if quantity less than 0
@@ -119,12 +119,12 @@ class Cart {
   }
 
   // Total calculations
-  TotalProductPrice(product) {
+  totalProductPrice(product) {
     return parseInt(product.price) * parseInt(product.quantity)
   }
-  GlobalTotal() {
+  globalTotal() {
     const globalTotal = this.cartToArray().reduce((acu, product) => {
-      return acu + this.TotalProductPrice(product)
+      return acu + this.totalProductPrice(product)
     }, 0)
     if (globalTotal != 0) {
       document.querySelector(".cartIsEmpty").classList.replace("d-flex", "d-none")

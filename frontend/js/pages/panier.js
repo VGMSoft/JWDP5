@@ -19,12 +19,12 @@ function fillTemplate(product) {
   // clone template
   const clone = document.importNode(template.content, true)
   //fill template
-  totalProductPrice = cart.TotalProductPrice(product)
+  totalProductPrice = cart.totalProductPrice(product)
   clone.querySelector(".productName").innerHTML = product.name
   clone.querySelector(".quantity").value = product.quantity
   clone.querySelector(".unityPrice").innerHTML = product.price
-  clone.querySelector(".totalPrice").innerHTML = `${cart.TotalProductPrice(product)}&#128;`
-  document.querySelector(".globalTotal").innerHTML = `${cart.GlobalTotal()}&#128;`
+  clone.querySelector(".totalPrice").innerHTML = `${cart.totalProductPrice(product)}&#128;`
+  document.querySelector(".globalTotal").innerHTML = `${cart.globalTotal()}&#128;`
 
   //Listen to user changes
   userChangeListener(clone, product)
@@ -106,7 +106,7 @@ function sendOrder() {
     .then((json) => {
       //redirect to confirmation
       sessionStorage.setItem(json.orderId, JSON.stringify(order.contact))
-      window.location.href = `./confirmation.html?orderId=${json.orderId}&total=${cart.GlobalTotal()}`
+      window.location.href = `./confirmation.html?orderId=${json.orderId}&total=${cart.globalTotal()}`
     })
 }
 
