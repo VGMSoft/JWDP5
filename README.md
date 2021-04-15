@@ -1,6 +1,6 @@
-<h1 align="center">Welcome to Orinoco 👋</h1>
+<h1 style="text-align: center;">Welcome to Orinoco 👋</h1>
 
-<img align="center" src="./frontend/images/logo/logo_orinoco.png" alt="Orinoco__logo"/>
+<img style="text-align: center;" src="./frontend/images/logo/logo_orinoco.png" alt="Orinoco__logo"/>
 <p>
   <a href="https://twitter.com/virgilegug" target="_blank">
     <img alt="Twitter: virgilegug" src="https://img.shields.io/twitter/follow/virgilegug.svg?style=social" />
@@ -16,32 +16,47 @@
 * Valider des données issues de sources externes
 * Gérer des événements JavaScript
 
+### 🏠 [GitHub Homepage](https://github.com/VGMSoft/VirgileGuglielmi_5_04032021)
 
-### 🏠 [Homepage](https://github.com/VGMSoft/VirgileGuglielmi_5_04032021)
+### ✨ [Essayer l'application!](https://vgmsoft.github.io/VirgileGuglielmi_5_04032021/frontend/)
 
-### ✨ [Demo](https://vgmsoft.github.io/VirgileGuglielmi_5_04032021/frontend/)
+### ⚠️ Avertissement
+
+Le backend de la version de démonstration est deployée sur [Heroku](https://oc-orinoco-api.herokuapp.com/api/cameras)
+
+S'il elle n'est pas utilisé pendant plus d'une heure, l'application se met en sommeil et le temps de chargement du site
+prendra plus de temps !
+
+ℹ️ [Plus d'info sur ce comportement](https://blog.heroku.com/app_sleeping_on_heroku)
 
 ## Usage
+
 **Frontend**
-> Compilation du scss en css
+
+Compilation du scss en css
+
 ```sh
-sass: "sass --watch ./views/css/styles.scss:./views/css/styles.css"
+cd frontend && npm run sass
 ```
+
 **Backend**
->Installation des dépendances
+
+Installation des dépendances
+
 ```sh
 npm install
 ```
->Lancement du serveur node.js
+
+Lancement du serveur node.js
+
 ```sh
-node server
+cd backend && node server
 ```
 
 ## Author
 
 👤 **Virgile Guglielmi**
 
-* Website: virgileg.com
 * Twitter: [@virgilegug](https://twitter.com/virgilegug)
 * Github: [@VGMSoft](https://github.com/VGMSoft)
 
