@@ -110,6 +110,7 @@ function sendOrder() {
     .then((json) => {
       console.log('Request result: ', json)
       //redirect to confirmation
+      sessionStorage.setItem(json.orderId, JSON.stringify(order.contact))
       window.location.href = `./confirmation.html?orderId=${json.orderId}&total=${cart.GlobalTotal()}`
     })
 }

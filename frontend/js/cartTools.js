@@ -81,8 +81,8 @@ class Cart {
     this.updateAmount()
     //deleting product if quantity less than 0
     if (event.target.parentElement.parentElement.querySelector(".quantity").value < 1) {
-      console.log("Youpi")
       this.removeItem(productMod)
+      alert("Votre produit a été supprimé du panier.")
     }
   }
 
