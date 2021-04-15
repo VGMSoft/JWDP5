@@ -1,7 +1,2 @@
 *.DS_Store
-.idea/.gitignore
-.idea/VirgileGuglielmi_5_04032021.iml
-.idea/codeStyles/codeStyleConfig.xml
-.idea/jsLibraryMappings.xml
-.idea/modules.xml
-.idea/vcs.xml
+.idea/*
