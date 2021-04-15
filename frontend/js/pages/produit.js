@@ -46,6 +46,13 @@ function displayProduct(product) {
   document.querySelector('.addToCart').onclick = () => redirectProductToCart(product)
 }
 
+//get lense option on change
+function getOption() {
+  const lenseSelector = document.querySelector(".lenseSelector")
+  if (lenseSelector.value !== "Lenses") {
+    return lenseSelector.value
+  }
+}
 /*----------------------------------- redirect product to cart -------------------------------------*/
 //redirection modal
 function revealModalOnClick() {
@@ -63,9 +70,10 @@ function revealModalOnClick() {
   document.body.appendChild(div)
 }
 
-function redirectProductToCart(product) {
+async function redirectProductToCart(product) {
+  const option = await getOption()
   //adding item to cart
-  cart.addItem(product)
+  cart.addItem(product,option)
   cart.showAmount()
   revealModalOnClick()
 }

@@ -29,16 +29,8 @@ class Cart {
   }
 
   /*------------------------------- build cart -----------------------------*/
-  //get lense option on change
-  getOption() {
-    const lenseSelector = document.querySelector(".lenseSelector")
-    if (lenseSelector.value !== "Lenses") {
-      return lenseSelector.value
-    }
-  }
-
-  //building cart object
-  addItem(product) {
+    //building cart object
+  addItem(product,option) {
     //Get cart content
     const cart = this.getCartItems()
     //test if product exist in cart
@@ -50,13 +42,13 @@ class Cart {
       cart[product._id]._id = product._id
       cart[product._id].name = product.name
       cart[product._id].price = `${product.price / 100}€`
-      cart[product._id].option.push(`${this.getOption()}`)
+      cart[product._id].option.push(option)
       cart[product._id].quantity = 1
     } else {
       //increasing quantity
       cart[product._id].quantity++
       //add option
-      cart[product._id].option.push(`${this.getOption()}`)
+      cart[product._id].option.push(option)
     }
     //Append to localStorage
     this.setCartItem(cart)
