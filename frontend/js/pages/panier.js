@@ -26,6 +26,7 @@ function fillTemplate(product) {
   clone.querySelector(".unityPrice").innerHTML = product.price
   clone.querySelector(".totalPrice").innerHTML = `${cart.TotalProductPrice(product)}&#128;`
   document.querySelector(".globalTotal").innerHTML = `${cart.GlobalTotal()}&#128;`
+
   //Listen to user changes
   userChangeListener(clone, product)
   //append clone element to markup
@@ -35,22 +36,20 @@ function fillTemplate(product) {
 // Quantity listener & total calculation ON USER CHANGE
 function userChangeListener(clone, product) {
   let quantity = clone.querySelector(".quantity")
-  quantity.onchange = (event) => {
-    event.preventDefault()
-    // Update quantity
-    cart.updateQuantity(product._id, quantity.value)
-    // Update total product price
-    let totalPrice = event.target.parentElement.parentElement.lastElementChild
-    let updatedTotal = (product.price.slice(0, -1) * cart.getQuantity(product._id))
-    totalPrice.innerHTML = `${updatedTotal}&#128;`
-    // Update global total
-    document.querySelector(".globalTotal").innerHTML = `${cart.GlobalTotal()}&#128;`
-    // Update product amount
-    cart.updateAmount()
-    //deleting product if quantity less than 0
-    if (event.target.value < 1) {
-      cart.removeItem(product)
-    }
+
+// Recuperating product
+let productMod = product
+  //reduce quantity onclick on reduce button
+  clone.querySelector(".reduceQuantity").onclick = (event, product) => {
+    let quantityInput = event.target.parentElement.parentElement.querySelector(".quantity")
+    quantityInput.value--
+    cart.modifyQuantity(productMod, quantityInput)
+  }
+//increase quantity onclick on increase button
+  clone.querySelector(".increaseQuantity").onclick = (event, product) => {
+    let quantityInput = event.target.parentElement.parentElement.querySelector(".quantity")
+    quantityInput.value++
+    cart.modifyQuantity(productMod, quantityInput)
   }
 }
 
@@ -72,7 +71,7 @@ function checkInput(input, condition) {
 //Browse & verify input values
 checkInput(document.querySelector("#firstName"), /^[a-zA-Z-,\s]+$/)
 checkInput(document.querySelector("#lastName"), /^[a-zA-Z-,\s]+$/)
-checkInput(document.querySelector("#adress"), /^([a-zA-Z0-9-\s]+){1,8}$/)
+checkInput(document.querySelector("#address"), /^([a-zA-Z0-9-\s]+){1,8}$/)
 checkInput(document.querySelector("#city"), /^[a-zA-Z-,\s]+$/)
 //source: https://emailregex.com/
 checkInput(document.querySelector("#email"), /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
@@ -83,11 +82,11 @@ function buildContactObject() {
   //getting field value
   const firstName = document.querySelector("#firstName").value.trim()
   const lastName = document.querySelector("#lastName").value.trim()
-  const adress = document.querySelector("#adress").value.trim()
+  const address = document.querySelector("#address").value.trim()
   const city = document.querySelector("#city").value.trim()
   const email = document.querySelector("#email").value.trim()
   //Creating contactObject
-  let contactObject = { firstName: firstName, lastName: lastName, adress: adress, city: city, email: email }
+  let contactObject = { firstName: firstName, lastName: lastName, address: address, city: city, email: email }
   localStorage.setItem(`${firstName} ${lastName}`, JSON.stringify(contactObject))
   console.log('Objet de Contact : ', contactObject)
   return contactObject
@@ -114,6 +113,7 @@ function sendOrder() {
       window.location.href = `./confirmation.html?orderId=${json.orderId}&total=${cart.GlobalTotal()}`
     })
 }
+
 //prevent empty cart order
 document.querySelector(".form").onsubmit = (event) => {
   event.preventDefault()

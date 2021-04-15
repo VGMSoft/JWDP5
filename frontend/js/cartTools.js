@@ -3,7 +3,7 @@ class Cart {
   getCartItems() {
     return JSON.parse(localStorage.getItem('cart')) || {}
   }
-  
+
   //send products object to localStorage under 'cart' key
   setCartItem(cart) {
     localStorage.setItem('cart', JSON.stringify(cart))
@@ -67,6 +67,25 @@ class Cart {
   }
 
   /*------------------------------------ Cart Math ------------------------------------*/
+
+  modifyQuantity(productMod, quantityInput) {
+    // Update quantity
+    this.updateQuantity(productMod._id, quantityInput.value)
+    // Update total product price
+    let totalPrice = event.target.parentElement.parentElement.parentElement.parentElement.querySelector(".totalPrice")
+    let updatedTotal = (productMod.price.slice(0, -1) * this.getQuantity(productMod._id))
+    totalPrice.innerHTML = `${updatedTotal}&#128;`
+    // Update global total
+    document.querySelector(".globalTotal").innerHTML = `${this.GlobalTotal()}&#128;`
+    // Update product amount
+    this.updateAmount()
+    //deleting product if quantity less than 0
+    if (event.target.parentElement.parentElement.querySelector(".quantity").value < 1) {
+      console.log("Youpi")
+      this.removeItem(productMod)
+    }
+  }
+
   //User update quantity
   getQuantity(id) {
     const product = this.getCartItems()
@@ -98,7 +117,7 @@ class Cart {
     localStorage.setItem('amount', amountOfProduct)
   }
 
-  showAmount(){
+  showAmount() {
     this.updateAmount()
     this.getAmount()
   }
@@ -117,5 +136,5 @@ class Cart {
     return globalTotal
   }
 }
-//  de la  Cart class Instanciation
+//Cart class Instanciation
 const cart = new Cart()

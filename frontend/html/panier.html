@@ -112,21 +112,26 @@
           <span class="w-25 d-flex justify-content-center">
             <div class="input-group">
               <div class="input-group-prepend">
-                <button class="btn btn-outline-secondary input-group-text">
+                <button
+                  class="btn btn-outline-secondary input-group-text reduceQuantity"
+                >
                   -
                 </button>
               </div>
               <input
                 type="number"
                 name="quantity"
-                class="quantity form-control rounded-0"
+                class="quantity form-control rounded-0 text-center"
                 min="0"
                 max="25"
                 pattern="[1-9]+"
+                onKeyDown="return false"
                 required
               />
               <div class="input-group-append">
-                <button class="btn btn-outline-secondary input-group-text">
+                <button
+                  class="btn btn-outline-secondary input-group-text increaseQuantity"
+                >
                   +
                 </button>
               </div>
