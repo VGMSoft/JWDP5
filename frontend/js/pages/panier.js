@@ -1,10 +1,9 @@
 (() => {
   displayProduct()
-  cart.updateAmount()
+  secureOrder()
 })()
 
 /*---------------------------------------- CART ----------------------------------------*/
-
 //Display Cart Content
 function displayProduct() {
   //insert each product of product arrays
@@ -45,10 +44,10 @@ function userChangeListener(clone, product) {
     quantityInput.value++
     cart.userQuantityModifier(product, quantityInput, event)
   }
+  cart.updateAmount()
 }
 
 /*---------------------------------------- FORM ----------------------------------------*/
-
 //check inputs validity
 function checkInput(input, condition) {
   // user feedback
@@ -57,22 +56,22 @@ function checkInput(input, condition) {
     input.classList.remove("is-valid")
     if (condition.test(event.target.value.trim())) {
       input.classList.add("is-valid")
+      return 1
     } else {
       input.classList.add("is-invalid")
+      return 0
     }
   }
 }
-
 //Browse & verify input values
 checkInput(document.querySelector("#firstName"), /^[a-zA-Z-,\séè]+$/)
 checkInput(document.querySelector("#lastName"), /^[a-zA-Z-,\séè]+$/)
 checkInput(document.querySelector("#address"), /^([a-zA-Z0-9-\séè]+){1,8}$/)
 checkInput(document.querySelector("#city"), /^[a-zA-Z-,\séè]+$/)
-//source: https://emailregex.com/
 checkInput(document.querySelector("#email"), /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
 
 //Create contact object
-function buildContactObject() {
+function ContactObject() {
   //getting field value
   const firstName = document.querySelector("#firstName").value.trim()
   const lastName = document.querySelector("#lastName").value.trim()
@@ -86,9 +85,22 @@ function buildContactObject() {
 }
 
 /*---------------------------------------- ORDER ----------------------------------------*/
+//prevent empty cart order
+function secureOrder() {
+  document.querySelector(".form").onsubmit = (event) => {
+    event.preventDefault()
+    //At least 1 product in cart
+    if (Object.keys(cart.getCartItems()).length !== 0) {
+      sendOrder()
+    } else {
+      alert("Votre panier est vide, ajouter un article pour passer commande")
+    }
+  }
+}
+
 function sendOrder() {
   const order = {
-    contact: buildContactObject(),
+    contact: ContactObject(),
     products: Object.keys(cart.getCartItems())
   }
   //Post Request
@@ -104,15 +116,4 @@ function sendOrder() {
       sessionStorage.setItem(json.orderId, JSON.stringify(order.contact))
       window.location.href = `./confirmation.html?orderId=${json.orderId}&total=${cart.globalTotal()}`
     })
-}
-
-//prevent empty cart order
-document.querySelector(".form").onsubmit = (event) => {
-  event.preventDefault()
-  //At least 1 product in cart
-  if (Object.keys(cart.getCartItems()).length !== 0) {
-    sendOrder()
-  } else {
-    alert("Votre panier est vide, ajouter un article pour passer commande")
-  }
 }
