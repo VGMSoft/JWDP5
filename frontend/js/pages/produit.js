@@ -3,12 +3,10 @@
   getProductId()
     .then(id => getProduct(id))
     .then(product => displayProduct(product))
-    .catch((err) => console.error(err))
   cart.showAmount()
 })()
 
-/* ------------------------------------------ Filling Markup ------------------------------------------ */
-
+/* ------------------------------------------ Filling Markup ----------------------------------------*/
 function getProductId() {
   return new Promise((resolve) => resolve(new URL(window.location.href).searchParams.get("id")))
 }
@@ -17,7 +15,7 @@ function getProductId() {
 function getProduct(id) {
   return fetch(`${apiUrl}/api/cameras/` + id)
     .then(res => {
-      if (res.ok) {
+      if (res.status === 200) {
         return res.json();
       } else {
         return 0
@@ -59,8 +57,6 @@ function getOption() {
 }
 
 /*----------------------------------- redirect product to cart -------------------------------------*/
-
-//redirection modal
 function revealModalOnClick() {
   const modal = document.querySelector(".modal")
   document.body.classList.add("modal-open")
