@@ -1,19 +1,17 @@
 (() => {
-
   getProducts().then(products => displayProducts(products))
   cart.showAmount()
 })();
 
 // Collect Data from API
 function getProducts() {
-  loadingSpinnerOn()
+  loadingSpinner(1)
   return fetch(`${apiUrl}/api/cameras`)
     .then(res => {
-      if (res.ok) {
-        loadingSpinnerOff()
+      loadingSpinner(0)
+      if (res.status === 200) {
         return res.json()
       } else {
-        loadingSpinnerOff()
         serverOffline()
         return 0
       }
@@ -21,7 +19,7 @@ function getProducts() {
     .catch(err => {
       console.error(err)
       alert(
-        "La connexion au serveur semble être plus longue que d' habitude, veuillez réactualiser la page !"
+        "La connexion au serveur semble être plus longue que d' habitude. Le serveur hébergeant l' API est entré en sommeil, veuillez patienter puis réactualisez la page !"
       );
     });
 }
@@ -37,7 +35,6 @@ function fillTemplate(product) {
   const template = document.querySelector("#template")
   // clone template
   const clone = document.importNode(template.content, true)
-
   // fill template
   const urlTemplate = "./html/produit.html?id="
   clone.querySelector(".card img").src = product.imageUrl
@@ -57,15 +54,17 @@ function serverOffline() {
   templateContainer.appendChild(loadingContainer)
 }
 
-function loadingSpinnerOn() {
-  const loadingContainer = document.createElement("div")
-  loadingContainer.innerHTML = '<div class="spinner-border text-secondary loadingSpinner mt-5 pt-5" role="status"><span class="sr-only">Loading...</span></div>'
-  const templateContainer = document.querySelector(".templateContainer")
-  templateContainer.classList.add("justify-content-center")
-  templateContainer.appendChild(loadingContainer)
-}
-
-function loadingSpinnerOff() {
-  let spinner = document.querySelector('.loadingSpinner');
-  spinner.parentNode.removeChild(spinner);
+function loadingSpinner(state) {
+  if (state === 1) {
+    const loadingContainer = document.createElement("div")
+    loadingContainer.innerHTML = '<div class="spinner-border text-secondary loadingSpinner mt-5 pt-5" role="status"><span class="sr-only">Loading...</span></div>'
+    const templateContainer = document.querySelector(".templateContainer")
+    templateContainer.classList.add("justify-content-center")
+    templateContainer.appendChild(loadingContainer)
+    return 1
+  } else if (state === 0) {
+    let spinner = document.querySelector('.loadingSpinner')
+    spinner.parentNode.removeChild(spinner)
+    return 0
+  }
 }
