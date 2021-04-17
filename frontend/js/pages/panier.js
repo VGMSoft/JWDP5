@@ -1,9 +1,10 @@
 (() => {
-  cart.updateAmount()
   displayProduct()
+  cart.updateAmount()
 })()
 
 /*---------------------------------------- CART ----------------------------------------*/
+
 //Display Cart Content
 function displayProduct() {
   //insert each product of product arrays
@@ -36,17 +37,18 @@ function userChangeListener(clone, product) {
   clone.querySelector(".reduceQuantity").onclick = (event) => {
     let quantityInput = event.target.parentElement.parentElement.querySelector(".quantity")
     quantityInput.value--
-    cart.modifyQuantity(product, quantityInput)
+    cart.userQuantityModifier(product, quantityInput, event)
   }
 //increase quantity onclick on increase button
   clone.querySelector(".increaseQuantity").onclick = (event) => {
     let quantityInput = event.target.parentElement.parentElement.querySelector(".quantity")
     quantityInput.value++
-    cart.modifyQuantity(product, quantityInput)
+    cart.userQuantityModifier(product, quantityInput, event)
   }
 }
 
 /*---------------------------------------- FORM ----------------------------------------*/
+
 //check inputs validity
 function checkInput(input, condition) {
   // user feedback
@@ -69,7 +71,7 @@ checkInput(document.querySelector("#city"), /^[a-zA-Z-,\séè]+$/)
 //source: https://emailregex.com/
 checkInput(document.querySelector("#email"), /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
 
-//Create contatct object
+//Create contact object
 function buildContactObject() {
   //getting field value
   const firstName = document.querySelector("#firstName").value.trim()
@@ -78,7 +80,7 @@ function buildContactObject() {
   const city = document.querySelector("#city").value.trim()
   const email = document.querySelector("#email").value.trim()
   //Creating contactObject
-  let contactObject = { firstName: firstName, lastName: lastName, address: address, city: city, email: email }
+  let contactObject = {firstName: firstName, lastName: lastName, address: address, city: city, email: email}
   localStorage.setItem(`${firstName} ${lastName}`, JSON.stringify(contactObject))
   return contactObject
 }
@@ -93,7 +95,7 @@ function sendOrder() {
   const fetchOptions = {
     method: 'POST',
     body: JSON.stringify(order),
-    headers: { 'Content-Type': 'application/json; charset=utf-8' },
+    headers: {'Content-Type': 'application/json; charset=utf-8'},
   }
   fetch(`${apiUrl}/api/cameras/order`, fetchOptions)
     .then((response) => response.json())

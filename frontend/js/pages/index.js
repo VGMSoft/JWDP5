@@ -1,9 +1,7 @@
 (() => {
+
+  getProducts().then(products => displayProducts(products))
   cart.showAmount()
-  getProducts()
-    .then(products => {
-      displayProducts(products)
-    })
 })();
 
 // Collect Data from API
@@ -17,13 +15,13 @@ function getProducts() {
       } else {
         loadingSpinnerOff()
         serverOffline()
-        return null
+        return 0
       }
     })
     .catch(err => {
       console.error(err)
       alert(
-        "La connexion au serveur semble être plus longue que d'habitude, veuillez réactualiser la page !"
+        "La connexion au serveur semble être plus longue que d' habitude, veuillez réactualiser la page !"
       );
     });
 }

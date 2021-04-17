@@ -29,8 +29,9 @@ class Cart {
   }
 
   /*------------------------------- build cart -----------------------------*/
-    //building cart object
-  addItem(product,option) {
+
+  //building cart object
+  addItem(product, option) {
     //Get cart content
     const cart = this.getCartItems()
     //test if product exist in cart
@@ -56,36 +57,40 @@ class Cart {
 
   /*------------------------------------ Cart Math ------------------------------------*/
 
-  modifyQuantity(product, quantityInput) {
+//Quantity-----------------------------------------
+  userQuantityModifier(product, quantityInput, event) {
     // Update quantity
     this.updateQuantity(product._id, quantityInput.value)
-    // Update total product price
-    let totalPrice = event.target.parentElement.parentElement.parentElement.parentElement.querySelector(".totalPrice")
+
+    //Value assignation
+    let totalProductPriceEvent = event.target.parentElement.parentElement.parentElement.parentElement.querySelector(".totalPrice")
     let updatedTotal = (product.price.slice(0, -1) * this.getQuantity(product._id))
-    totalPrice.innerHTML = `${updatedTotal}&#128;`
+    let globalTotal = document.querySelector(".globalTotal")
+
+    // Update product total
+    totalProductPriceEvent.innerHTML = `${updatedTotal}&#128;`
     // Update global total
-    document.querySelector(".globalTotal").innerHTML = `${this.globalTotal()}&#128;`
-    // Update product amount
+    globalTotal.innerHTML = `${this.globalTotal()}&#128;`
     this.updateAmount()
     //deleting product if quantity less than 0
     if (event.target.parentElement.parentElement.querySelector(".quantity").value < 1) {
       this.removeItem(product)
-      alert("Votre produit a été supprimé du panier.")
+      alert("Votre produit va être supprimé du panier.")
     }
   }
 
-  //User update quantity
+  //User update quantity-------------------------------
   getQuantity(id) {
-    const product = this.getCartItems()
-    return product[id].quantity
+    return this.getCartItems()[id].quantity
   }
+
   updateQuantity(id, quantity) {
     const cart = this.getCartItems()
     cart[id].quantity = quantity
     this.setCartItem(cart)
   }
 
-  // Showing amount of products in cart
+  // Amount of products in cart-------------------------
   getAmount() {
     let cartContent = document.querySelector(".cartContent")
     if (JSON.parse(localStorage.getItem('amount')) === 0) {
@@ -110,10 +115,11 @@ class Cart {
     this.getAmount()
   }
 
-  // Total calculations
+  // Total calculations-------------------------------------
   totalProductPrice(product) {
     return parseInt(product.price) * parseInt(product.quantity)
   }
+
   globalTotal() {
     const globalTotal = this.cartToArray().reduce((acu, product) => {
       return acu + this.totalProductPrice(product)
@@ -124,5 +130,6 @@ class Cart {
     return globalTotal
   }
 }
+
 //Cart class Instanciation
 const cart = new Cart()

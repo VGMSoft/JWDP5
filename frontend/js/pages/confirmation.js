@@ -1,3 +1,4 @@
+//Display data
 document.querySelector(".orderId").innerHTML = getParam("orderId")
 document.querySelector(".total").innerHTML = `${getParam("total")}&#128;`
 

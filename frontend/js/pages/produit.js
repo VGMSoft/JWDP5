@@ -1,17 +1,16 @@
 (() => {
+  //const id = getProductId()
+  getProductId()
+    .then(id => getProduct(id))
+    .then(product => displayProduct(product))
+    .catch((err) => console.error(err))
   cart.showAmount()
-  const id = getProductId()
-  getProduct(id)
-    .then(product => {
-      displayProduct(product)
-    })
 })()
 
 /* ------------------------------------------ Filling Markup ------------------------------------------ */
 
-//collect product id
 function getProductId() {
-  return new URL(window.location.href).searchParams.get("id")
+  return new Promise((resolve) => resolve(new URL(window.location.href).searchParams.get("id")))
 }
 
 //fetching data from API
@@ -21,7 +20,7 @@ function getProduct(id) {
       if (res.ok) {
         return res.json();
       } else {
-        return null
+        return 0
       }
     })
     .catch(err => {
@@ -53,9 +52,9 @@ function displayProduct(product) {
 
 //get lense option on change
 function getOption() {
-  const lenseSelector = document.querySelector(".lenseSelector")
-  if (lenseSelector.value !== "Lenses") {
-    return lenseSelector.value
+  const lenseOption = document.querySelector(".lenseSelector").value
+  if (lenseOption !== "Lenses") {
+    return new Promise((resolve) => resolve(lenseOption))
   }
 }
 
@@ -77,10 +76,11 @@ function revealModalOnClick() {
   document.body.appendChild(div)
 }
 
-async function redirectProductToCart(product) {
-  const option = await getOption()
-  //adding item to cart
-  cart.addItem(product, option)
-  cart.showAmount()
-  revealModalOnClick()
+function redirectProductToCart(product) {
+  getOption()
+    .then((option) => {
+      cart.addItem(product, option)
+      cart.showAmount()
+      revealModalOnClick()
+    })
 }
