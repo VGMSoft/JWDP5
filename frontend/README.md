@@ -1,6 +1,6 @@
 <h1 style="text-align: center;">Welcome to Orinoco 👋</h1>
 
-<img style="text-align: center;" src="./frontend/images/logo/logo_orinoco.png" alt="Orinoco__logo"/>
+<img style="text-align: center;" src="images/logo/logo_orinoco.png" alt="Orinoco__logo"/>
 <p>
   <a href="https://twitter.com/virgilegug" target="_blank">
     <img alt="Twitter: virgilegug" src="https://img.shields.io/twitter/follow/virgilegug.svg?style=social" />
