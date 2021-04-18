@@ -29,7 +29,6 @@ class Cart {
   }
 
   /*------------------------------- build cart -----------------------------*/
-
   //building cart object
   addItem(product, option) {
     //Get cart content
@@ -57,14 +56,14 @@ class Cart {
 
   /*------------------------------------ Cart Math ------------------------------------*/
 
-//Quantity-----------------------------------------
+//Quantity
   userQuantityModifier(product, quantityInput, event) {
     // Update quantity
     this.updateQuantity(product._id, quantityInput.value)
 
     //Value assignation
     let totalProductPriceEvent = event.target.parentElement.parentElement.parentElement.parentElement.querySelector(".totalPrice")
-    let updatedTotal = (product.price.slice(0, -1) * this.getQuantity(product._id))
+    let updatedTotal = (product.price.slice(0, -1) * this.getCartItems()[product._id].quantity)
     let globalTotal = document.querySelector(".globalTotal")
 
     // Update product total
@@ -79,18 +78,13 @@ class Cart {
     }
   }
 
-  //User update quantity-------------------------------
-  getQuantity(id) {
-    return this.getCartItems()[id].quantity
-  }
-
   updateQuantity(id, quantity) {
     const cart = this.getCartItems()
     cart[id].quantity = quantity
     this.setCartItem(cart)
   }
 
-  // Amount of products in cart-------------------------
+  // Amount of products in cart
   getAmount() {
     let cartContent = document.querySelector(".cartContent")
     if (JSON.parse(localStorage.getItem('amount')) === 0) {
@@ -115,7 +109,7 @@ class Cart {
     this.getAmount()
   }
 
-  // Total calculations-------------------------------------
+  // Total calculations
   totalProductPrice(product) {
     return parseInt(product.price) * parseInt(product.quantity)
   }
@@ -130,6 +124,5 @@ class Cart {
     return globalTotal
   }
 }
-
 //Cart class Instanciation
 const cart = new Cart()
