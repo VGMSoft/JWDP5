@@ -31,7 +31,7 @@ prendra plus de temps !
 
 ## Usage
 
-**Frontend**
+**Frontend codé from scratch**
 
 Compilation du scss en css
 
@@ -39,7 +39,7 @@ Compilation du scss en css
 cd frontend && npm run sass
 ```
 
-**Backend**
+**Backend fourni par OpenClassrooms**
 
 Installation des dépendances
 
