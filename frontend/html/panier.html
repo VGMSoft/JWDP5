@@ -1,278 +1,279 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-  <meta charset="utf-8"/>
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1, shrink-to-fit=no"
-  />
-  <!--favicon-->
-  <link rel="icon" sizes="57x57" href="../images/favicon.ico"/>
-  <!--favicon end-->
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta
+      name="description"
+      content="Orinoco Entreprise de commerce en ligne - Panier"
+    />
+    <!--favicon-->
+    <link rel="icon" sizes="57x57" href="../images/favicon.ico" />
+    <!--favicon end-->
 
-  <!--styles-->
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-    integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
-    crossorigin="anonymous"
-  />
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css"
-  />
-  <link rel="stylesheet" href="../css/styles.css"/>
-  <!--styles end-->
+    <!--styles-->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+      integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <!--styles end-->
 
-  <title>Panier</title>
-</head>
+    <title>Panier</title>
+  </head>
 
-<body>
-<header>
-  <nav
-    class="navbar navbar-dark bg-dark navbar-expand-lg shadow d-flex justify-content-between"
-  >
-    <a class="navbar-brand p-0" href="../index.html">
-      <img
-        src="../images/logo/logo--icon.png"
-        alt=""
-        class="logo--icon"
-      />
-      <img
-        src="../images/logo/logo--invert.png"
-        alt="Orinoco"
-        class="logo--invert"
-      />
-    </a>
-  </nav>
-</header>
-
-<main class="container">
-  <h1 class="p-3">Panier</h1>
-
-  <!--Panier-->
-  <div class="row">
-    <div class="col-6 p-3">
-      <h2>
-        Vos produits
-      </h2>
-    </div>
-    <div class="col-6 p-3">
-      <button
-        class="float-right btn btn-danger emptyCart"
-        onclick="cart.emptyCart()"
-      >Vider le panier
-      </button
+  <body>
+    <header>
+      <nav
+        class="navbar navbar-dark bg-dark navbar-expand-lg shadow d-flex justify-content-between"
       >
-    </div>
-  </div>
+        <a class="navbar-brand p-0" href="../index.html">
+          <img src="../images/logo/logo--icon.png" alt="" class="logo--icon" />
+          <img
+            src="../images/logo/logo--invert.png"
+            alt="Orinoco"
+            class="logo--invert"
+          />
+        </a>
+      </nav>
+    </header>
 
+    <main class="container">
+      <h1 class="p-3">Panier</h1>
 
-  <div class="row">
-    <div class="col-12">
-
-      <div
-        class="list-group-item list-group-item-primary d-flex justify-content-between rounded-top px-0"
-      >
-    <span class="w-25 d-flex justify-content-center font-weight-bold"
-    >Produit</span>
-        <span class="w-25 d-flex justify-content-center font-weight-bold"
-        >Quantité</span>
-        <span class="w-25 d-flex justify-content-center font-weight-bold"
-        >Prix</span>
-        <span class="w-25 d-flex justify-content-center font-weight-bold"
-        >Total</span>
+      <!--Panier-->
+      <div class="row">
+        <div class="col-6 p-3">
+          <h2>Vos produits</h2>
+        </div>
+        <div class="col-6 p-3">
+          <button
+            class="float-right btn btn-danger emptyCart"
+            onclick="cart.emptyCart()"
+          >
+            Vider le panier
+          </button>
+        </div>
       </div>
 
-      <ul class="list-group rounded-0 templateContainer">
-        <li
-          class="list-group-item d-flex justify-content-center px-0 cartIsEmpty"
-        >
+      <div class="row">
+        <div class="col-12">
+          <div
+            class="list-group-item list-group-item-primary d-flex justify-content-between rounded-top px-0"
+          >
+            <span class="w-25 d-flex justify-content-center font-weight-bold"
+              >Produit</span
+            >
+            <span class="w-25 d-flex justify-content-center font-weight-bold"
+              >Quantité</span
+            >
+            <span class="w-25 d-flex justify-content-center font-weight-bold"
+              >Prix</span
+            >
+            <span class="w-25 d-flex justify-content-center font-weight-bold"
+              >Total</span
+            >
+          </div>
+
+          <ul class="list-group rounded-0 templateContainer">
+            <li
+              class="list-group-item d-flex justify-content-center px-0 cartIsEmpty"
+            >
               <span class="text-secondary text-center"
-              >Le panier est vide ...</span
+                >Le panier est vide ...</span
               >
-        </li>
-      </ul>
+            </li>
+          </ul>
 
-      <div
-        class="list-group-item list-group-item-secondary d-flex justify-content-between rounded-bottom px-0"
-      >
-    <span class="w-25 d-flex justify-content-center font-weight-bold"
-    >Total</span>
-        <span class="w-25 d-flex justify-content-center globalTotal"
-        >0€</span
-        >
-      </div>
-    </div>
-  </div>
-
-  <!--cartProductTemplate-->
-  <template id="template">
-    <li class="list-group-item d-flex justify-content-between px-0">
-      <!--productName-->
-      <span
-        class="w-25 d-inline-block text-center text-nowrap text-truncate align-middle my-auto mx-1 productName"
-      >productName</span
-      >
-      <!--Quantity-->
-      <div class="w-25 d-flex justify-content-center">
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <button
-              class="btn btn-outline-secondary input-group-text reduceQuantity"
+          <div
+            class="list-group-item list-group-item-secondary d-flex justify-content-between rounded-bottom px-0"
+          >
+            <span class="w-25 d-flex justify-content-center font-weight-bold"
+              >Total</span
             >
-              -
-            </button>
-          </div>
-          <input
-            type="number"
-            name="quantity"
-            class="quantity form-control rounded-0 text-center"
-            min="0"
-            max="25"
-            pattern="[1-9]+"
-            onKeyDown="return false"
-            required
-          />
-          <div class="input-group-append">
-            <button
-              class="btn btn-outline-secondary input-group-text increaseQuantity"
+            <span class="w-25 d-flex justify-content-center globalTotal"
+              >0€</span
             >
-              +
-            </button>
           </div>
         </div>
       </div>
-      <!--unityPrice-->
-      <span
-        class="w-25 d-flex justify-content-center align-items-center unityPrice"
-      >unityPrice</span
-      >
-      <!--totalPrice-->
-      <span
-        class="w-25 d-flex justify-content-center align-items-center totalPrice"
-      >totalPrice</span
-      >
-    </li>
-  </template>
-  <!--cartProductTemplate END-->
 
-  <!--Form-->
-  <div class="row">
-    <div class="col-12 p-3">
-      <h2>Vos coordonnées</h2>
-      <form class="form">
-        <!--first name-->
-        <div class="form-group">
-          <label for="firstName">Prénom</label>
-          <input
-            type="text"
-            class="form-control"
-            id="firstName"
-            aria-describedby="firstNameHelp"
-            placeholder="Your first name"
-            name="firstName"
-            pattern="[a-zA-Z-,\séè]+"
-            aria-label="Caractères autorisés: lettres/,/-"
-            required
-          />
-          <small id="firstNameHelp" class="form-text text-muted"
-          >Ex : Victor</small
+      <!--cartProductTemplate-->
+      <template id="template">
+        <li class="list-group-item d-flex justify-content-between px-0">
+          <!--productName-->
+          <span
+            class="w-25 d-inline-block text-center text-nowrap text-truncate align-middle my-auto mx-1 productName"
+            >productName</span
           >
-        </div>
-        <!--last name-->
-        <div class="form-group">
-          <label for="lastName">Nom</label>
-          <input
-            type="text"
-            class="form-control"
-            id="lastName"
-            aria-describedby="lastNameHelp"
-            placeholder="Your last name"
-            name="lastName"
-            pattern="[a-zA-Z-,\séè]+"
-            aria-label="Caractères autorisés: lettres/,/-"
-            required
-          />
-          <small id="lastNameHelp" class="form-text text-muted"
-          >Ex : Deschamps</small
-          >
-        </div>
-        <!--address-->
-        <div class="form-group">
-          <label for="address">Adresse</label>
-          <input
-            type="text"
-            class="form-control"
-            id="address"
-            aria-describedby="addressHelp"
-            placeholder="Your address"
-            name="address"
-            pattern="([a-zA-Z0-9-\séè]+){1,8}"
-            aria-label="Caractères autorisés: lettres/-"
-            required
-          />
-          <small id="addressHelp" class="form-text text-muted"
-          >Ex : 24 rue Copernic</small
-          >
-        </div>
-        <!--city-->
-        <div class="form-group">
-          <label for="city">Ville</label>
-          <input
-            type="text"
-            class="form-control"
-            id="city"
-            aria-describedby="cityHelp"
-            placeholder="Your city"
-            name="city"
-            pattern="[a-zA-Z-,\séè]+"
-            aria-label="Caractères autorisés: lettres/,/-"
-            required
-          />
-          <small id="cityHelp" class="form-text text-muted"
-          >Ex : Paris</small
-          >
-        </div>
-        <!--email-->
-        <div class="form-group">
-          <label for="email">Email</label>
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <div class="input-group-text">@</div>
+          <!--Quantity-->
+          <div class="w-25 d-flex justify-content-center">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <button
+                  class="btn btn-outline-secondary input-group-text reduceQuantity"
+                >
+                  -
+                </button>
+              </div>
+              <input
+                type="number"
+                name="quantity"
+                class="quantity form-control rounded-0 text-center"
+                min="0"
+                max="25"
+                pattern="[1-9]+"
+                onKeyDown="return false"
+                required
+              />
+              <div class="input-group-append">
+                <button
+                  class="btn btn-outline-secondary input-group-text increaseQuantity"
+                >
+                  +
+                </button>
+              </div>
             </div>
-            <input
-              type="email"
-              class="form-control"
-              id="email"
-              aria-describedby="emailHelp"
-              placeholder="Your email"
-              name="email"
-              pattern="[a-zA-Z\.\-]+@[\w\.-]+\.\w{2,4}"
-              aria-label="Requis : Adresse Mail"
-              required
-            />
           </div>
-          <small id="emailHelp" class="form-text text-muted"
-          >Ex : v.deschamps@gmail.com</small
+          <!--unityPrice-->
+          <span
+            class="w-25 d-flex justify-content-center align-items-center unityPrice"
+            >unityPrice</span
           >
+          <!--totalPrice-->
+          <span
+            class="w-25 d-flex justify-content-center align-items-center totalPrice"
+            >totalPrice</span
+          >
+        </li>
+      </template>
+      <!--cartProductTemplate END-->
+
+      <!--Form-->
+      <div class="row">
+        <div class="col-12 p-3">
+          <h2>Vos coordonnées</h2>
+          <form class="form">
+            <!--first name-->
+            <div class="form-group">
+              <label for="firstName">Prénom</label>
+              <input
+                type="text"
+                class="form-control"
+                id="firstName"
+                aria-describedby="firstNameHelp"
+                placeholder="Your first name"
+                name="firstName"
+                pattern="[a-zA-Z-,\séè]+"
+                aria-label="Caractères autorisés: lettres/,/-"
+                required
+              />
+              <small id="firstNameHelp" class="form-text text-muted"
+                >Ex : Victor</small
+              >
+            </div>
+            <!--last name-->
+            <div class="form-group">
+              <label for="lastName">Nom</label>
+              <input
+                type="text"
+                class="form-control"
+                id="lastName"
+                aria-describedby="lastNameHelp"
+                placeholder="Your last name"
+                name="lastName"
+                pattern="[a-zA-Z-,\séè]+"
+                aria-label="Caractères autorisés: lettres/,/-"
+                required
+              />
+              <small id="lastNameHelp" class="form-text text-muted"
+                >Ex : Deschamps</small
+              >
+            </div>
+            <!--address-->
+            <div class="form-group">
+              <label for="address">Adresse</label>
+              <input
+                type="text"
+                class="form-control"
+                id="address"
+                aria-describedby="addressHelp"
+                placeholder="Your address"
+                name="address"
+                pattern="([a-zA-Z0-9-\séè]+){1,8}"
+                aria-label="Caractères autorisés: lettres/-"
+                required
+              />
+              <small id="addressHelp" class="form-text text-muted"
+                >Ex : 24 rue Copernic</small
+              >
+            </div>
+            <!--city-->
+            <div class="form-group">
+              <label for="city">Ville</label>
+              <input
+                type="text"
+                class="form-control"
+                id="city"
+                aria-describedby="cityHelp"
+                placeholder="Your city"
+                name="city"
+                pattern="[a-zA-Z-,\séè]+"
+                aria-label="Caractères autorisés: lettres/,/-"
+                required
+              />
+              <small id="cityHelp" class="form-text text-muted"
+                >Ex : Paris</small
+              >
+            </div>
+            <!--email-->
+            <div class="form-group">
+              <label for="email">Email</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">@</div>
+                </div>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  aria-describedby="emailHelp"
+                  placeholder="Your email"
+                  name="email"
+                  pattern="[a-zA-Z\.\-]+@[\w\.-]+\.\w{2,4}"
+                  aria-label="Requis : Adresse Mail"
+                  required
+                />
+              </div>
+              <small id="emailHelp" class="form-text text-muted"
+                >Ex : v.deschamps@gmail.com</small
+              >
+            </div>
+            <!--submit-->
+            <button class="btn btn-primary order" type="submit">
+              Commander
+            </button>
+            <!--redirect-->
+          </form>
         </div>
-        <!--submit-->
-        <button class="btn btn-primary order" type="submit">
-          Commander
-        </button>
-        <!--redirect-->
-      </form>
-    </div>
-  </div>
-  <!--Form END-->
-</main>
+      </div>
+      <!--Form END-->
+    </main>
 
-<footer></footer>
+    <footer></footer>
 
-<!-- Javascript -->
-<script src="../js/config.js"></script>
-<script src="../js/cartTools.js"></script>
-<script src="../js/min/panier.min.js"></script>
-</body>
+    <!-- Javascript -->
+    <script src="../js/config.js"></script>
+    <script src="../js/cartTools.js"></script>
+    <script src="../js/min/panier.min.js"></script>
+  </body>
 </html>
