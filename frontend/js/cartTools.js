@@ -1,38 +1,37 @@
 class Cart {
   //get localStorage content for 'cart' key
-  getCartItems() {
+  getCart() {
     return JSON.parse(localStorage.getItem('cart')) || {}
   }
 
   //send products object to localStorage under 'cart' key
-  setCartItem(cart) {
+  saveCart(cart) {
     localStorage.setItem('cart', JSON.stringify(cart))
   }
 
   emptyCart() {
     localStorage.clear()
-    location.reload()
   }
 
   removeItem(product) {
-    let cart = this.getCartItems()
+    let cart = this.getCart()
     //delete product
     delete cart[product._id]
     //Append to localStorage
-    this.setCartItem(cart)
+    this.saveCart(cart)
     location.reload()
   }
 
   //transform products object in products array
   cartToArray() {
-    return Object.values(this.getCartItems())
+    return Object.values(this.getCart())
   }
 
   /*------------------------------- build cart -----------------------------*/
   //building cart object
   addItem(product, option) {
     //Get cart content
-    const cart = this.getCartItems()
+    const cart = this.getCart()
     //test if product exist in cart
     if (cart[product._id] == null) {
       //setting new Product Object
@@ -51,7 +50,7 @@ class Cart {
       cart[product._id].option.push(option)
     }
     //Append to localStorage
-    this.setCartItem(cart)
+    this.saveCart(cart)
   }
 
   /*------------------------------------ Cart Math ------------------------------------*/
@@ -63,14 +62,17 @@ class Cart {
 
     //Value assignation
     let totalProductPriceEvent = event.target.parentElement.parentElement.parentElement.parentElement.querySelector(".totalPrice")
-    let updatedTotal = (product.price.slice(0, -1) * this.getCartItems()[product._id].quantity)
+    let updatedTotal = (product.price.slice(0, -1) * this.getCart()[product._id].quantity)
     let globalTotal = document.querySelector(".globalTotal")
 
     // Update product total
     totalProductPriceEvent.innerHTML = `${updatedTotal}&#128;`
     // Update global total
     globalTotal.innerHTML = `${this.globalTotal()}&#128;`
+
+    // Update amount of products in cart,
     this.updateAmount()
+
     //deleting product if quantity less than 0
     if (event.target.parentElement.parentElement.querySelector(".quantity").value < 1) {
       this.removeItem(product)
@@ -79,9 +81,9 @@ class Cart {
   }
 
   updateQuantity(id, quantity) {
-    const cart = this.getCartItems()
+    const cart = this.getCart()
     cart[id].quantity = quantity
-    this.setCartItem(cart)
+    this.saveCart(cart)
   }
 
   // Amount of products in cart
