@@ -3,6 +3,10 @@
   secureOrder()
 })()
 
+function onClickEmptyCart() {
+  cart.emptyCart()
+  location.reload()
+}
 /*---------------------------------------- CART ----------------------------------------*/
 //Display Cart Content
 function displayProduct() {
@@ -90,7 +94,7 @@ function secureOrder() {
   document.querySelector(".form").onsubmit = (event) => {
     event.preventDefault()
     //At least 1 product in cart
-    if (Object.keys(cart.getCartItems()).length !== 0) {
+    if (Object.keys(cart.getCart()).length !== 0) {
       sendOrder()
     } else {
       alert("Votre panier est vide, ajouter un article pour passer commande")
@@ -101,7 +105,7 @@ function secureOrder() {
 function sendOrder() {
   const order = {
     contact: ContactObject(),
-    products: Object.keys(cart.getCartItems())
+    products: Object.keys(cart.getCart())
   }
   //Post Request
   const fetchOptions = {
