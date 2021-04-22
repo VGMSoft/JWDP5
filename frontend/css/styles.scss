@@ -54,7 +54,7 @@ input[type="number"] {
 }
 
 /* Portrait */
-@media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@media only screen and (min-width: 375px) and (max-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
   .reduceQuantity,
   .increaseQuantity {
    padding-left: 0.375em;

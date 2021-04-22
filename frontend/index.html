@@ -1,94 +1,94 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <meta
-      name="description"
-      content="Orinoco Entreprise de commerce en ligne - Accueil"
-    />
-    <!--favicon-->
-    <link rel="icon" sizes="57x57" href="./images/favicon.ico" />
-    <!--favicon end-->
+<head>
+  <meta charset="utf-8"/>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+  <meta
+    name="description"
+    content="Orinoco Entreprise de commerce en ligne - Accueil"
+  />
+  <!--favicon-->
+  <link rel="icon" sizes="57x57" href="./images/favicon.ico"/>
+  <!--favicon end-->
 
-    <!--styles-->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-      integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
-      crossorigin="anonymous"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css"
-    />
-    <link rel="stylesheet" href="./css/styles.css" />
-    <!--styles END-->
+  <!--styles-->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+    integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+    crossorigin="anonymous"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css"
+  />
+  <link rel="stylesheet" href="./css/styles.css"/>
+  <!--styles END-->
 
-    <title>Orinoco</title>
-  </head>
+  <title>Orinoco</title>
+</head>
 
-  <body>
-    <header>
-      <nav
-        class="navbar navbar-dark bg-dark navbar-expand-lg shadow d-flex justify-content-between"
-      >
-        <a class="navbar-brand p-0" href="./index.html">
-          <img
-            src="./images/logo/logo--icon.png"
-            alt="Orinoco"
-            class="logo--icon"
-          />
-          <img
-            src="./images/logo/logo--invert.png"
-            alt="Orinoco"
-            class="logo--invert"
-          />
+<body>
+<header>
+  <nav
+    class="navbar navbar-dark bg-dark navbar-expand-lg shadow d-flex justify-content-between"
+  >
+    <a class="navbar-brand p-0" href="./index.html">
+      <img
+        src="./images/logo/logo--icon.png"
+        alt=""
+        class="logo--icon"
+      />
+      <img
+        src="./images/logo/logo--invert.png"
+        alt="Orinoco"
+        class="logo--invert"
+      />
+    </a>
+    <ul class="nav">
+      <li class="nav-item">
+        <a class="nav-link text-light" href="./html/panier.html">
+          <i class="bi bi-basket3 p-1 text-light"></i>Panier
+          <div
+            class="d-inline-block rounded-pill bg-danger text-white m-2 px-2 cartContent"
+          ></div>
         </a>
-        <ul class="nav">
-          <li class="nav-item">
-            <a class="nav-link text-light" href="./html/panier.html">
-              <i class="bi bi-basket3 p-1 text-light"></i>Panier
-              <div
-                class="d-inline-block rounded-pill bg-danger text-white m-2 px-2 cartContent"
-              ></div>
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </header>
+      </li>
+    </ul>
+  </nav>
+</header>
 
-    <main class="container">
-      <h1 class="p-3">Nos produits</h1>
+<main class="container">
+  <h1 class="p-3">Nos produits</h1>
 
-      <div class="row templateContainer d-flex"></div>
-    </main>
+  <div class="row templateContainer d-flex"></div>
+</main>
 
-    <!-- Template -->
-    <template id="template">
-      <div class="col-12 col-md-6 col-lg-4">
-        <figure class="card m-2 card--portrait shadow-sm vcam1">
-          <img class="card-img-top bg-secondary" src="" alt="" />
-          <figcaption class="card-body">
-            <h2 class="card-title">Produit</h2>
-            <a class="btn btn-primary float-right" role="button"
-              >Voir produit</a
-            >
-          </figcaption>
-        </figure>
-      </div>
-    </template>
-    <!-- Template END -->
+<!-- Template -->
+<template id="template">
+  <div class="col-12 col-md-6 col-lg-4">
+    <figure class="card m-2 card--portrait shadow-sm vcam1">
+      <img class="card-img-top bg-secondary" src="" alt=""/>
+      <figcaption class="card-body">
+        <h2 class="card-title">Produit</h2>
+        <a class="btn btn-primary float-right" role="button"
+        >Voir produit</a
+        >
+      </figcaption>
+    </figure>
+  </div>
+</template>
+<!-- Template END -->
 
-    <footer></footer>
+<footer></footer>
 
-    <!-- Javascript -->
-    <script src="./js/config.js"></script>
-    <script src="./js/cartTools.js"></script>
-    <script src="./js/min/index.min.js"></script>
-    <!-- Javascript END -->
-  </body>
+<!-- Javascript -->
+<script src="./js/config.js"></script>
+<script src="./js/cartTools.js"></script>
+<script src="./js/min/index.min.js"></script>
+<!-- Javascript END -->
+</body>
 </html>
