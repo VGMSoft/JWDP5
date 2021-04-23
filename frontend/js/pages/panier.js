@@ -3,16 +3,17 @@
   secureOrder()
 })()
 
-function onClickEmptyCart() {
-  cart.emptyCart()
-  location.reload()
-}
+
+
 /*---------------------------------------- CART ----------------------------------------*/
+
 //Display Cart Content
 function displayProduct() {
   //insert each product of product arrays
-  let productArray = cart.cartToArray()
-  productArray.forEach((product) => fillTemplate(product))
+  cart.getCartItems().forEach((product) => {
+    fillTemplate(product)
+    totalProductPrice(product)
+  })
 }
 
 // Insert Data in Markup
@@ -25,33 +26,55 @@ function fillTemplate(product) {
   clone.querySelector(".productName").innerHTML = product.name
   clone.querySelector(".quantity").value = product.quantity
   clone.querySelector(".unityPrice").innerHTML = product.price
-  clone.querySelector(".totalPrice").innerHTML = `${cart.totalProductPrice(product)}&#128;`
-  document.querySelector(".globalTotal").innerHTML = `${cart.globalTotal()}&#128;`
+  clone.querySelector(".totalPrice").innerHTML = `${totalProductPrice(product)}&#128;`
+  document.querySelector(".globalTotal").innerHTML = `${globalTotal()}&#128;`
 
-  //Listen to user changes
-  userChangeListener(clone, product)
+  //Listen to quantity changes
+  refreshCartQuantity(clone, product)
   //append clone element to markup
   document.querySelector(".templateContainer").appendChild(clone);
 }
 
-// Quantity listener & total calculation ON USER CHANGE
-function userChangeListener(clone, product) {
+// Update product Data
+function refreshCartQuantity(clone, product) {
   //reduce quantity onclick on reduce button
   clone.querySelector(".reduceQuantity").onclick = (event) => {
     let quantityInput = event.target.parentElement.parentElement.querySelector(".quantity")
     quantityInput.value--
-    cart.userQuantityModifier(product, quantityInput, event)
+    cart.productUpdater(product, quantityInput)
+    location.reload()
   }
-//increase quantity onclick on increase button
+  //increase quantity onclick on increase button
   clone.querySelector(".increaseQuantity").onclick = (event) => {
     let quantityInput = event.target.parentElement.parentElement.querySelector(".quantity")
     quantityInput.value++
-    cart.userQuantityModifier(product, quantityInput, event)
+    cart.productUpdater(product, quantityInput)
+    location.reload()
   }
-  cart.updateAmount()
+}
+
+// Total calculations
+function totalProductPrice(product) {
+  return parseInt(product.price) * parseInt(product.quantity)
+}
+
+function globalTotal() {
+  const globalTotal = cart.getCartItems().reduce((acu, product) => {
+    return acu + totalProductPrice(product)
+  }, 0)
+  if (globalTotal !== 0) {
+    document.querySelector(".cartIsEmpty").classList.replace("d-flex", "d-none")
+  }
+  return globalTotal
+}
+
+function onClickEmptyCart() {
+  cart.emptyCart()
+  location.reload()
 }
 
 /*---------------------------------------- FORM ----------------------------------------*/
+
 //check inputs validity
 function checkInput(input, condition) {
   // user feedback
@@ -67,6 +90,7 @@ function checkInput(input, condition) {
     }
   }
 }
+
 //Browse & verify input values
 checkInput(document.querySelector("#firstName"), /^[a-zA-Z-,\séè]+$/)
 checkInput(document.querySelector("#lastName"), /^[a-zA-Z-,\séè]+$/)
@@ -89,6 +113,7 @@ function ContactObject() {
 }
 
 /*---------------------------------------- ORDER ----------------------------------------*/
+
 //prevent empty cart order
 function secureOrder() {
   document.querySelector(".form").onsubmit = (event) => {
@@ -118,6 +143,6 @@ function sendOrder() {
     .then((json) => {
       //redirect to confirmation
       sessionStorage.setItem(json.orderId, JSON.stringify(order.contact))
-      window.location.href = `./confirmation.html?orderId=${json.orderId}&total=${cart.globalTotal()}`
+      window.location.href = `./confirmation.html?orderId=${json.orderId}&total=${globalTotal()}`
     })
 }

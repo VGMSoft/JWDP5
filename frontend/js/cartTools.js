@@ -19,15 +19,15 @@ class Cart {
     delete cart[product._id]
     //Append to localStorage
     this.saveCart(cart)
-    location.reload()
   }
 
   //transform products object in products array
-  cartToArray() {
+  getCartItems() {
     return Object.values(this.getCart())
   }
 
   /*------------------------------- build cart -----------------------------*/
+
   //building cart object
   addItem(product, option) {
     //Get cart content
@@ -56,25 +56,13 @@ class Cart {
   /*------------------------------------ Cart Math ------------------------------------*/
 
 //Quantity
-  userQuantityModifier(product, quantityInput, event) {
+  productUpdater(product, quantityInput) {
     // Update quantity
     this.updateQuantity(product._id, quantityInput.value)
-
-    //Value assignation
-    let totalProductPriceEvent = event.target.parentElement.parentElement.parentElement.parentElement.querySelector(".totalPrice")
-    let updatedTotal = (product.price.slice(0, -1) * this.getCart()[product._id].quantity)
-    let globalTotal = document.querySelector(".globalTotal")
-
-    // Update product total
-    totalProductPriceEvent.innerHTML = `${updatedTotal}&#128;`
-    // Update global total
-    globalTotal.innerHTML = `${this.globalTotal()}&#128;`
-
     // Update amount of products in cart,
     this.updateAmount()
-
     //deleting product if quantity less than 0
-    if (event.target.parentElement.parentElement.querySelector(".quantity").value < 1) {
+    if (quantityInput.value < 1) {
       this.removeItem(product)
       alert("Votre produit va être supprimé du panier.")
     }
@@ -86,7 +74,7 @@ class Cart {
     this.saveCart(cart)
   }
 
-  // Amount of products in cart
+  // total amount of products in cart
   getAmount() {
     let cartContent = document.querySelector(".cartContent")
     if (JSON.parse(localStorage.getItem('amount')) === 0) {
@@ -100,7 +88,7 @@ class Cart {
   }
 
   updateAmount() {
-    const amountOfProduct = this.cartToArray().reduce((acu, product) => {
+    const amountOfProduct = this.getCartItems().reduce((acu, product) => {
       return acu + (parseInt(product.quantity))
     }, 0)
     localStorage.setItem('amount', amountOfProduct)
@@ -110,21 +98,7 @@ class Cart {
     this.updateAmount()
     this.getAmount()
   }
-
-  // Total calculations
-  totalProductPrice(product) {
-    return parseInt(product.price) * parseInt(product.quantity)
-  }
-
-  globalTotal() {
-    const globalTotal = this.cartToArray().reduce((acu, product) => {
-      return acu + this.totalProductPrice(product)
-    }, 0)
-    if (globalTotal !== 0) {
-      document.querySelector(".cartIsEmpty").classList.replace("d-flex", "d-none")
-    }
-    return globalTotal
-  }
 }
+
 //Cart class Instanciation
 const cart = new Cart()
