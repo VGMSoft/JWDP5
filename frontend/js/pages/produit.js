@@ -51,7 +51,7 @@ function displayProduct(product) {
 //get lense option on change
 function getOption() {
   const lenseOption = document.querySelector(".lenseSelector").value
-  if (lenseOption !== "Lenses") {
+  if (lenseOption !== "Objectif") {
     return new Promise((resolve) => resolve(lenseOption))
   }
 }
@@ -80,7 +80,6 @@ function redirectProductToCart(product) {
       revealModalOnClick()
     })
 }
-
 
 function displayAmount() {
   cart.getAmount()

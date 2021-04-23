@@ -106,14 +106,15 @@
               <div class="card-title float-right price"></div>
             </div>
             <p class="card-text">Description</p>
-            <div class="mb-5">
+            <div class="d-flex flex-column mb-5">
+              <label for="options">Options :</label>
               <select
                 class="form-control form-control-sm w-50 btn btn-secondary lenseSelector"
                 name="lenses"
                 onchange="getOption()"
                 required
               >
-                <option value="">Lenses</option>
+                <option id="options" value="">Objectif</option>
               </select>
             </div>
 
