@@ -69,7 +69,6 @@ function loadingSpinner(state) {
   }
 }
 
-
 function displayAmount() {
   cart.getAmount()
   let cartContent = document.querySelector(".cartContent")

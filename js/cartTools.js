@@ -27,7 +27,6 @@ class Cart {
   }
 
   /*------------------------------- build cart -----------------------------*/
-
   //building cart object
   addItem(product, option) {
     //Get cart content
@@ -54,7 +53,6 @@ class Cart {
   }
 
   /*------------------------------------ Cart Math ------------------------------------*/
-
 //Quantity
   itemUpdater(product, quantityInput) {
     // Update quantity

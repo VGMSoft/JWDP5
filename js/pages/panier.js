@@ -3,10 +3,7 @@
   secureOrder()
 })()
 
-
-
 /*---------------------------------------- CART ----------------------------------------*/
-
 //Display Cart Content
 function displayProduct() {
   //insert each product of product arrays
@@ -28,7 +25,6 @@ function fillTemplate(product) {
   clone.querySelector(".unityPrice").innerHTML = product.price
   clone.querySelector(".totalPrice").innerHTML = `${totalProductPrice(product)}&#128;`
   document.querySelector(".globalTotal").innerHTML = `${globalTotal()}&#128;`
-
   //Listen to quantity changes
   refreshCartQuantity(clone, product)
   //append clone element to markup
@@ -74,7 +70,6 @@ function onClickEmptyCart() {
 }
 
 /*---------------------------------------- FORM ----------------------------------------*/
-
 //check inputs validity
 function checkInput(input, condition) {
   // user feedback
@@ -113,7 +108,6 @@ function ContactObject() {
 }
 
 /*---------------------------------------- ORDER ----------------------------------------*/
-
 //prevent empty cart order
 function secureOrder() {
   document.querySelector(".form").onsubmit = (event) => {
