@@ -1,6 +1,6 @@
 (() => {
   getProducts().then(products => displayProducts(products))
-  cart.showAmount()
+  displayAmount()
 })();
 
 // Collect Data from API
@@ -68,3 +68,22 @@ function loadingSpinner(state) {
     return 0
   }
 }
+
+
+function displayAmount() {
+  cart.getAmount()
+  let cartContent = document.querySelector(".cartContent")
+  if (cart.getAmount() === 0) {
+    cartContent.classList.add("d-none")
+    cartContent.classList.remove("d-inline-block")
+  } else {
+    cartContent.innerHTML = localStorage.getItem('amount')
+    cartContent.classList.add("d-inline-block")
+    cartContent.classList.remove("d-none")
+  }
+  cart.updateAmount()
+}
+
+
+
+

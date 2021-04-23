@@ -3,7 +3,7 @@
   getProductId()
     .then(id => getProduct(id))
     .then(product => displayProduct(product))
-  cart.showAmount()
+  displayAmount()
 })()
 
 /* ------------------------------------------ Filling Markup ----------------------------------------*/
@@ -76,7 +76,23 @@ function redirectProductToCart(product) {
   getOption()
     .then((option) => {
       cart.addItem(product, option)
-      cart.showAmount()
+      displayAmount()
       revealModalOnClick()
     })
 }
+
+
+function displayAmount() {
+  cart.getAmount()
+  let cartContent = document.querySelector(".cartContent")
+  if (cart.getAmount() === 0) {
+    cartContent.classList.add("d-none")
+    cartContent.classList.remove("d-inline-block")
+  } else {
+    cartContent.innerHTML = localStorage.getItem('amount')
+    cartContent.classList.add("d-inline-block")
+    cartContent.classList.remove("d-none")
+  }
+  cart.updateAmount()
+}
+
