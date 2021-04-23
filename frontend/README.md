@@ -22,9 +22,9 @@
 
 ### ⚠️ Avertissement
 
-Le backend de la version de démonstration est deployée sur [Heroku](https://oc-orinoco-api.herokuapp.com/api/cameras)
+Le backend de la version de démonstration est deployé sur [Heroku](https://oc-orinoco-api.herokuapp.com/api/cameras)
 
-S'il elle n'est pas utilisé pendant plus d'une heure, l'application se met en sommeil et le temps de chargement du site
+S’il n'est pas utilisé pendant plus d'une heure, le serveur se met en sommeil et le temps de chargement du site
 prendra plus de temps !
 
 ℹ️ [Plus d'info sur ce comportement](https://blog.heroku.com/app_sleeping_on_heroku)
@@ -33,7 +33,7 @@ prendra plus de temps !
 
 **Frontend**
 
-Compilation du scss en css
+Compilation du scss en css (développement)
 
 ```sh
 cd frontend && npm run sass
