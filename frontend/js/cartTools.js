@@ -56,7 +56,7 @@ class Cart {
   /*------------------------------------ Cart Math ------------------------------------*/
 
 //Quantity
-  productUpdater(product, quantityInput) {
+  itemUpdater(product, quantityInput) {
     // Update quantity
     this.updateQuantity(product._id, quantityInput.value)
     // Update amount of products in cart,
@@ -76,15 +76,7 @@ class Cart {
 
   // total amount of products in cart
   getAmount() {
-    let cartContent = document.querySelector(".cartContent")
-    if (JSON.parse(localStorage.getItem('amount')) === 0) {
-      cartContent.classList.add("d-none")
-      cartContent.classList.remove("d-inline-block")
-    } else {
-      cartContent.innerHTML = localStorage.getItem('amount')
-      cartContent.classList.add("d-inline-block")
-      cartContent.classList.remove("d-none")
-    }
+   return JSON.parse(localStorage.getItem('amount'))
   }
 
   updateAmount() {
@@ -93,12 +85,6 @@ class Cart {
     }, 0)
     localStorage.setItem('amount', amountOfProduct)
   }
-
-  showAmount() {
-    this.updateAmount()
-    this.getAmount()
-  }
 }
-
 //Cart class Instanciation
 const cart = new Cart()

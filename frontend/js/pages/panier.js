@@ -41,14 +41,14 @@ function refreshCartQuantity(clone, product) {
   clone.querySelector(".reduceQuantity").onclick = (event) => {
     let quantityInput = event.target.parentElement.parentElement.querySelector(".quantity")
     quantityInput.value--
-    cart.productUpdater(product, quantityInput)
+    cart.itemUpdater(product, quantityInput)
     location.reload()
   }
   //increase quantity onclick on increase button
   clone.querySelector(".increaseQuantity").onclick = (event) => {
     let quantityInput = event.target.parentElement.parentElement.querySelector(".quantity")
     quantityInput.value++
-    cart.productUpdater(product, quantityInput)
+    cart.itemUpdater(product, quantityInput)
     location.reload()
   }
 }
