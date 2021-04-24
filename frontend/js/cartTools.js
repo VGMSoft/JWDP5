@@ -63,8 +63,13 @@ class Cart {
     this.updateAmount()
     //deleting product if quantity less than 0
     if (quantityInput.value < 1) {
-      this.removeItem(product)
-      alert("Votre produit va être supprimé du panier.")
+      let decision = confirm("Votre produit va être supprimé du panier, voulez vous continuer ?")
+      if (decision) {
+        this.removeItem(product)
+      } else {
+        quantityInput.value ++
+        this.updateQuantity(product._id, quantityInput.value)
+      }
     }
   }
 
@@ -76,7 +81,7 @@ class Cart {
 
   // total amount of products in cart
   getAmount() {
-   return JSON.parse(localStorage.getItem('amount'))
+    return JSON.parse(localStorage.getItem('amount'))
   }
 
   updateAmount() {
@@ -86,5 +91,6 @@ class Cart {
     localStorage.setItem('amount', amountOfProduct)
   }
 }
+
 //Cart class Instanciation
 const cart = new Cart()
