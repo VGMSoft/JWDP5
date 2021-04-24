@@ -71,17 +71,16 @@ function loadingSpinner(state) {
 
 
 function displayAmount() {
-  cart.getAmount()
+  cart.updateAmount()
   let cartContent = document.querySelector(".cartContent")
   if (cart.getAmount() === 0) {
     cartContent.classList.add("d-none")
     cartContent.classList.remove("d-inline-block")
   } else {
-    cartContent.innerHTML = localStorage.getItem('amount')
+    cartContent.innerHTML = cart.getAmount()
     cartContent.classList.add("d-inline-block")
     cartContent.classList.remove("d-none")
   }
-  cart.updateAmount()
 }
 
 
